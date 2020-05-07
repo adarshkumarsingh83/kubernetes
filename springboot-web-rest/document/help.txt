@@ -1,0 +1,64 @@
+#To build the application
+$ mvn clean package
+
+#To execute the application
+$ mvn spring-boot:run
+or
+$ java -jar ./target/springboot-web-rest.jar
+
+#To test
+$ curl localhost:8080/api/message
+
+
+
+
+
+Last login: Thu Apr 30 21:19:39 on ttys001
+VV29158:~ akumar38$ cd /Library/LaunchDaemons/
+VV29158:LaunchDaemons akumar38$ pwd
+/Library/LaunchDaemons
+VV29158:LaunchDaemons akumar38$ sudo vi com.espark.sh
+Password:
+Sorry, try again.
+Password:
+Sorry, try again.
+Password:
+
+
+execute.sh
+========================================
+#!bin/bash
+#Start Server only if it is not running
+if [ $(lsof -n -i :8080 | grep LISTEN | wc -l) -eq 0 ]
+then
+ # Note starting server
+  echo " Server Started"
+  java -jar ./target/springboot-web-rest.jar
+else
+  echo "Server Already Running"
+fi
+========================================
+$ chmod +x execute.sh
+
+
+$ cd /Library/LaunchDaemons/
+$ sudo vi org.espark.plist
+========================================
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+  <plist version="1.0">
+  	<dict>
+  		<key>Label</key>
+  		<string>org.espark</string>
+  		<key>Program</key>
+  		<string>/Users/akumar38/Downloads/springboot-web-rest/execute.sh</string>
+  		<key>RunAtLoad</key>
+  		<true/>
+  	</dict>
+  </plist>
+========================================
+# -w flag permanently adds the plist to the Launch Daemon
+sudo launchctl load -w /Library/LaunchDaemons/org.espark.plist
+
+
+
