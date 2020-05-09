@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: espark-eureka-server
+  name: espark-eureka-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: espark-eureka-server
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: espark-eureka-server
+    spec:
+      containers:
+      - image: adarshkumarsingh83/espark-eureka-server
+        name: espark-eureka-server
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: espark-eureka-server
+  name: espark-eureka-server
+spec:
+  ports:
+  - name: 8761-8761
+    port: 8761
+    protocol: TCP
+    targetPort: 8761
+  selector:
+    app: espark-eureka-server
+  type: ClusterIP
+status:
+  loadBalancer: {}

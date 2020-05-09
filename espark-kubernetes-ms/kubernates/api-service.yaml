@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: espark-api-service
+  name: espark-api-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: espark-api-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: espark-api-service
+    spec:
+      containers:
+      - image: adarshkumarsingh83/espark-api-service
+        name: espark-api-service
+        resources: {}
+status: {}

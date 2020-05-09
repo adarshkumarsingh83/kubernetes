@@ -1,0 +1,94 @@
+version: "3"
+services:
+  espark-eureka-server:
+    image: espark-eureka-server
+    build:
+      context: ./espark-eureka-server
+      dockerfile: Dockerfile
+    volumes:
+      - /data/espark-eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - spring-ms
+  espark-config-server:
+    image: espark-config-server
+    build:
+      context: ./espark-config-server
+      dockerfile: Dockerfile
+    volumes:
+      - /data/espark-config-server
+    ports:
+      - "8888:8888"
+    links:
+      - espark-eureka-server
+    depends_on:
+      - espark-eureka-server
+    networks:
+      - spring-ms
+  espark-address-service:
+    image: espark-address-service
+    build:
+      context: ./espark-address-service
+      dockerfile: Dockerfile
+    volumes:
+      - /data/espark-address-service
+    links:
+      - espark-eureka-server
+      - espark-config-server
+    depends_on:
+      - espark-eureka-server
+      - espark-config-server
+    networks:
+      - spring-ms
+  espark-employee-service:
+    image: espark-employee-service
+    build:
+      context: ./espark-employee-service
+      dockerfile: Dockerfile
+    volumes:
+      - /data/espark-employee-service
+    links:
+      - espark-eureka-server
+      - espark-config-server
+    depends_on:
+      - espark-eureka-server
+      - espark-config-server
+    networks:
+      - spring-ms
+  espark-api-service:
+    image: espark-api-service
+    build:
+      context: ./espark-api-service
+      dockerfile: Dockerfile
+    volumes:
+      - /data/espark-api-service
+    links:
+      - espark-eureka-server
+      - espark-config-server
+      - espark-employee-service
+      - espark-address-service
+    depends_on:
+      - espark-eureka-server
+      - espark-config-server
+    networks:
+      - spring-ms
+  espark-api-gateway:
+    image: espark-api-gateway
+    build:
+      context: ./espark-api-gateway
+      dockerfile: Dockerfile
+    volumes:
+      - /data/espark-api-gateway
+    ports:
+      - "8080:8080"
+    links:
+      - espark-eureka-server
+      - espark-employee-service
+      - espark-address-service
+    depends_on:
+      - espark-eureka-server
+    networks:
+      - spring-ms
+networks:
+  spring-ms:

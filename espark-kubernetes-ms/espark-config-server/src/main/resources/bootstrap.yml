@@ -1,0 +1,34 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: espark-config-server
+  cloud:
+    config:
+      server:
+        git:
+#          uri: file://${HOME}/config-repo
+          uri: https://github.com/adarshkumarsingh83/configuration
+
+          # Search in the 'config' directory of the repo. This generally wouldn't
+          # be used because the configs would be in the root directory, but because
+          # this example repo is hosting both the code and the configs, we're
+          # isolating the configuration files into their own directory.
+          searchPaths: server-config-store
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://espark-eureka-server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}-${random.int}
+    hostname: espark-config-server
+    leaseRenewalIntervalInSeconds: 5
+    preferIpAddress: true
+
+
+# show full health details at /health
+endpoints.health.sensitive: false

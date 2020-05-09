@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: espark-eureka-server
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  datacenter: India
+  environment: production
+server:
+  port: 8761
+
+
+

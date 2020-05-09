@@ -1,0 +1,24 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: espark-api-gateway
+  cloud:
+    config:
+      env: default # optional
+      label: master # optional
+      uri: http://espark-config-server:8888 # optional
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://espark-eureka-server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}-${random.int}
+    hostname: espark-api-gateway
+    leaseRenewalIntervalInSeconds: 5
+    preferIpAddress: true

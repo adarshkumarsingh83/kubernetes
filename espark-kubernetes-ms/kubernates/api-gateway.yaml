@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: espark-api-gateway
+  name: espark-api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: espark-api-gateway
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: espark-api-gateway
+    spec:
+      containers:
+      - image: adarshkumarsingh83/espark-api-gateway
+        name: espark-api-gateway
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: espark-api-gateway
+  name: espark-api-gateway
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: espark-api-gateway
+  type: LoadBalancer
+status:
+  loadBalancer: {}

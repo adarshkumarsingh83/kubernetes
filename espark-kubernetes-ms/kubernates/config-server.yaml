@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: espark-config-server
+  name: espark-config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: espark-config-server
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: espark-config-server
+    spec:
+      containers:
+      - image: adarshkumarsingh83/espark-config-server
+        name: espark-config-server
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: espark-config-server
+  name: espark-config-server
+spec:
+  ports:
+  - name: 8888-8888
+    port: 8888
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: espark-config-server
+  type: ClusterIP
+status:
+  loadBalancer: {}
