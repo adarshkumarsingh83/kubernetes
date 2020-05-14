@@ -1,14 +1,26 @@
 spring:
   application:
     name: espark-eureka-server
+server:
+  port: 8761
+
 eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
   datacenter: India
   environment: production
-server:
-  port: 8761
 
+---
 
-
+spring:
+  application:
+    name: espark-eureka-server
+  profiles:
+    - docker
+eureka:
+  instance:
+    hostname: "${HOSTNAME}.eureka"
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_ADDRESS}

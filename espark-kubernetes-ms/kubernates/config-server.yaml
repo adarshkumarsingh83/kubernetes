@@ -20,6 +20,11 @@ spec:
       containers:
       - image: adarshkumarsingh83/espark-config-server
         name: espark-config-server
+        ports:
+          - containerPort: 8888
+        env:
+          - name: REGISTRY_HOST
+            value: espark-eureka-server
         resources: {}
 status: {}
 ---
@@ -36,8 +41,9 @@ spec:
     port: 8888
     protocol: TCP
     targetPort: 8888
+    nodePort: 30002
   selector:
     app: espark-config-server
-  type: ClusterIP
+  type: LoadBalancer
 status:
   loadBalancer: {}

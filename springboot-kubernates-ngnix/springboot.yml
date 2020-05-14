@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: espark-springboot
+spec:
+  selector:
+    matchLabels:
+      app: espark-springboot
+      tier: backend
+      track: stable
+  replicas: 7
+  template:
+    metadata:
+      labels:
+        app: espark-springboot
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: espark-springboot
+          image: "adarshkumarsingh83/springboot-web-rest"
+          ports:
+            - name: http
+              containerPort: 80
+              
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: espark-springboot
+spec:
+  selector:
+    app: espark-springboot
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http

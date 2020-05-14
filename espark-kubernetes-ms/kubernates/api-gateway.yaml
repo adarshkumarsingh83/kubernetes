@@ -20,6 +20,11 @@ spec:
       containers:
       - image: adarshkumarsingh83/espark-api-gateway
         name: espark-api-gateway
+        ports:
+          - containerPort: 8080
+        env:
+          - name: REGISTRY_HOST
+            value: espark-eureka-server
         resources: {}
 status: {}
 ---
@@ -36,6 +41,7 @@ spec:
     port: 8080
     protocol: TCP
     targetPort: 8080
+    nodePort: 30000
   selector:
     app: espark-api-gateway
   type: LoadBalancer

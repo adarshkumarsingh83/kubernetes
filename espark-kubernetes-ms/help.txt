@@ -195,3 +195,23 @@ $ kubectl delete services xxxx
 
 $ kubectl delete deployment xxxx
 ========================================================================================================================
+
+ $ kubectl delete service/espark-api-gateway
+ $ kubectl delete service/espark-config-server
+ $ kubectl delete service/espark-eureka-server
+
+ $ kubectl delete deployment.apps/espark-address-service
+ $ kubectl delete deployment.apps/espark-api-gateway
+ $ kubectl delete deployment.apps/espark-api-service
+ $ kubectl delete deployment.apps/espark-config-server
+ $ kubectl delete deployment.apps/espark-employee-service
+ $ kubectl delete deployment.apps/espark-eureka-server
+
+
+ # To Open Dashboard if minikube is started
+ $ minikube dashboard
+
+
+  $ minikube ip
+
+

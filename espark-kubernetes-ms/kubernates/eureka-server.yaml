@@ -20,6 +20,8 @@ spec:
       containers:
       - image: adarshkumarsingh83/espark-eureka-server
         name: espark-eureka-server
+        ports:
+          - containerPort: 8761
         resources: {}
 status: {}
 ---
@@ -36,8 +38,9 @@ spec:
     port: 8761
     protocol: TCP
     targetPort: 8761
+    nodePort: 87610
   selector:
     app: espark-eureka-server
-  type: ClusterIP
+  type: LoadBalancer
 status:
   loadBalancer: {}

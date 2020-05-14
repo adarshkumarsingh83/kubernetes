@@ -1,0 +1,26 @@
+# To build the docker image and tag
+$ docker build -f Dockerfile -t adarshkumarsingh83/springboot-web-rest .
+
+# to push the docker image to the docker hub 
+$ docker push adarshkumarsingh83/springboot-web-rest
+
+#to create nginx image and push
+$ docker build -f  Dockerfile -t adarshkumarsingh83/nginx .
+
+$ docker push adarshkumarsingh83/nginx
+
+
+$ kubectl apply -f springboot.yaml
+
+$ kubectl apply -f nginx.yaml
+
+$ kubectl get service frontend --watch
+
+
+$ curl http://${EXTERNAL_IP}/
+
+
+$ kubectl delete services frontend hello
+
+
+$ kubectl delete deployment frontend hello

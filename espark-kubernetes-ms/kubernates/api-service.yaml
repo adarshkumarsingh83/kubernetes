@@ -20,5 +20,8 @@ spec:
       containers:
       - image: adarshkumarsingh83/espark-api-service
         name: espark-api-service
+        env:
+          - name: REGISTRY_HOST
+            value: espark-eureka-server
         resources: {}
 status: {}
