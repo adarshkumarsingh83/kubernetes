@@ -5,8 +5,8 @@ server:
 espark:
   services:
     names:
-      address: ESPARK-ADDRESS-SERVICE
-      employee: ESPARK-EMPLOYEE-SERVICE
+      address: ESPARK-ADDRESS-SERVICE:8080
+      employee: ESPARK-EMPLOYEE-SERVICE:8080
 
 spring:
   application:

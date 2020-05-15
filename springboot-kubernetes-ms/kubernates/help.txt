@@ -32,12 +32,12 @@ $ docker push adarshkumarsingh83/espark-api-gateway
 
 
 #TO DO THE DEPLOYMENT OF THE KUBE CONFIG AND SERVICE
-$ cd kubernates/
-$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernetes-ms/kubernates/config.yaml
-$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernetes-ms/kubernates/address.yaml
-$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernetes-ms/kubernates/employee.yaml
-$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernetes-ms/kubernates/api.yaml
-$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernetes-ms/kubernates/gateway.yaml
+$ cd $(pwd)/kubernates
+$ kubectl apply -f $(pwd)/kubernates/config.yaml
+$ kubectl apply -f $(pwd)/kubernates/address.yaml
+$ kubectl apply -f $(pwd)/kubernates/employee.yaml
+$ kubectl apply -f $(pwd)/kubernates/api.yaml
+$ kubectl apply -f $(pwd)/kubernates/gateway.yaml
 
 #TO VIEW THE DETAILS
 $ kubectl get all
