@@ -1,0 +1,30 @@
+
+server:
+  port: 8080
+
+espark:
+  services:
+    names:
+      address: ESPARK-ADDRESS-SERVICE
+      employee: ESPARK-EMPLOYEE-SERVICE
+
+spring:
+  application:
+    name: espark-api-service
+  cloud:
+    kubernetes:
+      config:
+        enabled: true
+        sources:
+          - namespace: default
+            name: kubernates-configmap-store
+      reload:
+        enabled: true
+        mode: event
+        strategy: refresh
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,refresh,keepalive,health

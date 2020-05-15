@@ -1,0 +1,80 @@
+# TO BUILD THE APPLICATION
+$ mvn clean package
+
+# TO CREATE A DOCKER IMAGE
+##############################for espark-address-service
+$ cd espark-address-service
+$ docker build -f Dockerfile -t adarshkumarsingh83/espark-address-service .
+
+# to push the docker image to the docker hub
+$ docker push adarshkumarsingh83/espark-address-service
+
+##############################for espark-employee-service
+$ cd espark-employee-service
+$ docker build -f Dockerfile -t adarshkumarsingh83/espark-employee-service .
+
+# to push the docker image to the docker hub
+$ docker push adarshkumarsingh83/espark-employee-service
+
+##############################for espark-api-service
+$ cd espark-api-service
+$ docker build -f Dockerfile -t adarshkumarsingh83/espark-api-service .
+
+# to push the docker image to the docker hub
+$ docker push adarshkumarsingh83/espark-api-service
+
+##############################for espark-api-gateway
+$ cd espark-api-gateway
+$ docker build -f Dockerfile -t adarshkumarsingh83/espark-api-gateway .
+
+# to push the docker image to the docker hub
+$ docker push adarshkumarsingh83/espark-api-gateway
+
+
+#TO DO THE DEPLOYMENT OF THE KUBE CONFIG AND SERVICE
+$ cd kubernates/
+$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernates-ms/kubernates/config.yaml
+$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernates-ms/kubernates/address.yaml
+$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernates-ms/kubernates/employee.yaml
+$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernates-ms/kubernates/api.yaml
+$ kubectl apply -f /Users/akumar38/GITHUB/kubernetes/springboot-kubernates-ms/kubernates/gateway.yaml
+
+#TO VIEW THE DETAILS
+$ kubectl get all
+
+#TO VIEW THE POD DETAILS
+$ kubectl get pod
+
+#TO VIEW THE CONFIG MAP DETAILS
+$ kubectl describe configmap kubernates-configmap-store
+
+#TO VIEW THE LOGS OF THE POD
+$ kubectl logs <pod-name> -f
+
+$ minikube service espark-api-service
+OR
+$ kubectl port-forward svc/espark-api-gateway 8080:8080
+
+
+#TO TEST THE REST END POINT
+$ curl localhost:8080/api/employee/1
+
+$ curl localhost:8080/api/address/1
+
+$ curl localhost:8080/api/details/1
+
+$ curl localhost:8080/api/details
+
+$ curl localhost:8080/api/config
+
+
+#FOR DELETING DEPLOYMENT AND SERVICE
+$ kubectl delete services springboot-kubernates-configmap
+$ kubectl delete deployment springboot-kubernates-configmap
+
+
+# TO DELETE ALL THE CONTAINERS WITH VOLUMES
+$ docker rm -vf $(docker ps -a -q)
+
+# TO DELETE ALL THE IMAGES
+$ docker rmi -f $(docker images -a -q)

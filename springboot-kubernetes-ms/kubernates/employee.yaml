@@ -1,0 +1,33 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: espark-employee-service
+spec:
+  selector:
+    app: espark-employee-service
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30085
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: espark-employee-service
+spec:
+  selector:
+    matchLabels:
+      app: espark-employee-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: espark-employee-service
+    spec:
+      containers:
+        - name: espark-employee-service
+          image: "adarshkumarsingh83/espark-employee-service"
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

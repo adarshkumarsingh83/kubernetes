@@ -1,0 +1,33 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: espark-api-gateway
+spec:
+  selector:
+    app: espark-api-gateway
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30082
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: espark-api-gateway
+spec:
+  selector:
+    matchLabels:
+      app: espark-api-gateway
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: espark-api-gateway
+    spec:
+      containers:
+        - name: espark-api-gateway
+          image: "adarshkumarsingh83/espark-api-gateway"
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
