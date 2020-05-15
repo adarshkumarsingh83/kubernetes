@@ -1,0 +1,33 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springboot-kubernates-configmap
+spec:
+  selector:
+    app: springboot-kubernates-configmap
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30083
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-kubernates-configmap
+spec:
+  selector:
+    matchLabels:
+      app: springboot-kubernates-configmap
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-kubernates-configmap
+    spec:
+      containers:
+        - name: springboot-kubernates-configmap
+          image: "adarshkumarsingh83/springboot-kubernates-configmap"
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

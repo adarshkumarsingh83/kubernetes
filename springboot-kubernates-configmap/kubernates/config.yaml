@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernates-configmap-store
+data:
+  application.properties: |-
+    espark.kube.config.message=WELCOME TO ESPARK FROM KUBERNATES CHANGES
+    espark.kube.config.name=ADARSH KUMAR SINGH FROM KUBERNATES CHANGES
