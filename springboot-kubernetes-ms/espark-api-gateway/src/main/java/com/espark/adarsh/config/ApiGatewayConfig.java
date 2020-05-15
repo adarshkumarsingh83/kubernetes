@@ -14,7 +14,7 @@ public class ApiGatewayConfig {
                 .route(r -> r.path("/api/**")
                         .filters(f -> f.addRequestHeader("api-request", "api-request-header")
                                 .addResponseHeader("api-response", "api-response-header"))
-                        .uri("espark-api-service:8080")
+                        .uri("http://espark-api-service:8080")
                         .id("espark-api-service"))
                 .build();
     }

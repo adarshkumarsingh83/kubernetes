@@ -8,7 +8,7 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
-      nodePort: 30082
+      nodePort: 30086
   type: NodePort
 ---
 apiVersion: apps/v1
@@ -28,6 +28,6 @@ spec:
       containers:
         - name: espark-api-gateway
           image: "adarshkumarsingh83/espark-api-gateway"
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080

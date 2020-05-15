@@ -32,7 +32,6 @@ $ docker push adarshkumarsingh83/espark-api-gateway
 
 
 #TO DO THE DEPLOYMENT OF THE KUBE CONFIG AND SERVICE
-$ cd $(pwd)/kubernates
 $ kubectl apply -f $(pwd)/kubernates/config.yaml
 $ kubectl apply -f $(pwd)/kubernates/address.yaml
 $ kubectl apply -f $(pwd)/kubernates/employee.yaml
@@ -54,7 +53,6 @@ $ kubectl logs <pod-name> -f
 $ minikube service espark-api-service
 OR
 $ kubectl port-forward svc/espark-api-gateway 8080:8080
-$ kubectl port-forward svc/espark-api-service 8080:8080
 
 
 #TO TEST THE REST END POINT
@@ -68,10 +66,15 @@ $ curl localhost:8080/api/details
 
 $ curl localhost:8080/api/config
 
+$ curl localhost:8080/api/message
+
 
 #FOR DELETING DEPLOYMENT AND SERVICE
-$ kubectl delete services springboot-kubernates-configmap espark-address-service espark-api-gateway espark-api-service espark-employee-service
-$ kubectl delete deployment springboot-kubernates-configmap espark-address-service espark-api-gateway espark-api-service espark-employee-service
+$ kubectl delete services  espark-address-service espark-api-gateway espark-api-service espark-employee-service
+$ kubectl delete deployment  espark-address-service espark-api-gateway espark-api-service espark-employee-service
+
+# TO DELETE CONFIG MAP
+$ kubectl delete configmap  kubernates-configmap-store  -n   default
 
 
 # TO DELETE ALL THE CONTAINERS WITH VOLUMES

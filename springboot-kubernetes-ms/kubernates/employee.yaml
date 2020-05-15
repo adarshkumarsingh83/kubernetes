@@ -28,6 +28,6 @@ spec:
       containers:
         - name: espark-employee-service
           image: "adarshkumarsingh83/espark-employee-service"
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080

@@ -28,6 +28,6 @@ spec:
       containers:
         - name: espark-api-service
           image: "adarshkumarsingh83/espark-api-service"
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
