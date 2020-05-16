@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+  espark-mysql:
+    image: mysql:5.7
+    container_name: espark-mysql
+    restart: always
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_DATABASE=espark"
+      - "MYSQL_USER=esparkuser"
+      - "MYSQL_PASSWORD=esparkpwd"
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/espark-mysql
+    networks:
+      - spring-ms
+
+  springboot-jpa-mysql:
+    image: springboot-jpa-mysql
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/springboot-jpa-mysql
+    links:
+      - espark-mysql
+    ports:
+      - 9090:9090
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "DATABASE_HOST=espark-mysql"
+      - "DATABASE_USER=root"
+      - "DATABASE_PASSWORD=root"
+      - "DATABASE_NAME=espark"
+      - "DATABASE_PORT=3306"
+    depends_on:
+      - espark-mysql
+    networks:
+      - spring-ms
+networks:
+  spring-ms:

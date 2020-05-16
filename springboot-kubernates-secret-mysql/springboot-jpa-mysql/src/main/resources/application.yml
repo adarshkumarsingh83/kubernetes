@@ -1,0 +1,44 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: springboot-jpa-mysql
+  datasource:
+    url: jdbc:mysql://localhost/esparkdb?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #initialization-mode: always
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    hibernate:
+      #ddl-auto: validate
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+---
+
+#spring:
+  application:
+    name: springboot-jpa-mysql
+  profiles: docker
+  datasource:
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_PORT}?createDatabaseIfNotExist=true&useSSL=false
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    platform: mysql
+    driverClassName: com.mysql.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate.ddl-auto: update
+    hibernate:
+      #ddl-auto: validate
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
