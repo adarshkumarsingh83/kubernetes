@@ -32,7 +32,7 @@ spring:
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
     platform: mysql
-    driverClassName: com.mysql.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     generate-ddl: true
     show-sql: true
