@@ -23,22 +23,26 @@ spring:
 
 ---
 
-#spring:
+spring:
   application:
     name: springboot-jpa-mysql
   profiles: docker
   datasource:
-    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_PORT}?createDatabaseIfNotExist=true&useSSL=false
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?createDatabaseIfNotExist=true&useSSL=false
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
     platform: mysql
-    driverClassName: com.mysql.cj.jdbc.Driver
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    hikari:
+      initialization-fail-timeout: 100
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
     generate-ddl: true
     show-sql: true
-    hibernate.ddl-auto: update
     hibernate:
-      #ddl-auto: validate
+      ddl-auto: create
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
