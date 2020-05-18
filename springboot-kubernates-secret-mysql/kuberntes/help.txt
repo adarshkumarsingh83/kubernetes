@@ -1,0 +1,37 @@
+
+#To build code
+$ mvn clean package
+
+# To build the docker image and tag
+$ docker build -f Dockerfile -t adarshkumarsingh83/springboot-jpa-mysql .
+
+# to push the docker image to the docker hub
+$ docker push adarshkumarsingh83/springboot-jpa-mysql
+
+
+# to create service and other in kubernetes
+$ kubectl apply -f $(pwd)/configmap.yml
+$ kubectl apply -f $(pwd)/secret1.yml
+$ kubectl apply -f $(pwd)/secret2.yml
+$ kubectl apply -f $(pwd)/springboot.yml
+
+
+#to view the service and other
+$ kubectl get all
+
+$ minikube service springboot-jpa-mysql
+or
+$ kubectl port-forward svc/springboot-jpa-mysql 8080:8080
+
+$ curl http://192.168.64.4:32655/api/employee
+
+#FOR DELETING DEPLOYMENT AND SERVICE
+$ kubectl delete services  springboot-jpa-mysql
+$ kubectl delete deployment  springboot-jpa-mysql
+
+# TO DELETE CONFIG MAP
+$ kubectl delete configmap  db-conf  -n   default
+
+$  kubectl get secrets
+$ kubectl delete  secret/db-credentials
+$ kubectl delete  secret/db-root-credentials

@@ -62,6 +62,9 @@ $ lsof -P | grep ':3306' | awk '{print $2}' | xargs kill -9
 #TO START THE DOCKER CONTAINERS
 $ docker-compose up
 
+
+$ docker-compose down
+
 # TO DELETE ALL THE CONTAINERS WITH VOLUMES
 $ docker rm -vf $(docker ps -a -q)
 

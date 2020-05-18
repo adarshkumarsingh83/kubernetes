@@ -36,6 +36,8 @@ spring:
     testWhileIdle: true
     validationQuery: SELECT 1
     hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
       initialization-fail-timeout: 100
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
