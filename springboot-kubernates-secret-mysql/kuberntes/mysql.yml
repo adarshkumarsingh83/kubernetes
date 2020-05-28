@@ -15,7 +15,7 @@ spec:
     tier: database
   clusterIP: None  # We Use DNS, Thus ClusterIP is not relevant
 ---
-# Define a 'Persistent Voulume Claim'(PVC) for Mysql Storage, dynamically provisioned by cluster
+# Define a 'Persistent Volume Claim'(PVC) for Mysql Storage, dynamically provisioned by cluster
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -84,6 +84,6 @@ spec:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
       volumes:
-        - name: mysql-persistent-storage # Obtaining 'vloume' from PVC
+        - name: mysql-persistent-storage # Obtaining 'volume' from PVC
           persistentVolumeClaim:
             claimName: mysql-pv-claim

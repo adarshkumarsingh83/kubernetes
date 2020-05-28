@@ -3,15 +3,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: springboot-jpa-mysql
+  namespace: default
 spec:
   selector:  # backend application pod labels should match these
-    app: to-do-app
+    app: springboot-jpa-mysql-label
     tier: backend
   ports:
-    - protocol: "TCP"
+    - protocol: TCP
       port: 9090
       targetPort: 9090
-  type: NodePort   # use NodePort, if you are not running Kubernetes on cloud
+  type: LoadBalancer   # use NodePort, if you are not running Kubernetes on cloud
 ---
 # Configure 'Deployment' of backend application
 apiVersion: apps/v1
@@ -22,36 +23,36 @@ metadata:
     app: springboot-jpa-mysql-label
     tier: backend
 spec:
-  replicas: 2    # Number of replicas of back-end application to be deployed
+  replicas: 1    # Number of replicas of back-end application to be deployed
   selector:
     matchLabels: # backend application pod labels should match these
       app: springboot-jpa-mysql-label
       tier: backend
   template:
     metadata:
-      labels: # Must macth 'Service' and 'Deployment' labels
+      labels: # Must match 'Service' and 'Deployment' labels
         app: springboot-jpa-mysql-label
         tier: backend
     spec:
       containers:
         - name: springboot-jpa-mysql
           image: adarshkumarsingh83/springboot-jpa-mysql  # docker image of backend application
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
           env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
             - name: DATABASE_HOST   # Setting Database host address from configMap
               valueFrom:
                 configMapKeyRef:
-                  name: db-conf  # name of configMap
+                  name: db-conf # name of configMap
                   key: host
             - name: DATABASE_NAME  # Setting Database name from configMap
               valueFrom:
                 configMapKeyRef:
                   name: db-conf
                   key: name
-            - name: DATABASE_PORT  # Setting Database port from configMap
-              valueFrom:
-                configMapKeyRef:
-                  name: db-conf
-                  key: port
             - name: DATABASE_USER  # Setting Database username from Secret
               valueFrom:
                 secretKeyRef:
@@ -62,5 +63,3 @@ spec:
                 secretKeyRef:
                   name: db-credentials
                   key: password
-          ports:
-            - containerPort: 9090
