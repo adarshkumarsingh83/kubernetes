@@ -6,17 +6,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.espark.adarsh</groupId>
-    <artifactId>springboot-kubernetes-ms</artifactId>
+    <artifactId>springboot-netflix-cloud-ms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>springboot-kubernetes-ms</name>
+    <name>springboot-netflix-cloud-ms</name>
  
     <modules>
+        <module>espark-eureka-server</module>
+        <module>espark-config-server</module>
+        <module>espark-api-gateway</module>
         <module>espark-address-service</module>
         <module>espark-employee-service</module>
         <module>espark-api-service</module>
-        <module>espark-api-gateway</module>
     </modules>
 
 </project>
