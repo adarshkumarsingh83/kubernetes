@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-db-conf           # name of ConfigMap, referenced in other files
+  namespace: default
+data:
+  host: "postgres"            # host address of postgres server, we are using DNS of Service
+  name: "espark-postgres"    # name of the database for application
+  port: "5432"

@@ -1,0 +1,85 @@
+# Define a 'Service' To Expose postgres to Other Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres  # DNS name
+  labels:
+    app: postgres
+    tier: database
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:       # postgres Pod Should contain same labels
+    app: postgres
+    tier: database
+  clusterIP: None  # We Use DNS, Thus ClusterIP is not relevant
+---
+# Define a 'Persistent Volume Claim'(PVC) for postgres Storage, dynamically provisioned by cluster
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim # name of PVC essential for identifying the storage data
+  labels:
+    app: postgres
+    tier: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+# Configure 'Deployment' of postgres server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+    tier: database
+spec:
+  selector: # postgres Pod Should contain same labels
+    matchLabels:
+      app: postgres
+      tier: database
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' selectors
+        app: postgres
+        tier: database
+    spec:
+      containers:
+        - image: postgres:9.6 # image from docker-hub
+          name: postgres
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: POSTGRES_USER # Setting USER username on postgres From a 'Secret'
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-db-credentials
+                  key: username
+            - name: POSTGRES_PASSWORD # Setting USER Password on postgres From a 'Secret'
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-db-credentials
+                  key: password
+            - name: POSTGRES_DB # Setting db name for postgres From configmap
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-db-conf
+                  key: name
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:        # Mounting volume obtained from Persistent Volume Claim
+            - name: postgres-persistent-storage
+              mountPath: /var/lib/postgres
+      volumes:
+        - name: postgres-persistent-storage # Obtaining 'volume' from PVC
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
