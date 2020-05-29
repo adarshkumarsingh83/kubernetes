@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-db-conf           # name of ConfigMap, referenced in other files
+  namespace: default
+data:
+  host: "mongo"            # host address of postgres server, we are using DNS of Service
+  name: "espark"    # name of the database for application
+  port: "27017"

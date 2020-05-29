@@ -1,0 +1,43 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: springboot-jpa-mongo
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: espark
+      auto-index-creation: false
+
+---
+
+spring:
+  application:
+    name: springboot-jpa-mongo
+  profiles: docker
+  data:
+    mongodb:
+      authentication-database: admin
+      username: ${DATABASE_USER}
+      password: ${DATABASE_PASSWORD}
+      host: ${DATABASE_HOST}
+      port: ${DATABASE_PORT}
+      database: ${DATABASE_NAME}
+      auto-index-creation: false
+---
+
+spring:
+  application:
+    name: springboot-jpa-mongo
+  profiles: kubernates
+  data:
+    mongodb:
+      authentication-database: admin
+      username: ${DATABASE_USER}
+      password: ${DATABASE_PASSWORD}
+      host: ${DATABASE_HOST}
+      port: ${DATABASE_PORT}
+      database: ${DATABASE_NAME}
+      auto-index-creation: false

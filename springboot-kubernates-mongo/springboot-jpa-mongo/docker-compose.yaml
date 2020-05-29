@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  espark-mongo:
+    container_name: espark-mongo
+    image: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=espark
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - 27017:27017
+    networks:
+      - spring-ms
+
+  springboot-jpa-mongo:
+    depends_on:
+      - espark-mongo
+    image: springboot-jpa-mongo
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    links:
+      - espark-mongo
+    ports:
+      - 9090:9090
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DATABASE_HOST=espark-mongo
+      - DATABASE_NAME=espark
+      - DATABASE_PORT=27017
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+    networks:
+      - spring-ms
+
+networks:
+  spring-ms:

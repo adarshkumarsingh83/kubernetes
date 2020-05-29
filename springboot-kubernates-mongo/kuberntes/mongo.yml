@@ -1,0 +1,83 @@
+# Define a 'Service' To Expose mongo to Other Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo  # DNS name
+  labels:
+    app: mongo
+    tier: database
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:       # mongo Pod Should contain same labels
+    app: mongo
+    tier: database
+  clusterIP: None  # We Use DNS, Thus ClusterIP is not relevant
+---
+# Define a 'Persistent Volume Claim'(PVC) for mongo Storage, dynamically provisioned by cluster
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pv-claim # name of PVC essential for identifying the storage data
+  labels:
+    app: mongo
+    tier: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+# Configure 'Deployment' of mongo server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+  labels:
+    app: mongo
+    tier: database
+spec:
+  selector: # mongo Pod Should contain same labels
+    matchLabels:
+      app: mongo
+      tier: database
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' selectors
+        app: mongo
+        tier: database
+    spec:
+      containers:
+        - image: mongo # image from docker-hub
+          name: mongo
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME # Setting USER username on mongo From a 'Secret'
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-db-credentials
+                  key: username
+            - name: MONGO_INITDB_ROOT_PASSWORD # Setting USER Password on mongo From a 'Secret'
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-db-credentials
+                  key: password
+            - name: MONGO_INITDB_DATABASE # Setting db name for mongo From configmap
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-db-conf
+                  key: name
+          ports:
+            - containerPort: 27017
+              name: mongo
+          volumeMounts:        # Mounting volume obtained from Persistent Volume Claim
+            - name: mongo-persistent-storage
+              mountPath: /var/lib/mongo
+      volumes:
+        - name: mongo-persistent-storage # Obtaining 'volume' from PVC
+          persistentVolumeClaim:
+            claimName: mongo-pv-claim

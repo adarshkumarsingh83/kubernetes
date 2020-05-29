@@ -1,0 +1,71 @@
+#to find the pid on the port
+$ sudo lsof -i :<port no>
+$ sudo kill -9 <pid>
+
+$ mvn clean package
+$ mvn spring-boot:run
+
+##########################################
+Post
+http://localhost:9090/api/employee
+==========================================
+{
+ "name":"adarsh"
+ ,"email":"adarsh@kumar"
+}
+==========================================
+{
+ "name":"radha"
+ ,"email":"radha@singh"
+}
+==========================================
+
+##########################################
+Get
+http://localhost:9090/api/employee
+
+[
+    {
+        "id": 1,
+        "name": "adarsh",
+        "email": "adarsh@kumar",
+        "createdDate": "2018-04-07T03:03:16.000+0000",
+        "updatedDate": "2018-04-07T03:03:16.000+0000"
+    },
+    {
+        "id": 2,
+        "name": "radha",
+        "email": "radha@singh",
+        "createdDate": "2018-04-07T03:03:31.000+0000",
+        "updatedDate": "2018-04-07T03:03:31.000+0000"
+    }
+]
+
+##########################################
+PUT
+http://localhost:9090/api/employee/1
+{
+    "id": 1,
+    "name": "adarsh",
+    "email": "adarsh@kumar.singh"
+}
+
+##########################################
+DElETE
+http://localhost:9090/api/employee/3
+
+##########################################
+
+
+$ lsof -P | grep ':5432' | awk '{print $2}' | xargs kill -9
+
+#TO START THE DOCKER CONTAINERS
+$ docker-compose up
+
+$ docker-compose down
+
+# TO DELETE ALL THE CONTAINERS WITH VOLUMES
+$ docker rm -vf $(docker ps -a -q)
+
+# TO DELETE ALL THE IMAGES
+$ docker rmi -f $(docker images -a -q)

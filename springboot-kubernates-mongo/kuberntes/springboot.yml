@@ -1,0 +1,70 @@
+# Define 'Service' to expose backend application deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-jpa-mongo
+  namespace: default
+spec:
+  selector:  # backend application pod labels should match these
+    app: springboot-jpa-mongo-label
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: LoadBalancer   # use NodePort, if you are not running Kubernetes on cloud
+---
+# Configure 'Deployment' of backend application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-jpa-mongo
+  labels:
+    app: springboot-jpa-mongo-label
+    tier: backend
+spec:
+  replicas: 1    # Number of replicas of back-end application to be deployed
+  selector:
+    matchLabels: # backend application pod labels should match these
+      app: springboot-jpa-mongo-label
+      tier: backend
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' labels
+        app: springboot-jpa-mongo-label
+        tier: backend
+    spec:
+      containers:
+        - name: springboot-jpa-mongo
+          image: adarshkumarsingh83/springboot-jpa-mongo  # docker image of backend application
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: DATABASE_HOST   # Setting Database host address from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-db-conf # name of configMap
+                  key: host
+            - name: DATABASE_NAME  # Setting Database name from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-db-conf
+                  key: name
+            - name: DATABASE_PORT  # Setting Database name from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-db-conf
+                  key: port
+            - name: DATABASE_USER  # Setting Database username from Secret
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-db-credentials # Secret Name
+                  key: username
+            - name: DATABASE_PASSWORD # Setting Database password from Secret
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-db-credentials
+                  key: password
