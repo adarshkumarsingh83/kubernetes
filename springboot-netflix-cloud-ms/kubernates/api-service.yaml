@@ -54,7 +54,7 @@ spec:
       port: 8181
       protocol: TCP
       targetPort: 8181
-  type: LoadBalancer
+  clusterIP: None
 
 
 

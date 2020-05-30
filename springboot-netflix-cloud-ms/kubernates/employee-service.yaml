@@ -54,6 +54,6 @@ spec:
       port: 8282
       protocol: TCP
       targetPort: 8282
-  type: LoadBalancer
+  clusterIP: None
 
 

@@ -49,5 +49,5 @@ spec:
       port: 8888
       protocol: TCP
       targetPort: 8888
-  type: LoadBalancer
+  clusterIP: None
 

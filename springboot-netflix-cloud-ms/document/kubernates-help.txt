@@ -63,8 +63,7 @@ $ kubectl apply -f $(pwd)/api-gateway.yaml
 #to view the service and other
 $ kubectl get all
 
-
-$ kubectl port-forward svc/espark-config-server 8761:8761
+$ kubectl port-forward svc/espark-api-gateway 8080:8080
 
 #TO VIEW THE POD DETAILS
 $ kubectl get pod
@@ -85,7 +84,7 @@ $ curl localhost:8080/api/details
 
 
 # TO DELETE CONFIG MAP
-$ kubectl delete configmap  cluster-config  -n   default
+$ kubectl delete configmap cluster-config -n default
 
 #FOR DELETING DEPLOYMENT AND SERVICE
 $ kubectl delete services  espark-eureka-server
@@ -102,3 +101,6 @@ $ kubectl delete deployment  espark-employee-service
 
 $ kubectl delete services  espark-api-service
 $ kubectl delete deployment  espark-api-service
+
+$ kubectl delete services  espark-api-gateway
+$ kubectl delete deployment  espark-api-gateway
