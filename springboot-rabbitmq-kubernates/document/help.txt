@@ -1,0 +1,29 @@
+rabbitmq mgmt console
+http://localhost:15672/
+guest/guest
+
+$ mvn clean package
+$ docker-compose up
+$ docker-compose down
+
+Post
+curl -H "Content-type:application/json"  \
+-d '{"messageId":"1","sender":"adarsh kumar","data":"love u radha"}' \
+http://localhost:8080/api/producer/message
+
+
+GET
+curl http://localhost:9090/api/consumer/message
+
+
+#TO LIST DOWN ALL THE IMAGES
+$ docker images
+
+#TO LIST ALL THE PROCESS
+$ docker ps -a
+
+# TO DELETE ALL THE CONTAINERS WITH VOLUMES
+$ docker rm -vf $(docker ps -a -q)
+
+# TO DELETE ALL THE IMAGES
+$ docker rmi -f $(docker images -a -q)

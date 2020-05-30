@@ -1,0 +1,63 @@
+version: "3.1"
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - spring-ms
+  springboot-rabbitmq-producer:
+    image: springboot-rabbitmq-producer
+    build:
+      context: ./springboot-rabbitmq-producer
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    volumes:
+      - /data/springboot-rabbitmq-producer
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "RABBITMQ_HOST=rabbitmq"
+      - "RABBITMQ_PORT=5672"
+      - "RABBITMQ_USERNAME=guest"
+      - "RABBITMQ_USERPWD=guest"
+      - "APP_EXCHANGE=espark-exchange"
+      - "APP_QUEUE=espark-queue"
+      - "APP_ROUTING_KEY=espark"
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+    ports:
+      - 8080:8080
+    networks:
+      - spring-ms
+  springboot-rabbitmq-consumer:
+    image: springboot-rabbitmq-consumer
+    build:
+      context: ./springboot-rabbitmq-consumer
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    volumes:
+      - /data/springboot-rabbitmq-consumer
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "RABBITMQ_HOST=rabbitmq"
+      - "RABBITMQ_PORT=5672"
+      - "RABBITMQ_USERNAME=guest"
+      - "RABBITMQ_USERPWD=guest"
+      - "APP_EXCHANGE=espark-exchange"
+      - "APP_QUEUE=espark-queue"
+      - "APP_ROUTING_KEY=espark"
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+    ports:
+      - 9090:9090
+    networks:
+      - spring-ms
+networks:
+  spring-ms:

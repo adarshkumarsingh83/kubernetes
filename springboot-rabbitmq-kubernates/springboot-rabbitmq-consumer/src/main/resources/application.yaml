@@ -1,0 +1,38 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: springboot-rabbitmq-consumer
+  rabbitmq:
+    host: localhost
+    port: 15672
+    username: guest
+    password: guest
+
+espark:
+  rabbitmq:
+    exchange: espark-exchange
+    queue: espark-queue
+    routingKey: espark
+
+---
+
+spring:
+  application:
+    name: springboot-rabbitmq-consumer
+  profiles:
+    active:
+      - docker
+      - kubernates
+  rabbitmq:
+    host: ${RABBITMQ_HOST:'localhost'}
+    port: ${RABBITMQ_PORT:15672}
+    username: ${RABBITMQ_USERNAME:'guest'}
+    password: ${RABBITMQ_USERPWD:'guest'}
+
+espark:
+  rabbitmq:
+    exchange: ${APP_EXCHANGE:'espark-exchange'}
+    queue: ${APP_QUEUE:'espark-queue'}
+    routingKey: ${APP_ROUTING_KEY:'espark'}
