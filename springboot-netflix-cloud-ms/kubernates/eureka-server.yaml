@@ -23,9 +23,10 @@ spec:
         imagePullPolicy: Always
         ports:
           - containerPort: 8761
-          env:   # Setting environmental Variables
-            - name: SPRING_PROFILES_ACTIVE
-              value: kubernates
+        env:   # Setting environmental Variables
+          - name: SPRING_PROFILES_ACTIVE
+            value: kubernates
+
 ---
 
 apiVersion: v1
@@ -36,7 +37,6 @@ metadata:
     app: espark-eureka-server
     tier: backend
 spec:
-  replicas: 1
   selector:
     app: espark-eureka-server
     tier: backend

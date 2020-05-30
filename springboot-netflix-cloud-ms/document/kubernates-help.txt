@@ -1,0 +1,104 @@
+........................................................................................................................
+MAVEN BUILD PROCESS
+........................................................................................................................
+
+# build cmd for whole project
+$ mvn clean package
+
+........................................................................................................................
+TO BUILD
+........................................................................................................................
+
+cd espark-eureka-server
+docker build -f Dockerfile -t adarshkumarsingh83/espark-eureka-server .
+
+cd ..
+cd espark-config-server
+docker build -f Dockerfile -t adarshkumarsingh83/espark-config-server .
+
+cd ..
+cd espark-api-gateway
+docker build -f Dockerfile -t adarshkumarsingh83/espark-api-gateway .
+
+cd ..
+cd espark-address-service
+docker build -f Dockerfile -t adarshkumarsingh83/espark-address-service .
+
+cd ..
+cd espark-employee-service
+docker build -f Dockerfile -t adarshkumarsingh83/espark-employee-service .
+
+cd ..
+cd espark-api-service
+docker build -f Dockerfile -t adarshkumarsingh83/espark-api-service .
+
+........................................................................................................................
+TO PUSH TO DOCKER HUB
+........................................................................................................................
+
+docker push adarshkumarsingh83/espark-eureka-server
+docker push adarshkumarsingh83/espark-config-server
+docker push adarshkumarsingh83/espark-api-gateway
+docker push adarshkumarsingh83/espark-address-service
+docker push adarshkumarsingh83/espark-employee-service
+docker push adarshkumarsingh83/espark-api-service
+........................................................................................................................
+
+
+#NOTE CHANGE TO THE DOCKER DESKTOP IN THE DOCKER -> KUBERNATES
+
+$ kubectl cluster-info
+
+# to create service and other in kubernetes
+$ cd kubernates
+$ kubectl apply -f $(pwd)/configmap.yaml
+$ kubectl apply -f $(pwd)/eureka-server.yaml
+$ kubectl apply -f $(pwd)/config-server.yaml
+$ kubectl apply -f $(pwd)/address-service.yaml
+$ kubectl apply -f $(pwd)/employee-service.yaml
+$ kubectl apply -f $(pwd)/api-service.yaml
+$ kubectl apply -f $(pwd)/api-gateway.yaml
+
+
+#to view the service and other
+$ kubectl get all
+
+
+$ kubectl port-forward svc/espark-config-server 8761:8761
+
+#TO VIEW THE POD DETAILS
+$ kubectl get pod
+
+#TO VIEW THE LOGS OF THE POD
+$ kubectl logs <pod-name> -f
+
+
+## TO TEST THE API
+
+$ curl localhost:8080/api/employee/1
+
+$ curl localhost:8080/api/address/1
+
+$ curl localhost:8080/api/details/1
+
+$ curl localhost:8080/api/details
+
+
+# TO DELETE CONFIG MAP
+$ kubectl delete configmap  cluster-config  -n   default
+
+#FOR DELETING DEPLOYMENT AND SERVICE
+$ kubectl delete services  espark-eureka-server
+$ kubectl delete deployment  espark-eureka-server
+
+$ kubectl delete services  espark-config-server
+$ kubectl delete deployment  espark-config-server
+
+$ kubectl delete services  espark-address-service
+$ kubectl delete deployment  espark-address-service
+
+$ kubectl delete services  espark-employee-service
+$ kubectl delete deployment  espark-employee-service
+
+$ kubectl delete services  espark-api-service
+$ kubectl delete deployment  espark-api-service

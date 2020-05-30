@@ -23,14 +23,14 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8888
-            env:   # Setting environmental Variables
-              - name: SPRING_PROFILES_ACTIVE
-                value: kubernates
-              - name: EUREKA_SERVER
-                valueFrom:
-                  configMapKeyRef:
-                    name: cluster-config # name of configMap
-                    key: eureka
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: EUREKA_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-config # name of configMap
+                  key: eureka
 ---
 
 apiVersion: v1
@@ -41,7 +41,6 @@ metadata:
     app: espark-config-server
     tier: backend
 spec:
-  replicas: 1
   selector:
     app: espark-config-server
     tier: backend

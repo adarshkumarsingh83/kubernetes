@@ -1,0 +1,38 @@
+========================================================================================================================
+MAVEN BUILD PROCESS
+========================================================================================================================
+
+# build cmd for whole project
+$ mvn clean package
+
+========================================================================================================================
+DOCKER PROCESS
+========================================================================================================================
+........................................................................................................................
+#To build and start the docker containers
+........................................................................................................................
+$ docker-compose up
+
+
+## TO TEST THE API 
+
+$ curl localhost:8080/api/employee/1
+
+$ curl localhost:8080/api/address/1
+
+$ curl localhost:8080/api/details/1
+
+$ curl localhost:8080/api/details
+
+
+#TO LIST DOWN ALL THE IMAGES
+$ docker images
+
+#TO LIST ALL THE PROCESS
+$ docker ps -a
+
+# TO DELETE ALL THE CONTAINERS WITH VOLUMES
+$ docker rm -vf $(docker ps -a -q)
+
+# TO DELETE ALL THE IMAGES
+$ docker rmi -f $(docker images -a -q)
