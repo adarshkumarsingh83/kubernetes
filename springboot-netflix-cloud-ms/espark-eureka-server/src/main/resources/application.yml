@@ -18,9 +18,10 @@ spring:
     name: espark-eureka-server
   profiles:
     - docker
+    - kubernates
 eureka:
-  instance:
-    hostname: "${HOSTNAME}.eureka"
+  datacenter: India
+  environment: production
   client:
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER_ADDRESS}
+    register-with-eureka: false
+    fetch-registry: false

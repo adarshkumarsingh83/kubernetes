@@ -5,10 +5,13 @@ services:
     build:
       context: ./espark-eureka-server
       dockerfile: Dockerfile
+    restart: on-failure:5
     volumes:
       - /data/espark-eureka-server
     ports:
       - "8761:8761"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
     networks:
       - spring-ms
   espark-config-server:
@@ -16,10 +19,14 @@ services:
     build:
       context: ./espark-config-server
       dockerfile: Dockerfile
+    restart: on-failure:5
     volumes:
       - /data/espark-config-server
     ports:
       - "8888:8888"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "EUREKA_SERVER=espark-eureka-server"
     links:
       - espark-eureka-server
     depends_on:
@@ -31,8 +38,13 @@ services:
     build:
       context: ./espark-address-service
       dockerfile: Dockerfile
+    restart: on-failure:5
     volumes:
       - /data/espark-address-service
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "CONFIG_SERVER=espark-config-server"
+      - "EUREKA_SERVER=espark-eureka-server"
     links:
       - espark-eureka-server
       - espark-config-server
@@ -46,8 +58,13 @@ services:
     build:
       context: ./espark-employee-service
       dockerfile: Dockerfile
+    restart: on-failure:5
     volumes:
       - /data/espark-employee-service
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "CONFIG_SERVER=espark-config-server"
+      - "EUREKA_SERVER=espark-eureka-server"
     links:
       - espark-eureka-server
       - espark-config-server
@@ -61,6 +78,11 @@ services:
     build:
       context: ./espark-api-service
       dockerfile: Dockerfile
+    restart: on-failure:5
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "CONFIG_SERVER=espark-config-server"
+      - "EUREKA_SERVER=espark-eureka-server"
     volumes:
       - /data/espark-api-service
     links:
@@ -78,6 +100,11 @@ services:
     build:
       context: ./espark-api-gateway
       dockerfile: Dockerfile
+    restart: on-failure:5
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "CONFIG_SERVER=espark-config-server"
+      - "EUREKA_SERVER=espark-eureka-server"
     volumes:
       - /data/espark-api-gateway
     ports:

@@ -1,46 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
+  name: espark-eureka-server
   labels:
     app: espark-eureka-server
-  name: espark-eureka-server
+    tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: espark-eureka-server
-  strategy: {}
+      tier: backend
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: espark-eureka-server
+        tier: backend
     spec:
       containers:
       - image: adarshkumarsingh83/espark-eureka-server
         name: espark-eureka-server
+        imagePullPolicy: Always
         ports:
           - containerPort: 8761
-        resources: {}
-status: {}
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
+  name: espark-eureka-server
   labels:
     app: espark-eureka-server
-  name: espark-eureka-server
+    tier: backend
 spec:
+  replicas: 1
+  selector:
+    app: espark-eureka-server
+    tier: backend
   ports:
   - name: 8761-8761
     port: 8761
     protocol: TCP
     targetPort: 8761
-    nodePort: 87610
-  selector:
-    app: espark-eureka-server
   type: LoadBalancer
-status:
-  loadBalancer: {}
+

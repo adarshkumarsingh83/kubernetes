@@ -1,6 +1,7 @@
 
 server:
-  port: 0
+  port: 8282
+
 
 spring:
   application:
@@ -9,14 +10,40 @@ spring:
     config:
       env: default # optional
       label: master # optional
-      uri: http://espark-config-server:8888 # optional
+      uri: http://localhost:8888 # optional
 
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://espark-eureka-server:8761/eureka
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}-${random.int}
+    hostname: espark-employee-service
+    leaseRenewalIntervalInSeconds: 5
+    preferIpAddress: true
+
+---
+
+spring:
+  application:
+    name: espark-employee-service
+  profiles:
+    - docker
+    - kubernates
+  cloud:
+    config:
+      env: default # optional
+      label: master # optional
+      uri: http://${CONFIG_SERVER}:8888 # optional
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER}:8761/eureka
   instance:
     instance-id: ${spring.application.name}-${random.int}
     hostname: espark-employee-service

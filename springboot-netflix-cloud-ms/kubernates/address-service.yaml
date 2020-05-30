@@ -1,27 +1,59 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
+  name: espark-address-service
   labels:
     app: espark-address-service
-  name: espark-address-service
+    tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: espark-address-service
-  strategy: {}
+      tier: backend
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: espark-address-service
+        tier: backend
     spec:
       containers:
-      - image: adarshkumarsingh83/espark-address-service
-        name: espark-address-service
-        env:
-          - name: REGISTRY_HOST
-            value: espark-eureka-server
-        resources: {}
-status: {}
+        - image: adarshkumarsingh83/espark-address-service
+          name: espark-address-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8383
+            env:   # Setting environmental Variables
+              - name: SPRING_PROFILES_ACTIVE
+                value: kubernates
+              - name: EUREKA_SERVER
+                valueFrom:
+                  configMapKeyRef:
+                    name: cluster-config # name of configMap
+                    key: eureka
+              - name: CONFIG_SERVER
+                valueFrom:
+                  configMapKeyRef:
+                    name: cluster-config # name of configMap
+                    key: config-server
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: espark-address-service
+  labels:
+    app: espark-address-service
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    app: espark-address-service
+    tier: backend
+  ports:
+    - name: 8383-8383
+      port: 8383
+      protocol: TCP
+      targetPort: 8383
+  type: LoadBalancer
+

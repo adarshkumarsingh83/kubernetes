@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-config    # name of ConfigMap, referenced in other files
+  namespace: default
+data:
+  eureka: "espark-eureka-server"            # host address of eureka server, we are using DNS of Service
+  config-server: "espark-config-server"    # name of the eureka for application

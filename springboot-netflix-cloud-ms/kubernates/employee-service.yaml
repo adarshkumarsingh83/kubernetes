@@ -1,27 +1,60 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
+  name: espark-employee-service
   labels:
     app: espark-employee-service
-  name: espark-employee-service
+    tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: espark-employee-service
-  strategy: {}
+      tier: backend
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: espark-employee-service
+        tier: backend
     spec:
       containers:
-      - image: adarshkumarsingh83/espark-employee-service
-        name: espark-employee-service
-        env:
-          - name: REGISTRY_HOST
-            value: espark-eureka-server
-        resources: {}
-status: {}
+        - image: adarshkumarsingh83/espark-employee-service
+          name: espark-employee-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8282
+            env:   # Setting environmental Variables
+              - name: SPRING_PROFILES_ACTIVE
+                value: kubernates
+              - name: EUREKA_SERVER
+                valueFrom:
+                  configMapKeyRef:
+                    name: cluster-config # name of configMap
+                    key: eureka
+              - name: CONFIG_SERVER
+                valueFrom:
+                  configMapKeyRef:
+                    name: cluster-config # name of configMap
+                    key: config-server
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: espark-employee-service
+  labels:
+    app: espark-employee-service
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    app: espark-employee-service
+    tier: backend
+  ports:
+    - name: 8282-8282
+      port: 8282
+      protocol: TCP
+      targetPort: 8282
+  type: LoadBalancer
+
+
