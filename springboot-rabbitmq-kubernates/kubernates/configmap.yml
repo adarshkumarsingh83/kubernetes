@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbit-conf
+  namespace: default
+data:
+  host: "rabbitmq"     # host address of mysql server, we are using DNS of Service
+  port: "5672"
+  username: "guest"
+  password: "guest"
+  exchange: "espark-exchange"
+  queue: "espark-queue"
+  routingkey: "espark"

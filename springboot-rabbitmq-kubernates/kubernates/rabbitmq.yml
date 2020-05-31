@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq # DNS name
+  labels:
+    app: rabbitmq
+    tire: backend
+spec:
+  ports:
+    - port: 5672
+      targetPort: 5672
+  selector:   # Pod Should contain same labels
+    app: rabbitmq
+    tire: backend
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  labels:
+    app: rabbitmq
+    tire: backend
+spec:
+  selector: # Pod Should contain same labels
+    matchLabels:
+      app: rabbitmq
+      tier: backend
+  template:
+    metadata:
+      labels:  # Must match 'Service' and 'Deployment' selectors
+        app: rabbitmq
+        tire: backend
+    spec:
+      containers:
+        - image: rabbitmq:management  # image from docker-hub
+          name: rabbitmq
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5672
