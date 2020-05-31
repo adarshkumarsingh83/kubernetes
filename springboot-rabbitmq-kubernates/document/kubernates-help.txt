@@ -44,7 +44,7 @@ $ kubectl get pod
 #TO VIEW THE LOGS OF THE POD
 $ kubectl logs <pod-name> -f
 
-
+--------------------------------------------------------------------------------------
 ## TO TEST THE API
 Post
 curl -H "Content-type:application/json"  \
@@ -53,6 +53,7 @@ http://localhost:8080/api/producer/message
 
 GET
 curl http://localhost:9090/api/consumer/message
+--------------------------------------------------------------------------------------
 
 
 # TO DELETE CONFIG MAP
@@ -67,4 +68,4 @@ $ kubectl delete services  springboot-rabbitmq-consumer
 $ kubectl delete deployment  springboot-rabbitmq-consumer
 
 $ kubectl delete services  rabbitmq
-$ kubectl delete deployment  rabbitmq
+$ kubectl delete statefulsets  rabbitmq
