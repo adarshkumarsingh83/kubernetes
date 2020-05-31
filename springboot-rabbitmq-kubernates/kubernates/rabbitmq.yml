@@ -7,7 +7,12 @@ spec:
     app: rabbitmq
   ports:
     - protocol: TCP
+      name: amqp
       port: 5672
+      targetPort: 5672
+    - protocol: TCP
+      name: mgmt
+      port: 15672
       targetPort: 15672
   type: LoadBalancer
 ---
@@ -37,9 +42,6 @@ spec:
             - name: amqp
               protocol: TCP
               containerPort: 5672
-          env:
-            - name: "RABBITMQ_ERLANG_COOKIE"
-              value: "1WqgH8N2v1qDBDZDbNy8Bg9IkPWLEpu79m6q+0t36lQ="
           volumeMounts:
             - mountPath: /var/lib/rabbitmq
               name: rabbitmq-data

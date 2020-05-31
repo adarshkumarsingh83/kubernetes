@@ -60,21 +60,21 @@ spec:
                   key: username
             - name: RABBITMQ_USERPWD # Setting Database password from Secret
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: rabbit-conf
                   key: password
             - name: APP_EXCHANGE
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: rabbit-conf
                   key: exchange
             - name: APP_QUEUE
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: rabbit-conf
                   key: queue
             - name: APP_ROUTING_KEY
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: rabbit-conf
                   key: routingkey
