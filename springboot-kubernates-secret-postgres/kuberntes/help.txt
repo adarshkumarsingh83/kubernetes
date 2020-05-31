@@ -54,3 +54,4 @@ $ kubectl delete deployment  springboot-jpa-postgres
 #FOR DELETING DEPLOYMENT AND SERVICE OF POSTGRACE
 $ kubectl delete services  postgres
 $ kubectl delete deployment  postgres
+$ kubectl delete pvc postgres-pv-claim

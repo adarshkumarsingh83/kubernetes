@@ -28,6 +28,7 @@ $ kubectl cluster-info
 
 # to create service and other in kubernetes
 $ cd kubernates
+$ kubectl apply -f $(pwd)/secret.yml
 $ kubectl apply -f $(pwd)/configmap.yml
 $ kubectl apply -f $(pwd)/rabbitmq.yml
 $ kubectl apply -f $(pwd)/producer.yml
@@ -57,10 +58,12 @@ curl http://localhost:9090/api/consumer/message
 
 
 # TO DELETE CONFIG MAP
-$ kubectl delete configmap rabbit-config -n default
+$ kubectl delete configmap rabbit-conf -n default
+
+#TO DELETE SECRET
+$ kubectl delete secret rabbit-secret
 
 #FOR DELETING DEPLOYMENT AND SERVICE
-
 $ kubectl delete services  springboot-rabbitmq-producer
 $ kubectl delete deployment  springboot-rabbitmq-producer
 

@@ -56,3 +56,4 @@ $ kubectl delete deployment  springboot-jpa-mysql
 #FOR DELETING DEPLOYMENT AND SERVICE OF MYSQL
 $ kubectl delete services  mysql
 $ kubectl delete deployment  mysql
+$ kubectl delete pvc mysql-pv-claim

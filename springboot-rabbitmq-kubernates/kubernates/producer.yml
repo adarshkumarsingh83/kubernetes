@@ -55,13 +55,13 @@ spec:
                   key: port
             - name: RABBITMQ_USERNAME  # Setting Database username from Secret
               valueFrom:
-                configMapKeyRef:
-                  name: rabbit-conf # Secret Name
+                secretKeyRef:
+                  name: rabbit-secret # Secret Name
                   key: username
             - name: RABBITMQ_USERPWD # Setting Database password from Secret
               valueFrom:
-                configMapKeyRef:
-                  name: rabbit-conf
+                secretKeyRef:
+                  name: rabbit-secret
                   key: password
             - name: APP_EXCHANGE
               valueFrom:
