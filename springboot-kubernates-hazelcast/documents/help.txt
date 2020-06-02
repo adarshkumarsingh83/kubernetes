@@ -11,10 +11,10 @@ $ docker rmi -f $(docker images -a -q)
 
 # TO CREATE A DOCKER IMAGE
 # To build the docker image and tag
-$ docker build -f Dockerfile -t adarshkumarsingh83/springboot-hazelcast-kubernates .
+$ docker build -f Dockerfile -t adarshkumarsingh83/springboot-kubernates-hazelcast .
 
 # to push the docker image to the docker hub
-$ docker push adarshkumarsingh83/springboot-hazelcast-kubernates
+$ docker push adarshkumarsingh83/springboot-kubernates-hazelcast
 
 
 $ kubectl apply -f $(pwd)/deployment.yaml
@@ -41,5 +41,5 @@ curl -X GET http://localhost:8080/api/hazelcast/owner
 $ kubectl delete deployment hazelcast-service
 $ kubectl delete service hazelcast-service
 
-$ kubectl delete deployment springboot-hazelcast-kubernates
-$ kubectl delete service springboot-hazelcast-kubernates
+$ kubectl delete deployment springboot-kubernates-hazelcast
+$ kubectl delete service springboot-kubernates-hazelcast

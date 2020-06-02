@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springboot-hazelcast-kubernates
+  name: springboot-kubernates-hazelcast
   labels:
-    app: springboot-hazelcast-kubernates
+    app: springboot-kubernates-hazelcast
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: springboot-hazelcast-kubernates
+      app: springboot-kubernates-hazelcast
   template:
     metadata:
       labels:
-        app: springboot-hazelcast-kubernates
+        app: springboot-kubernates-hazelcast
     spec:
       containers:
-        - name: springboot-hazelcast-kubernates
-          image: adarshkumarsingh83/springboot-hazelcast-kubernates
+        - name: springboot-kubernates-hazelcast
+          image: adarshkumarsingh83/springboot-kubernates-hazelcast
           ports:
             - name: http
               containerPort: 8080
@@ -26,15 +26,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: springboot-hazelcast-kubernates
+  name: springboot-kubernates-hazelcast
   labels:
-    app: springboot-hazelcast-kubernates
+    app: springboot-kubernates-hazelcast
 spec:
   ports:
     - port: 8080
       protocol: TCP
   selector:
-    app: springboot-hazelcast-kubernates
+    app: springboot-kubernates-hazelcast
   type: LoadBalancer
 ---
 apiVersion: v1
@@ -43,7 +43,7 @@ metadata:
   name: hazelcast-service
 spec:
   selector:
-    app: springboot-hazelcast-kubernates
+    app: springboot-kubernates-hazelcast
   ports:
     - name: hazelcast
       port: 5701

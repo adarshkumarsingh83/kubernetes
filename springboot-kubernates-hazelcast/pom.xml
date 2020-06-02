@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.espark.adarsh</groupId>
-	<artifactId>springboot-hazelcast-kubernates</artifactId>
+	<artifactId>springboot-kubernates-hazelcast</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>springboot-hazelcast-kubernates</name>
+	<name>springboot-kubernates-hazelcast</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
