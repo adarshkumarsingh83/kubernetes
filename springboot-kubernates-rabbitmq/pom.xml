@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.espark.adarsh</groupId>
-    <artifactId>springboot-rabbitmq-kubernates</artifactId>
+    <artifactId>springboot-kubernates-rabbitmq</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>springboot-rabbitmq-kubernates</name>
+    <name>springboot-kubernates-rabbitmq</name>
  
     <modules>
         <module>springboot-rabbitmq-producer</module>
