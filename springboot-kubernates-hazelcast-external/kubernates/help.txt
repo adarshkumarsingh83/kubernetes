@@ -1,0 +1,16 @@
+#To execute hazelcast locally
+extract the zip file then 'hazelcast-3.12.7.zip'
+got to hazelcast-3.12.7/bin
+then $ sh start.sh
+
+
+
+$ kubectl delete statefulsets  hazelcast
+$ kubectl delete services  management-center
+$ kubectl delete statefulsets  management-center
+
+
+curl -X POST http://localhost:8080/api/write -d '{"id":1,"key":"adarsh","value":"adarsh"}' -H "Content-Type: application/json"
+
+
+curl  -X GET http://localhost:8080/api/read/adarsh

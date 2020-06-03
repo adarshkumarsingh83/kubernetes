@@ -9,4 +9,5 @@ public class HazelCastBean implements Serializable {
 
     private String key;
     private Object value;
+
 }

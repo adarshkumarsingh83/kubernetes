@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: springboot-kubernates-hazelcast-external
+hazelcast.url: localhost:5701,192.168.64.1:5701
+
+---
+
+spring:
+  application:
+    name: springboot-kubernates-hazelcast-external
+  profiles:
+    - docker
+    - kubernates
+
+hazelcast.url: hazelcast:5701,hazelcast:5702

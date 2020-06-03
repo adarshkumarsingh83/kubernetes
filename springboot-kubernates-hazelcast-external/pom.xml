@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.espark.adarsh</groupId>
-	<artifactId>springboot-kuberntes-hazelcast-external</artifactId>
+	<artifactId>springboot-kubernates-hazelcast-external</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>springboot-kuberntes-hazelcast-external</name>
+	<name>springboot-kubernates-hazelcast-external</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -49,6 +49,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
