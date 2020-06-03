@@ -1,9 +1,16 @@
+
+server:
+  port: 9090
+
 spring:
   application:
     name: springboot-kubernates-hazelcast-external
 hazelcast.url: localhost:5701,192.168.64.1:5701
 
 ---
+
+server:
+  port: 9090
 
 spring:
   application:
