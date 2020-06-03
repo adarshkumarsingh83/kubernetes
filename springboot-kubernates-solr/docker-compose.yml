@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  zookeeper:
+    image: "zookeeper:3.4"
+    ports:
+      - "2181:2181"
+    container_name: "zookeeper"
+    hostname: "zookeeper"
+
+  solr:
+    image: solr:7.1
+    ports:
+      - "8983:8983"
+    volumes:
+      - solrdata1:/opt/solr/server/solr
+    container_name: solr1
+    links:
+      - zookeeper
+    command: /opt/solr/bin/solr start -f -z zookeeper:2181
+    depends_on:
+      - zookeeper
+
+  solr1:
+    image: solr:7.1
+    ports:
+      - "8984:8983"
+    volumes:
+      - solrdata2:/opt/solr/server/solr
+    container_name: solr2
+    links:
+      - zookeeper
+    command: /opt/solr/bin/solr start -f -z zookeeper:2181
+    depends_on:
+      - zookeeper
+
+  solr2:
+    image: solr:7.1
+    ports:
+      - "8984:8983"
+    volumes:
+      - solrdata2:/opt/solr/server/solr
+    container_name: solr2
+    links:
+      - zookeeper
+    command: /opt/solr/bin/solr start -f -z zookeeper:2181
+    depends_on:
+      - zookeeper
+
+
+
+volumes:
+  solrdata1:
+  solrdata2:

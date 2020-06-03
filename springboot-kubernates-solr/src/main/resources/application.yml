@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: springboot-kubernates-solr
+server:
+  port: 8080
+
+solr.host: "http://solr:8983/solr"
+
+---
+
+spring:
+  application:
+    name: springboot-kubernates-solr
+  profiles:
+    - docker
+    - kubernates
+
+server:
+  port: 8080
+
+solr.host: http://solr:8983/solr

@@ -1,0 +1,60 @@
+
+.......................................................................................................................
+MAVEN BUILD PROCESS
+........................................................................................................................
+
+# build cmd for whole project
+$ mvn clean package
+
+
+........................................................................................................................
+TO BUILD
+........................................................................................................................
+
+$ docker build -f Dockerfile -t adarshkumarsingh83/springboot-kubernates-hazelcast-external .
+
+........................................................................................................................
+TO PUSH TO DOCKER HUB
+........................................................................................................................
+
+$ docker push adarshkumarsingh83/springboot-kubernates-hazelcast-external
+
+
+
+$ kubectl cluster-info
+
+# to create service and other in kubernetes
+$ cd kubernates
+$ kubectl apply -f $(pwd)/hazelcast-mgmt.yml
+$ kubectl apply -f $(pwd)/spring.yml
+
+
+#to view the service and other
+$ kubectl get all
+
+
+#TO VIEW THE POD DETAILS
+$ kubectl get pod
+
+#TO VIEW THE LOGS OF THE POD
+$ kubectl logs <pod-name> -f
+
+--------------------------------------------------------------------------------------
+## TO TEST THE API
+curl -X POST http://localhost:9090/api/write -d '{"id":1,"key":"adarsh","value":"adarsh"}' -H "Content-Type: application/json"
+
+curl  -X GET http://localhost:9090/api/read/adarsh
+
+#To open managment console
+http://localhost:8080
+--------------------------------------------------------------------------------------
+
+
+$ kubectl delete statefulsets  hazelcast
+$ kubectl delete services  hazelcast
+$ kubectl delete services  management-center
+$ kubectl delete statefulsets  management-center
+
+$ kubectl delete deployment springboot-kubernates-hazelcast-external
+$ kubectl delete services springboot-kubernates-hazelcast-external
+
