@@ -1,10 +1,15 @@
 spring:
   application:
     name: springboot-kubernates-solr
+  data:
+    solr:
+      repositories:
+        enabled: true
+      zk-host: localhost:2181
+      host: localhost:8983
 server:
   port: 8080
 
-solr.host: "http://solr:8983/solr"
 
 ---
 
@@ -14,8 +19,15 @@ spring:
   profiles:
     - docker
     - kubernates
+  data:
+    solr:
+      repositories:
+        enabled: true
+      zk-host: ${ZOOKEEPER}
+      host: ${SOLR_HOST}
 
 server:
   port: 8080
 
-solr.host: http://solr:8983/solr
+
+
