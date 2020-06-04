@@ -1,5 +1,7 @@
 package com.espark.adarsh.config;
 
+import com.espark.adarsh.entity.Employee;
+import com.espark.adarsh.web.EmployeeController;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
@@ -32,19 +34,12 @@ public class ApplicationConfig {
     public SolrClient solrClient() {
         CloudSolrClient solrClient = new CloudSolrClient.Builder(Arrays.asList(solrHost)).withZkHost(zkHost).build();
         solrClient.setDefaultCollection("employee");
-        /*try {
-            SolrClient client = new HttpSolrClient.Builder("http://"+solrHost[0]+"/solr/").build();
-            CoreAdminRequest.Create createRequest = new CoreAdminRequest.Create();
-            createRequest.setCoreName("employee");
-            createRequest.process(client);
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }*/
         return solrClient;
     }
 
     @Bean
     public SolrTemplate solrTemplate(SolrClient solrClient) {
-        return new SolrTemplate(solrClient);
+        SolrTemplate solrTemplate =  new SolrTemplate(solrClient);
+        return solrTemplate;
     }
 }

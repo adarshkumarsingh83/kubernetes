@@ -18,7 +18,7 @@ services:
     environment:
       - ZK_HOST=zookeeper:2181
     volumes:
-      - solrdata1:/opt/solr/server/solr
+      - solrdata1:/opt/solr/server/solr/mycores
     links:
       - zookeeper
     depends_on:
@@ -34,7 +34,7 @@ services:
     environment:
       - ZK_HOST=zookeeper:2181
     volumes:
-      - solrdata2:/opt/solr/server/solr
+      - solrdata2:/opt/solr/server/solr/mycores
     links:
       - zookeeper
     depends_on:
