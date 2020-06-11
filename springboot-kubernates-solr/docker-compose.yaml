@@ -1,0 +1,31 @@
+version: "3.2"
+services:
+  espark-solr:
+    image: solr
+    container_name: espark-solr
+    ports:
+     - "8983:8983"
+    restart: always
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - employee
+
+  springboot-kubernates-solr:
+    container_name: springboot-kubernates-solr
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 9090:9090
+    links:
+      - espark-solr
+    depends_on:
+      - espark-solr
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DOCKER-SOLR-HOST=http://espark-solr:8983/solr
+      - SOLR-USERNAME=admin
+      - SOLR-PWD=admin
+

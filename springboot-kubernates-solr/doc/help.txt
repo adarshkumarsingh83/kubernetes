@@ -1,0 +1,88 @@
+$ mvn clean package
+
+$ docker build . -t springboot-kubernates-solr
+
+$ docker-compose up
+$ docker-compose down
+
+http://localhost:8983/solr/#/
+
+$ docker images
+
+#to view the dockers process
+$ docker ps -a
+
+# to stop forcefully
+$ docker rm --force <name>
+
+
+#to delete docker image
+$ docker image rm --force springboot-kubernates-solr
+
+
+#TO LIST DOWN ALL THE IMAGES
+$ docker images
+
+#TO LIST ALL THE PROCESS
+$ docker ps -a
+
+# TO DELETE ALL THE CONTAINERS WITH VOLUMES
+$ docker rm -vf $(docker ps -a -q)
+
+# TO DELETE ALL THE IMAGES
+$ docker rmi -f $(docker images -a -q)
+
+
+@post
+curl -X POST http://localhost:9090/api/employee -d '{"id":"100","name":"adarsh kumar","age":35}' -H "Content-Type: application/json"
+curl -X POST http://localhost:9090/api/employee -d '{"id":"200","name":"radha singh","age":31}' -H "Content-Type: application/json"
+curl -X POST http://localhost:9090/api/employee -d '{"id":"300","name":"amit kumar","age":31}' -H "Content-Type: application/json"
+
+
+@get
+curl  -X GET http://localhost:9090/api/employee/100
+{
+    "id": "100",
+    "name": "adarsh kumar",
+    "age": 35
+}
+
+@get
+curl  -X GET http://localhost:9090/api/employee/name/adarsh
+{
+    "id": "100",
+    "name": "adarsh kumar",
+    "age": 35
+}
+
+@get
+curl  -X GET http://localhost:9090/api/employee/name-like/*ad*
+[
+    {
+        "id": "100",
+        "name": "adarsh kumar",
+        "age": 35
+    },
+    {
+        "id": "300",
+        "name": "radha singh",
+        "age": 31
+    }
+]
+
+@get
+curl  -X GET http://localhost:9090/api/employee/age/31
+[
+    {
+        "id": "200",
+        "name": "amit kumar",
+        "age": 31
+    },
+    {
+        "id": "300",
+        "name": "radha singh",
+        "age": 31
+    }
+]
+
+

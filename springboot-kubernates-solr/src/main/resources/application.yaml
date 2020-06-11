@@ -1,0 +1,40 @@
+logging:
+  level:
+    root: DEBUG
+
+server:
+  port: 9090
+
+spring:
+  application:
+    name: springboot-solr-docker
+  data:
+    solr:
+      host: http://localhost:8983/solr
+      username: admin
+      password: admin
+      repositories:
+        enabled: true
+
+---
+
+logging:
+  level:
+    root: INFO
+
+server:
+  port: 9090
+
+spring:
+  application:
+    name: springboot-solr-docker
+  profiles:
+    active:
+      - docker
+  data:
+    solr:
+      host: ${DOCKER-SOLR-HOST:'espark-solr:8983'}
+      username: ${SOLR-USERNAME:'admin'}
+      password: ${SOLR-PWD:'admin'}
+      repositories:
+        enabled: true
