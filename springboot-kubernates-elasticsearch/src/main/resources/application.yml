@@ -1,0 +1,32 @@
+server:
+  port: 9090
+
+
+spring:
+  application:
+    name: springboot-elasicsearch
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: localhost:9200
+
+application:
+  elastic:
+    url: localhost:9200
+
+---
+
+spring:
+  application:
+    name: springboot-elasicsearch
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: ${DOCKER-ELASTIC-URL}
+  profiles:
+    - docker
+    - kubernates
+
+application:
+  elastic:
+    url: ${DOCKER-ELASTIC-URL}

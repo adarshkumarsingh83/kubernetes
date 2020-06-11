@@ -12,13 +12,17 @@ services:
 
   solr1:
     container_name: solr1
-    image: solr:7.1
+    image: solr
     ports:
       - "8983:8983"
     environment:
       - ZK_HOST=zookeeper:2181
     volumes:
-      - solrdata1:/opt/solr/server/solr/mycores
+      - solrdata1:/opt/solr/server/solr
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - employee
     links:
       - zookeeper
     depends_on:
@@ -28,13 +32,17 @@ services:
 
   solr2:
     container_name: solr2
-    image: solr:7.1
+    image: solr
     ports:
       - "8984:8983"
     environment:
       - ZK_HOST=zookeeper:2181
     volumes:
-      - solrdata2:/opt/solr/server/solr/mycores
+      - solrdata2:/opt/solr/server/solr
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - employee
     links:
       - zookeeper
     depends_on:
