@@ -1,0 +1,60 @@
+# Define 'Service' to expose backend application deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-kubernates-solr
+  namespace: default
+spec:
+  selector:  # backend application pod labels should match these
+    app: springboot-kubernates-solr-label
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: LoadBalancer   # use NodePort, if you are not running Kubernetes on cloud
+---
+# Configure 'Deployment' of backend application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-kubernates-solr
+  labels:
+    app: springboot-kubernates-solr-label
+    tier: backend
+spec:
+  replicas: 1    # Number of replicas of back-end application to be deployed
+  selector:
+    matchLabels: # backend application pod labels should match these
+      app: springboot-kubernates-solr-label
+      tier: backend
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' labels
+        app: springboot-kubernates-solr-label
+        tier: backend
+    spec:
+      containers:
+        - name: springboot-kubernates-solr
+          image: adarshkumarsingh83/springboot-kubernates-solr  # docker image of backend application
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: DOCKER-SOLR-HOST   # Setting Database host address from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: solr-conf # name of configMap
+                  key: host
+            - name: SOLR-USERNAME  # Setting Database name from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: solr-conf
+                  key: name
+            - name: SOLR-PWD  # Setting Database name from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: solr-conf
+                  key: pwd

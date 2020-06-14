@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: solr-conf                           # name of ConfigMap, referenced in other files
+  namespace: default
+data:
+  host: "http://solr:8983/solr"            # host address of solr server, we are using DNS of Service
+  name: "admin"                            # name of the solr user for application
+  pwd: "admin"
