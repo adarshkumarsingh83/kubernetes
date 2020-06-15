@@ -30,17 +30,12 @@ spec:
       labels:     # Must match 'Service' and 'Deployment' labels
         app: solr
     spec:
-      restartPolicy: Always
       containers:
         - name: solr
-          image: solr:8.1.1
+          image: bitnami/solr:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8983
-        - name: solr
-            command:
-              - "/bin/bash"
-              - "-c"
-              - "/opt/docker-solr/scripts/startService.sh"
-              - solr-precreate
-              - employee
+          env:
+            - name: SOLR_CORE
+              value: employee
