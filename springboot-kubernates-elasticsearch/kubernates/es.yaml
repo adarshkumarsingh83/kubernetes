@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: elasticsearch
 spec:
-  serviceName: "elasticsearch"
+  serviceName: elasticsearch
   replicas: 1
   selector:
     matchLabels:
@@ -15,23 +15,23 @@ spec:
     spec:
       containers:
         - name: elasticsearch
-          image: docker.elastic.co/elasticsearch/elasticsearch:6.6.1
+          image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
           env:
             - name: discovery.type
               value: single-node
+            - name: cluster.name
+              value: espark-cluster
           ports:
             - containerPort: 9200
               name: client
-            - containerPort: 9300
-              name: nodes
           volumeMounts:
             - name: data
-              mountPath: /usr/share/elasticsearch/data
+              mountPath: /var/lib/elasticsearch
       volumes:
         - name: data
           hostPath:
-            path: /mnt/data
-            type: Directory
+            path: /data/elasticsearch
+            type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: Service
@@ -43,7 +43,6 @@ spec:
   ports:
     - port: 9200
       name: client
-    - port: 9300
-      name: nodes
   selector:
     app: elasticsearch
+  type: LoadBalancer

@@ -1,0 +1,49 @@
+# Define 'Service' to expose backend application deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-kubernates-elasticsearch
+  namespace: default
+spec:
+  selector:  # backend application pod labels should match these
+    app: springboot-kubernates-elasticsearch-label
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: LoadBalancer   # use NodePort, if you are not running Kubernetes on cloud
+---
+# Configure 'Deployment' of backend application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-kubernates-elasticsearch
+  labels:
+    app: springboot-kubernates-elasticsearch-label
+    tier: backend
+spec:
+  replicas: 1    # Number of replicas of back-end application to be deployed
+  selector:
+    matchLabels: # backend application pod labels should match these
+      app: springboot-kubernates-elasticsearch-label
+      tier: backend
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' labels
+        app: springboot-kubernates-elasticsearch-label
+        tier: backend
+    spec:
+      containers:
+        - name: springboot-kubernates-elasticsearch
+          image: adarshkumarsingh83/springboot-kubernates-elasticsearch  # docker image of backend application
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: DOCKER-ELASTIC-URL
+              value: elasticsearch:9200
+            - name: DOCKER-CLUSTER-NAME
+              value: espark-cluster

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kibana-deployment
+  name: kibana
   labels:
     app: kibana
 spec:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: kibana
-          image: docker.elastic.co/kibana/kibana:6.6.1
+          image: docker.elastic.co/kibana/kibana:7.0.1
           ports:
             - containerPort: 5601
               name: webinterface
@@ -28,9 +28,9 @@ metadata:
   labels:
     service: kibana
 spec:
-  type: NodePort
   ports:
     - port: 5601
       name: webinterface
   selector:
     app: kibana
+  type: LoadBalancer

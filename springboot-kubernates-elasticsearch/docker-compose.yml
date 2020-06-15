@@ -46,6 +46,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - DOCKER-ELASTIC-URL=elasticsearch:9200
+      - DOCKER-CLUSTER-NAME=docker-cluster
     networks:
       - spring-ms
 

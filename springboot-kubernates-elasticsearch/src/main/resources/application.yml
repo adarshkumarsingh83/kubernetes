@@ -21,7 +21,7 @@ spring:
     name: springboot-elasicsearch
   data:
     elasticsearch:
-      cluster-name: docker-cluster
+      cluster-name: ${DOCKER-CLUSTER-NAME}
       cluster-nodes: ${DOCKER-ELASTIC-URL}
   profiles:
     - docker
