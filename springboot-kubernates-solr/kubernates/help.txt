@@ -54,6 +54,6 @@ $ kubectl delete services springboot-kubernates-solr
 $ kubectl delete deployment springboot-kubernates-solr
 
 $ kubectl delete services  solr
-$ kubectl delete deployment  solr
+$ kubectl delete statefulset  solr
 
 

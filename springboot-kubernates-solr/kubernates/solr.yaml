@@ -1,33 +1,16 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: solr
-  namespace: default
-spec:
-  selector:
-    app: solr
-  ports:
-    - protocol: TCP
-      port: 8983
-      targetPort: 8983
-  type: LoadBalancer
-
----
-
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: solr
-  labels:
-    app: solr
 spec:
-  replicas: 1    # Number of replicas of back-end application to be deployed
+  serviceName: solr
+  replicas: 1
   selector:
-    matchLabels: # backend application pod labels should match these
+    matchLabels:
       app: solr
   template:
     metadata:
-      labels:     # Must match 'Service' and 'Deployment' labels
+      labels:
         app: solr
     spec:
       containers:
@@ -39,3 +22,26 @@ spec:
           env:
             - name: SOLR_CORE
               value: employee
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/solr
+      volumes:
+        - name: data
+          hostPath:
+            path: /data/solr
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: solr
+  labels:
+    service: solr
+spec:
+  ports:
+    - protocol: TCP
+      port: 8983
+      targetPort: 8983
+  selector:
+    app: solr
+  type: LoadBalancer
