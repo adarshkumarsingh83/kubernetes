@@ -1,0 +1,67 @@
+
+logging:
+  level:
+    root: DEBUG
+
+server:
+  port: 9191
+
+spring:
+  application:
+    name: springboot-kafka-consumer
+  kafka:
+    consumer:
+      topic: espark-topic
+      host: localhost:9092
+      group: espark-group
+  datasource:
+    url: jdbc:mysql://localhost:3306/espark?createDatabaseIfNotExist=true&useSSL=false
+    username: root
+    password: root
+    platform: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    hikari:
+      initialization-fail-timeout: 100
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+---
+
+spring:
+  application:
+    name: springboot-kafka-consumer
+  profiles:
+    - docker
+    - kubernates
+  kafka:
+    consumer:
+      topic: espark-topic
+      host: ${KAFKA-URL}
+      group: espark-group
+  datasource:
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?createDatabaseIfNotExist=true&useSSL=false
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    platform: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    hikari:
+      initialization-fail-timeout: 100
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

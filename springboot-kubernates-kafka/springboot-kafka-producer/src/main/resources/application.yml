@@ -1,0 +1,33 @@
+logging:
+  level:
+    root: DEBUG
+
+
+server:
+  port: 8181
+
+spring:
+  application:
+    name: springboot-kafka-producer
+  kafka:
+    producer:
+      topic: espark-topic
+      host: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+---
+
+
+spring:
+  application:
+    name: springboot-kafka-producer
+  profiles:
+    - docker
+    - kubernates
+  kafka:
+    producer:
+      topic: espark-topic
+      host: ${KAFKA-URL}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

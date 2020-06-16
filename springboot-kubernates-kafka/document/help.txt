@@ -1,0 +1,22 @@
+mvn clean package
+
+
+docker-compose up
+docker-compose down
+
+------------------------------------------------------------------------------------------------------------------------
+post
+$ curl --location --request POST 'http://localhost:8181/api/message' \
+--header 'Content-Type: application/json' \
+--data-raw '{"messageId":"100","data":"adarsh kumar love u radha","definition":"notification"}'
+
+@get
+$ curl http://localhost:8080/api/message/100
+------------------------------------------------------------------------------------------------------------------------
+
+
+# TO DELETE ALL THE CONTAINERS WITH VOLUMES
+$ docker rm -vf $(docker ps -a -q)
+
+# TO DELETE ALL THE IMAGES
+$ docker rmi -f $(docker images -a -q)
