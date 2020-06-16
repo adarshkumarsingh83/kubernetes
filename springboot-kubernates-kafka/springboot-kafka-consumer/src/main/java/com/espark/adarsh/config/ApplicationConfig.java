@@ -1,8 +1,7 @@
 package com.espark.adarsh.config;
 
-import com.espark.adarsh.entity.MessageEntity;
+import com.espark.adarsh.bean.MessageBean;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,44 +20,52 @@ import java.util.Map;
 public class ApplicationConfig {
 
     @Value("${spring.kafka.consumer.group}")
-    private String kafkaGroup;
+    String kafkaGroup;
+
+    @Value("${spring.kafka.consumer.groupMessage}")
+    String kafkaMessageGroup;
+
 
     @Value("${spring.kafka.consumer.host}")
-    private String kafkaHost;
-
+    String kafkaHost;
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, MessageEntity> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, MessageEntity> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, MessageBean> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, MessageBean> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConcurrency(1);
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
 
     @Bean
-    public ConsumerFactory<String, MessageEntity> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(consumerProps(), stringKeyDeserializer(), messageBeanJsonValueDeserializer());
-    }
-
-    @Bean
-    public Map<String, Object> consumerProps() {
+    public ConsumerFactory<String, MessageBean> consumerFactory() {
         Map<String, Object> properties = new HashMap<>();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaHost);
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaGroup);
-        properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        properties.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "100");
-        properties.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "15000");
-        return properties;
+        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        return new DefaultKafkaConsumerFactory<>(properties);
+    }
+
+
+    @Bean
+    public ConsumerFactory<String, MessageBean> messageConsumerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaHost);
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaMessageGroup);
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        config.put(JsonDeserializer.TRUSTED_PACKAGES, "com.espark.adarsh.bean.MessageBean");
+        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(),
+                new JsonDeserializer<>(MessageBean.class));
     }
 
     @Bean
-    public Deserializer stringKeyDeserializer() {
-        return new StringDeserializer();
+    public ConcurrentKafkaListenerContainerFactory<String, MessageBean> messageKafkaListenerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, MessageBean> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConcurrency(1);
+        factory.setConsumerFactory(messageConsumerFactory());
+        return factory;
     }
 
-    @Bean
-    public Deserializer messageBeanJsonValueDeserializer() {
-        return new JsonDeserializer(MessageEntity.class);
-    }
 }

@@ -13,13 +13,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProducerService {
 
+    @Value("${spring.kafka.producer.topic}")
+    private String kafkaTopic;
 
     @Autowired
     KafkaTemplate<String, MessageBean> kafkaTemplate;
 
     public String sendMessage(MessageBean messageBean) {
         try {
-            SendResult<String, MessageBean> sendResult = kafkaTemplate.sendDefault(messageBean.getMessageId(), messageBean).get();
+            SendResult<String, MessageBean> sendResult = kafkaTemplate.send(kafkaTopic, messageBean).get();
             RecordMetadata recordMetadata = sendResult.getRecordMetadata();
             log.info("label=ProducerService sendMessage() topic={}, partition={}, offset={}, messageBean={}",
                     recordMetadata.topic(), recordMetadata.partition(), recordMetadata.offset(), messageBean);

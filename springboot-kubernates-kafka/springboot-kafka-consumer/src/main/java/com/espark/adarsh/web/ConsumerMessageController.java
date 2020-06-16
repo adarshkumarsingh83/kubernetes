@@ -23,14 +23,14 @@ public class ConsumerMessageController {
         return this.consumerService.getAllMessage();
     }
 
-    @GetMapping("/messages/{id}")
-    public MessageEntity getMessages(@PathVariable("id") String id) {
+    @GetMapping("/message/{id}")
+    public MessageEntity getMessages(@PathVariable("id") Long id) {
         log.info("label=ConsumerMessageController getMessages()");
         return this.consumerService.getMessage(id);
     }
 
     @DeleteMapping("/messages/{id}")
-    public MessageEntity deleteMessages(@PathVariable("id") String id) {
+    public MessageEntity deleteMessages(@PathVariable("id") Long id) {
         log.info("label=ConsumerMessageController deleteMessages()");
         return this.consumerService.deleteMessage(id);
     }

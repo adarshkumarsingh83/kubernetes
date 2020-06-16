@@ -9,19 +9,27 @@ import javax.persistence.*;
 @Data
 @Entity
 @ToString
-@Table(name = "message")
-public class MessageEntity <T>{
+@Table(name = "message_entity")
+public class MessageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String messageId;
+    private Long id;
+
     private String definition;
-    private T data;
+
+    private String data;
 
     public MessageEntity() {
     }
 
-    public MessageEntity(T message) {
+    public MessageEntity(String message) {
         this.data = message;
+    }
+
+    public MessageEntity(com.espark.adarsh.bean.MessageBean message) {
+        this.data = message.getData();
+        this.id = message.getId();
+        this.definition = message.getDefinition();
     }
 }

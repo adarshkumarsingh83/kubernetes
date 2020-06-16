@@ -1,7 +1,7 @@
 
 logging:
   level:
-    root: DEBUG
+    root: INFO
 
 server:
   port: 9191
@@ -13,7 +13,8 @@ spring:
     consumer:
       topic: espark-topic
       host: localhost:9092
-      group: espark-group
+      group: espark-string-group
+      groupMessage: espark-json-group
   datasource:
     url: jdbc:mysql://localhost:3306/espark?createDatabaseIfNotExist=true&useSSL=false
     username: root
@@ -45,7 +46,8 @@ spring:
     consumer:
       topic: espark-topic
       host: ${KAFKA-URL}
-      group: espark-group
+      group: espark-string-group
+      groupMessage: espark-json-group
   datasource:
     url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?createDatabaseIfNotExist=true&useSSL=false
     username: ${DATABASE_USER}
