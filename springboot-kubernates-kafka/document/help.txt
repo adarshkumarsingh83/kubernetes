@@ -27,13 +27,19 @@ docker-compose up
 docker-compose down
 
 ------------------------------------------------------------------------------------------------------------------------
+TESTING THE API
+------------------------------------------------------------------------------------------------------------------------
 post
 $ curl --location --request POST 'http://localhost:8181/api/message' \
 --header 'Content-Type: application/json' \
 --data-raw '{"id":"1","data":"adarsh kumar love u radha","definition":"notification"}'
+$ curl --location --request POST 'http://localhost:8181/api/message' \
+--header 'Content-Type: application/json' \
+--data-raw '{"id":"2","data":"radha singh love u adi","definition":"notification"}'
 
 @get
 $ curl http://localhost:9191/api/message/1
+$ curl http://localhost:9191/api/message/2
 $ curl http://localhost:9191/api/messages
 ------------------------------------------------------------------------------------------------------------------------
 

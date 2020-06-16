@@ -19,7 +19,7 @@ services:
       - KAFKA_ADVERTISED_HOST_NAME=kafka
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - KAFKA_ADVERTISED_PORT=9092
-      - KAFKA_CREATE_TOPICS=espark-topic:1:1
+      - KAFKA_CREATE_TOPICS=espark-topic
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
@@ -62,6 +62,7 @@ services:
       - kafka
       - espark-mysql
     environment:
+      - SPRING_PROFILES_ACTIVE=docker
       - DATABASE_HOST=espark-mysql
       - DATABASE_PORT=3306
       - DATABASE_NAME=espark
@@ -88,6 +89,7 @@ services:
         - kafka
         - espark-mysql
       environment:
+        - SPRING_PROFILES_ACTIVE=docker
         - KAFKA-URL=kafka:9092
       networks:
         - spring-ms
