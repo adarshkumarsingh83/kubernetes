@@ -28,6 +28,6 @@ spring:
   kafka:
     producer:
       topic: espark-topic
-      host: ${KAFKA-URL}
+      host: ${KAFKA_URL}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer

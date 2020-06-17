@@ -68,7 +68,7 @@ services:
       - DATABASE_NAME=espark
       - DATABASE_USER=espark-root
       - DATABASE_PASSWORD=espark-root
-      - KAFKA-URL=kafka:9092
+      - KAFKA_URL=kafka:9092
     networks:
       - spring-ms
 
@@ -90,7 +90,7 @@ services:
         - espark-mysql
       environment:
         - SPRING_PROFILES_ACTIVE=docker
-        - KAFKA-URL=kafka:9092
+        - KAFKA_URL=kafka:9092
       networks:
         - spring-ms
 

@@ -45,7 +45,7 @@ spring:
   kafka:
     consumer:
       topic: espark-topic
-      host: ${KAFKA-URL}
+      host: ${KAFKA_URL}
       group: espark-string-group
       groupMessage: espark-json-group
   datasource:
