@@ -2,6 +2,7 @@ mvn clean package
 
 
 # To build the docker image and tag
+$ cd springboot-kafka-producer
 $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-kafka-producer .
 
 # to push the docker image to the docker hub
@@ -9,6 +10,7 @@ $ docker push adarshkumarsingh83/springboot-kafka-producer
 
 
 # To build the docker image and tag
+$ cd springboot-kafka-consumer
 $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-kafka-consumer .
 
 # to push the docker image to the docker hub
@@ -36,7 +38,6 @@ $ kubectl get pod
 
 #TO VIEW THE LOGS OF THE POD
 $ kubectl logs <pod-name> -f
-
 
 ------------------------------------------------------------------------------------------------------------------------
 TESTING THE API
@@ -71,13 +72,13 @@ $ kubectl delete deployment  zookeeper
 
 
 #FOR DELETING KAFKA
-$ kubectl delete services  kafka
-$ kubectl delete statefulset  kafka
+$ kubectl delete services kafka
+$ kubectl delete statefulset kafka
 
 
 #FOR DELETING DEPLOYMENT AND SERVICE OF MYSQL
-$ kubectl delete services  mysql
-$ kubectl delete deployment  mysql
+$ kubectl delete services mysql
+$ kubectl delete deployment mysql
 $ kubectl delete pvc mysql-pv-claim
 
 
@@ -86,6 +87,13 @@ $ kubectl delete  secret/mysql-credentials
 
 
 #FOR DELETING CONFIG MAP
-$ kubectl delete configmap  application-conf -n   default
+$ kubectl delete configmap application-conf -n default
+
+
+# TO DELETE ALL THE CONTAINERS WITH VOLUMES
+$ docker rm -vf $(docker ps -a -q)
+
+# TO DELETE ALL THE IMAGES
+$ docker rmi -f $(docker images -a -q)
 
 
