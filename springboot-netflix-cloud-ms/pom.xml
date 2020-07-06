@@ -16,6 +16,7 @@
         <module>espark-eureka-server</module>
         <module>espark-config-server</module>
         <module>espark-api-gateway</module>
+        <module>espark-zuul-gateway</module>
         <module>espark-address-service</module>
         <module>espark-employee-service</module>
         <module>espark-api-service</module>

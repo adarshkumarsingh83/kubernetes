@@ -22,6 +22,7 @@ $ docker push adarshkumarsingh83/springboot-kafka-consumer
 $ kubectl cluster-info
 
 # to create service and other in kubernetes
+$ kubectl apply -f $(pwd)/secret.yml
 $ kubectl apply -f $(pwd)/configmap.yml
 $ kubectl apply -f $(pwd)/mysql.yml
 $ kubectl apply -f $(pwd)/zookeeper.yml
@@ -29,6 +30,8 @@ $ kubectl apply -f $(pwd)/kafka.yml
 $ kubectl apply -f $(pwd)/producer.yml
 $ kubectl apply -f $(pwd)/consumer.yml
 
+
+kubectl get pods -l app=kafka
 
 #to view the service and other
 $ kubectl get all
@@ -67,8 +70,8 @@ $ kubectl delete deployment springboot-kafka-consumer
 
 
 #FOR DELETING ZOO KEEPER
-$ kubectl delete services  zookeeper
-$ kubectl delete deployment  zookeeper
+$ kubectl delete services zookeeper
+$ kubectl delete deployment zookeeper
 
 
 #FOR DELETING KAFKA

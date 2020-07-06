@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: espark-zuul-gateway
+  labels:
+    app: espark-zuul-gateway
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: espark-zuul-gateway
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: espark-zuul-gateway
+        tier: backend
+    spec:
+      containers:
+        - image: adarshkumarsingh83/espark-zuul-gateway
+          name: espark-api-gateway
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: EUREKA_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-config # name of configMap
+                  key: eureka
+            - name: CONFIG_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-config # name of configMap
+                  key: config-server
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: espark-zuul-gateway
+  labels:
+    app: espark-zuul-gateway
+    tier: backend
+spec:
+  selector:
+    app: espark-zuul-gateway
+    tier: backend
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
+
+
+

@@ -26,14 +26,12 @@ spec:
                 name: application-conf
                 key: zk_url
           - name: KAFKA_ADVERTISED_HOST_NAME
-            value: 192.168.1.240
+            value: kafka
           - name: KAFKA_ADVERTISED_PORT
             valueFrom:
               configMapKeyRef:
                 name: application-conf
                 key: kafka_ad_port
-          - name: KAFKA_BROKER_ID
-            value: "0"
           - name: KAFKA_CREATE_TOPICS
             valueFrom:
               configMapKeyRef:

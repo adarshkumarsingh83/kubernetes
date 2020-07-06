@@ -53,7 +53,8 @@ spec:
     spec:
       containers:
         - image: mysql:5.7 # image from docker-hub
-          args:# Workaround for https://github.com/docker-library/mysql/issues/186
+          args:
+            - "--ignore-db-dir=lost+found" # Workaround for https://github.com/docker-library/mysql/issues/186
           name: mysql
           env:
             - name: MYSQL_ROOT_PASSWORD # Setting Root Password of mysql From a 'Secret'
@@ -79,7 +80,7 @@ spec:
           ports:
             - containerPort: 3306
               name: mysql
-          volumeMounts:        # Mounting voulume obtained from Persistent Volume Claim
+          volumeMounts:        # Mounting volume obtained from Persistent Volume Claim
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
       volumes:

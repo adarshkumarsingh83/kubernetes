@@ -1,0 +1,121 @@
+version: "3"
+services:
+  espark-eureka-server:
+    image: espark-eureka-server
+    build:
+      context: ./espark-eureka-server
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    volumes:
+      - /data/espark-eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    networks:
+      - spring-ms
+  espark-config-server:
+    image: espark-config-server
+    build:
+      context: ./espark-config-server
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    volumes:
+      - /data/espark-config-server
+    ports:
+      - "8888:8888"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "EUREKA_SERVER=espark-eureka-server"
+    links:
+      - espark-eureka-server
+    depends_on:
+      - espark-eureka-server
+    networks:
+      - spring-ms
+  espark-address-service:
+    image: espark-address-service
+    build:
+      context: ./espark-address-service
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    volumes:
+      - /data/espark-address-service
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "CONFIG_SERVER=espark-config-server"
+      - "EUREKA_SERVER=espark-eureka-server"
+    links:
+      - espark-eureka-server
+      - espark-config-server
+    depends_on:
+      - espark-eureka-server
+      - espark-config-server
+    networks:
+      - spring-ms
+  espark-employee-service:
+    image: espark-employee-service
+    build:
+      context: ./espark-employee-service
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    volumes:
+      - /data/espark-employee-service
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "CONFIG_SERVER=espark-config-server"
+      - "EUREKA_SERVER=espark-eureka-server"
+    links:
+      - espark-eureka-server
+      - espark-config-server
+    depends_on:
+      - espark-eureka-server
+      - espark-config-server
+    networks:
+      - spring-ms
+  espark-api-service:
+    image: espark-api-service
+    build:
+      context: ./espark-api-service
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "CONFIG_SERVER=espark-config-server"
+      - "EUREKA_SERVER=espark-eureka-server"
+    volumes:
+      - /data/espark-api-service
+    links:
+      - espark-eureka-server
+      - espark-config-server
+      - espark-employee-service
+      - espark-address-service
+    depends_on:
+      - espark-eureka-server
+      - espark-config-server
+    networks:
+      - spring-ms
+  espark-zuul-gateway:
+    image: espark-zuul-gateway
+    build:
+      context: ./espark-zuul-gateway
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "CONFIG_SERVER=espark-config-server"
+      - "EUREKA_SERVER=espark-eureka-server"
+    volumes:
+      - /data/espark-api-gateway
+    ports:
+      - "8080:8080"
+    links:
+      - espark-eureka-server
+      - espark-employee-service
+      - espark-address-service
+    depends_on:
+      - espark-eureka-server
+    networks:
+      - spring-ms
+networks:
+  spring-ms:

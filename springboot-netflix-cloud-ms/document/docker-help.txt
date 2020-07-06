@@ -11,10 +11,13 @@ DOCKER PROCESS
 ........................................................................................................................
 #To build and start the docker containers
 ........................................................................................................................
-$ docker-compose up
+$ docker-compose -f docker-compose-api-gateway.yml up
+$ docker-compose -f docker-compose-zuul-gateway.yml up
 
+# EUREKA SERVER URL
+http://localhost:8761/
 
-## TO TEST THE API 
+## TO TEST THE API
 
 $ curl localhost:8080/api/employee/1
 
@@ -23,6 +26,10 @@ $ curl localhost:8080/api/address/1
 $ curl localhost:8080/api/details/1
 
 $ curl localhost:8080/api/details
+
+
+$ docker-compose -f docker-compose-api-gateway.yml down
+$ docker-compose -f docker-compose-zuul-gateway.yml down
 
 
 #TO LIST DOWN ALL THE IMAGES

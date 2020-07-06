@@ -1,0 +1,66 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: espark-zuul-gateway
+  cloud:
+    config:
+      env: default # optional
+      label: master # optional
+      uri: http://localhost:8888 # optional
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}-${random.int}
+    hostname: espark-zuul-gateway
+    leaseRenewalIntervalInSeconds: 5
+    preferIpAddress: true
+
+
+zuul:
+  routes:
+    espark-api-service:
+      path: /api/**
+      stripPrefix: false
+      serviceId: espark-api-service
+
+---
+
+spring:
+  application:
+    name: espark-zuul-gateway
+  profiles:
+    - docker
+    - kubernates
+  cloud:
+    config:
+      env: default # optional
+      label: master # optional
+      uri: http://${CONFIG_SERVER}:8888 # optional
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER}:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}-${random.int}
+    hostname: espark-zuul-gateway
+    leaseRenewalIntervalInSeconds: 5
+    preferIpAddress: true
+
+
+zuul:
+  routes:
+    espark-api-service:
+      path: /api/**
+      stripPrefix: false
+      serviceId: espark-api-service

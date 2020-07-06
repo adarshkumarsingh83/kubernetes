@@ -19,6 +19,10 @@ docker build -f Dockerfile -t adarshkumarsingh83/espark-config-server .
 cd ..
 cd espark-api-gateway
 docker build -f Dockerfile -t adarshkumarsingh83/espark-api-gateway .
+OR
+cd ..
+cd espark-zuul-gateway
+docker build -f Dockerfile -t adarshkumarsingh83/espark-zuul-gateway .
 
 cd ..
 cd espark-address-service
@@ -39,6 +43,8 @@ TO PUSH TO DOCKER HUB
 docker push adarshkumarsingh83/espark-eureka-server
 docker push adarshkumarsingh83/espark-config-server
 docker push adarshkumarsingh83/espark-api-gateway
+OR
+docker push adarshkumarsingh83/espark-zuul-gateway
 docker push adarshkumarsingh83/espark-address-service
 docker push adarshkumarsingh83/espark-employee-service
 docker push adarshkumarsingh83/espark-api-service
@@ -58,6 +64,8 @@ $ kubectl apply -f $(pwd)/address-service.yaml
 $ kubectl apply -f $(pwd)/employee-service.yaml
 $ kubectl apply -f $(pwd)/api-service.yaml
 $ kubectl apply -f $(pwd)/api-gateway.yaml
+OR
+$ kubectl apply -f $(pwd)/zuul-gateway.yaml
 
 
 #to view the service and other
@@ -104,3 +112,6 @@ $ kubectl delete deployment  espark-api-service
 
 $ kubectl delete services  espark-api-gateway
 $ kubectl delete deployment  espark-api-gateway
+OR
+$ kubectl delete services  espark-zuul-gateway
+$ kubectl delete deployment  espark-zuul-gateway
