@@ -1,0 +1,33 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: espark-zuul-gateway
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
+      config:
+        enabled: true
+        sources:
+          - namespace: default
+            name: kubernates-configmap-store
+      reload:
+        enabled: true
+        mode: event
+        strategy: refresh
+
+zuul:
+  routes:
+    espark-api-service:
+      path: /api/**
+      stripPrefix: false
+      serviceId: espark-api-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,refresh,keepalive,health

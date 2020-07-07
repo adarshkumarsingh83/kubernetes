@@ -30,6 +30,13 @@ $ docker build -f Dockerfile -t adarshkumarsingh83/espark-api-gateway .
 # to push the docker image to the docker hub
 $ docker push adarshkumarsingh83/espark-api-gateway
 
+##############################for espark-api-gateway
+$ cd espark-zuul-gateway
+$ docker build -f Dockerfile -t adarshkumarsingh83/espark-zuul-gateway .
+
+# to push the docker image to the docker hub
+$ docker push adarshkumarsingh83/espark-zuul-gateway
+
 
 #TO DO THE DEPLOYMENT OF THE KUBE CONFIG AND SERVICE
 $ kubectl apply -f $(pwd)/kubernates/config.yaml
@@ -37,6 +44,8 @@ $ kubectl apply -f $(pwd)/kubernates/address.yaml
 $ kubectl apply -f $(pwd)/kubernates/employee.yaml
 $ kubectl apply -f $(pwd)/kubernates/api.yaml
 $ kubectl apply -f $(pwd)/kubernates/gateway.yaml
+or
+$ kubectl apply -f $(pwd)/kubernates/zuul.yaml
 
 #TO VIEW THE DETAILS
 $ kubectl get all
@@ -50,9 +59,9 @@ $ kubectl describe configmap kubernates-configmap-store
 #TO VIEW THE LOGS OF THE POD
 $ kubectl logs <pod-name> -f
 
-$ minikube service espark-api-service
-OR
 $ kubectl port-forward svc/espark-api-gateway 8080:8080
+or
+$ kubectl port-forward svc/espark-zuul-gateway 8080:8080
 
 
 #TO TEST THE REST END POINT
@@ -72,6 +81,9 @@ $ curl localhost:8080/api/message
 #FOR DELETING DEPLOYMENT AND SERVICE
 $ kubectl delete services  espark-address-service espark-api-gateway espark-api-service espark-employee-service
 $ kubectl delete deployment  espark-address-service espark-api-gateway espark-api-service espark-employee-service
+or
+$ kubectl delete services  espark-address-service espark-zuul-gateway espark-api-service espark-employee-service
+$ kubectl delete deployment  espark-address-service espark-zuul-gateway espark-api-service espark-employee-service
 
 # TO DELETE CONFIG MAP
 $ kubectl delete configmap  kubernates-configmap-store  -n   default

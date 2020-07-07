@@ -1,0 +1,33 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: espark-zuul-gateway
+spec:
+  selector:
+    app: espark-zuul-gateway
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30086
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: espark-zuul-gateway
+spec:
+  selector:
+    matchLabels:
+      app: espark-zuul-gateway
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: espark-zuul-gateway
+    spec:
+      containers:
+        - name: espark-zuul-gateway
+          image: "adarshkumarsingh83/espark-zuul-gateway"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080

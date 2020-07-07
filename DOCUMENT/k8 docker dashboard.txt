@@ -1,0 +1,22 @@
+# Installing the Kubernetes Dashboard
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc3/aio/deploy/recommended.yaml
+
+$ kubectl get pods --all-namespaces
+
+# Kubectl Proxy
+$ kubectl proxy
+
+
+# Open in Browser
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+
+select the token option
+
+# To Generate Token 
+$ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | awk '/^deployment-controller-token-/{print $1}') | awk '$1=="token:"{print $2}'
+
+
+### Help from 
+https://medium.com/backbase/kubernetes-in-local-the-easy-way-f8ef2b98be68
+
+
