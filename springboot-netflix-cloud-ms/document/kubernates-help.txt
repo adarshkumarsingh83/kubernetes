@@ -56,16 +56,16 @@ docker push adarshkumarsingh83/espark-api-service
 $ kubectl cluster-info
 
 # to create service and other in kubernetes
-$ cd kubernates
-$ kubectl apply -f $(pwd)/configmap.yaml
-$ kubectl apply -f $(pwd)/eureka-server.yaml
-$ kubectl apply -f $(pwd)/config-server.yaml
-$ kubectl apply -f $(pwd)/address-service.yaml
-$ kubectl apply -f $(pwd)/employee-service.yaml
-$ kubectl apply -f $(pwd)/api-service.yaml
-$ kubectl apply -f $(pwd)/api-gateway.yaml
+
+$ kubectl apply -f $(pwd)/kubernates/configmap.yaml
+$ kubectl apply -f $(pwd)/kubernates/eureka-server.yaml
+$ kubectl apply -f $(pwd)/kubernates/config-server.yaml
+$ kubectl apply -f $(pwd)/kubernates/address-service.yaml
+$ kubectl apply -f $(pwd)/kubernates/employee-service.yaml
+$ kubectl apply -f $(pwd)/kubernates/api-service.yaml
+$ kubectl apply -f $(pwd)/kubernates/api-gateway.yaml
 OR
-$ kubectl apply -f $(pwd)/zuul-gateway.yaml
+$ kubectl apply -f $(pwd)/kubernates/zuul-gateway.yaml
 
 
 #to view the service and other
@@ -79,6 +79,8 @@ $ kubectl get pod
 #TO VIEW THE LOGS OF THE POD
 $ kubectl logs <pod-name> -f
 
+## To Test the Eureka Server
+http://localhost:8761/
 
 ## TO TEST THE API
 
