@@ -115,11 +115,11 @@ $ kubectl get all
 * $ curl localhost:8080/api/details
 
 #FOR DELETING DEPLOYMENT AND SERVICE
-$ kubectl delete services  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-api-gateway
-$ kubectl delete deployment  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-api-gateway
+* $ kubectl delete services  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-api-gateway
+* $ kubectl delete deployment  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-api-gateway
 or
-$ kubectl delete services  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-zuul-gateway
-$ kubectl delete deployment  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-zuul-gateway
+* $ kubectl delete services  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-zuul-gateway
+* $ kubectl delete deployment  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-zuul-gateway
 
 # TO DELETE CONFIG MAP
 $ kubectl delete configmap cluster-config -n default
