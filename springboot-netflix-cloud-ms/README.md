@@ -99,7 +99,7 @@ $ docker-compose -f docker-compose-zuul-gateway.yml down
 * $ kubectl apply -f $(pwd)/kubernates/employee-service.yaml
 * $ kubectl apply -f $(pwd)/kubernates/api-service.yaml
 * $ kubectl apply -f $(pwd)/kubernates/api-gateway.yaml
-or 
+* or 
 * $ kubectl apply -f $(pwd)/kubernates/zuul-gateway.yaml
 
 ### To view the service and other
