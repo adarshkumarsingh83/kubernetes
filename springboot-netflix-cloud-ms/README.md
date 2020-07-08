@@ -117,16 +117,16 @@ $ kubectl get all
 #FOR DELETING DEPLOYMENT AND SERVICE
 * $ kubectl delete services  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-api-gateway
 * $ kubectl delete deployment  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-api-gateway
-or
+* or
 * $ kubectl delete services  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-zuul-gateway
 * $ kubectl delete deployment  espark-eureka-server espark-config-server espark-address-service espark-employee-service espark-api-service espark-zuul-gateway
 
-# TO DELETE CONFIG MAP
+### TO DELETE CONFIG MAP
 $ kubectl delete configmap cluster-config -n default
 
 
-# TO DELETE ALL THE CONTAINERS WITH VOLUMES
+### TO DELETE ALL THE CONTAINERS WITH VOLUMES
 $ docker rm -vf $(docker ps -a -q)
 
-# TO DELETE ALL THE IMAGES
+### TO DELETE ALL THE IMAGES
 $ docker rmi -f $(docker images -a -q)
