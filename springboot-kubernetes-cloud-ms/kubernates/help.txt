@@ -86,7 +86,7 @@ $ kubectl delete services  espark-address-service espark-zuul-gateway espark-api
 $ kubectl delete deployment  espark-address-service espark-zuul-gateway espark-api-service espark-employee-service
 
 # TO DELETE CONFIG MAP
-$ kubectl delete configmap  kubernates-configmap-store  -n   default
+$ kubectl delete configmap  kubernates-configmap-store -n default
 
 
 # TO DELETE ALL THE CONTAINERS WITH VOLUMES
