@@ -32,20 +32,6 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!--KUBERNETES STARTER DEPENDENCY FOR SERVICE DISCOVERY -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-kubernetes</artifactId>
-            <version>1.1.2.RELEASE</version>
-        </dependency>
-
-        <!--KUBERNETES CONFIGURATION DEPENDENCY-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-kubernetes-config</artifactId>
-            <version>1.1.2.RELEASE</version>
-        </dependency>
-
          <!--HYSTRIX DEPENDENCY -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -100,5 +86,33 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>kubernates</id>
+            <dependencies>
+                <!--KUBERNETES STARTER DEPENDENCY FOR SERVICE DISCOVERY -->
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-kubernetes</artifactId>
+                </dependency>
+
+                <!--KUBERNETES CONFIGURATION DEPENDENCY-->
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-kubernetes-config</artifactId>
+                </dependency>
+            </dependencies>
+            <build>
+                <finalName>${project.name}</finalName>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

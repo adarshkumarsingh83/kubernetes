@@ -1,0 +1,53 @@
+### For Local execution
+* $ mvn clean package
+
+### ORDER TO START
+* espark-address-service
+* espark-employee-service
+* espark-api-service
+
+* espark-api-gateway
+* or
+* espark-zuul-gateway
+
+### PROFILE ARGUMENT IN IDE AS PROGRAM ARGUS IN INTELLJ /ECLIPSE
+* --spring.profiles.active=default
+
+### TO RUN  SERVER VIA CMD LINE
+* $ mvn spring-boot:run -Dspring-boot.run.profiles=default
+
+### TO RUN  SERVER VIA JAR FILE
+* $ java -jar -Dspring.profiles.active=default target/espark-address-service.jar
+* $ java -jar -Dspring.profiles.active=default target/espark-employee-service.jar
+* $ java -jar -Dspring.profiles.active=default target/espark-api-service.jar
+* $ java -jar -Dspring.profiles.active=default target/espark-api-gateway.jar
+* or
+* $ java -jar -Dspring.profiles.active=default target/espark-zuul-gateway.jar
+
+### TO BUILD & RUN  SERVER VIA DOCKER
+### image building
+* $ docker build -f Dockerfile -t espark-address-service .
+* $ docker build -f Dockerfile -t espark-employee-service .
+* $ docker build -f Dockerfile -t espark-api-service .
+* $ docker build -f Dockerfile -t espark-api-gateway .
+* or
+* $ docker build -f Dockerfile -t espark-zuul-gateway .
+
+### exeucion
+* $ docker run -e "SPRING_PROFILES_ACTIVE=default" -p 8081:8081 -t espark-address-service
+* $ docker run -e "SPRING_PROFILES_ACTIVE=default" -p 8082:8082 -t espark-employee-service
+* $ docker run -e "SPRING_PROFILES_ACTIVE=default" -p 9090:9090 -t espark-api-service
+* $ docker run -e "SPRING_PROFILES_ACTIVE=default" -p 8080:8080 -t espark-api-gateway
+* or
+* $ docker run -e "SPRING_PROFILES_ACTIVE=default" -p 8080:8080 -t espark-zuul-gateway
+
+
+### TO TEST THE API
+* $ curl localhost:8080/api/v1/employee/1
+* $ curl localhost:8080/api/v1/address/1
+* $ curl localhost:8080/api/v1/details/1
+* $ curl localhost:8080/api/v1/details
+* $ curl localhost:8080/api/v1/config
+* $ curl localhost:8080/api/v1/message
+
+

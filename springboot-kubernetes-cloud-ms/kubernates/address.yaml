@@ -31,3 +31,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates

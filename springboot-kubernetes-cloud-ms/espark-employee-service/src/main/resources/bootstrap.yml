@@ -1,10 +1,25 @@
 
+spring:
+  application:
+    name: espark-employee-service
+  profiles:
+    - default
 server:
-  port: 8080
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,refresh,keepalive,health
+
+---
 
 spring:
   application:
     name: espark-employee-service
+  profiles:
+    - kubernates
   cloud:
     kubernetes:
       config:
@@ -16,6 +31,9 @@ spring:
         enabled: true
         mode: event
         strategy: refresh
+
+server:
+  port: 8080
 
 management:
   endpoints:

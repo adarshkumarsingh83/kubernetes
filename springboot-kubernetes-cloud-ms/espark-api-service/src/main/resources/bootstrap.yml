@@ -1,16 +1,34 @@
 
-server:
-  port: 8080
 
-espark:
-  services:
-    names:
-      address: ESPARK-ADDRESS-SERVICE:8080
-      employee: ESPARK-EMPLOYEE-SERVICE:8080
 
 spring:
   application:
     name: espark-api-service
+  profiles:
+    - default
+
+server:
+  port: 9090
+
+espark:
+  services:
+    names:
+      address: localhost:8081
+      employee: localhost:8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,refresh,keepalive,health
+
+---
+
+spring:
+  application:
+    name: espark-api-service
+  profiles:
+    - kubernates
   cloud:
     kubernetes:
       config:
@@ -22,6 +40,15 @@ spring:
         enabled: true
         mode: event
         strategy: refresh
+
+server:
+  port: 8080
+
+espark:
+  services:
+    names:
+      address: ESPARK-ADDRESS-SERVICE:8080
+      employee: ESPARK-EMPLOYEE-SERVICE:8080
 
 management:
   endpoints:

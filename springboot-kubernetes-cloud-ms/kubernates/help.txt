@@ -1,5 +1,5 @@
 # TO BUILD THE APPLICATION
-$ mvn clean package
+$ mvn clean package -Pkubernates
 
 # TO CREATE A DOCKER IMAGE
 ##############################for espark-address-service
@@ -65,17 +65,17 @@ $ kubectl port-forward svc/espark-zuul-gateway 8080:8080
 
 
 #TO TEST THE REST END POINT
-$ curl localhost:8080/api/employee/1
+$ curl localhost:8080/api/v1/employee/1
 
-$ curl localhost:8080/api/address/1
+$ curl localhost:8080/api/v1/address/1
 
-$ curl localhost:8080/api/details/1
+$ curl localhost:8080/api/v1/details/1
 
-$ curl localhost:8080/api/details
+$ curl localhost:8080/api/v1/details
 
-$ curl localhost:8080/api/config
+$ curl localhost:8080/api/v1/config
 
-$ curl localhost:8080/api/message
+$ curl localhost:8080/api/v1/message
 
 
 #FOR DELETING DEPLOYMENT AND SERVICE

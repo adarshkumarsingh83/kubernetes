@@ -8,7 +8,6 @@
 > this project can we executed on k8 cluster 
 > this application has zuul as well as api-gateway use any one at a time  
 
-
 ### API USED 
 * Zuul Server
 * Api Gateway Server 
@@ -16,8 +15,62 @@
 * K8 Config Map 
 * Restful Services (api, address, employee)
 
+# FOR LOCAL EXECUTION 
+------------------------------------------------------------------- 
+
 ## Code Building 
-* $ mvn clean package
+### For local execution 
+* $ mvn clean package -Pdefault
+
+### ORDER TO START
+* espark-address-service
+* espark-employee-service
+* espark-api-service
+* espark-api-gateway
+
+
+### PROFILE ARGUMENT IN IDE AS PROGRAM ARGUS IN INTELLJ /ECLIPSE
+* --spring.profiles.active=default
+
+### TO RUN  SERVER VIA CMD LINE
+* $ mvn spring-boot:run -Dspring-boot.run.profiles=default
+
+### TO RUN  SERVER VIA JAR FILE
+* $ java -jar -Dspring.profiles.active=default target/espark-address-service.jar
+* $ java -jar -Dspring.profiles.active=default target/espark-employee-service.jar
+* $ java -jar -Dspring.profiles.active=default target/espark-api-service.jar
+* $ java -jar -Dspring.profiles.active=default target/espark-api-gateway.jar
+
+### TO BUILD & RUN  SERVER VIA DOCKER
+### image building
+* $ docker build -f Dockerfile -t espark-address-service .
+* $ docker build -f Dockerfile -t espark-employee-service .
+* $ docker build -f Dockerfile -t espark-api-service .
+* $ docker build -f Dockerfile -t espark-api-gateway .
+
+### execution
+* $ docker run -e "SPRING_PROFILES_ACTIVE=default" -p 8081:8081 -t espark-address-service
+* $ docker run -e "SPRING_PROFILES_ACTIVE=default" -p 8082:8082 -t espark-employee-service
+* $ docker run -e "SPRING_PROFILES_ACTIVE=default" -p 9090:9090 -t espark-api-service
+* $ docker run -e "SPRING_PROFILES_ACTIVE=default" -p 8080:8080 -t espark-api-gateway
+
+### TO TEST THE API
+* $ curl localhost:8080/api/v1/employee/1
+* $ curl localhost:8080/api/v1/address/1
+* $ curl localhost:8080/api/v1/details/1
+* $ curl localhost:8080/api/v1/details
+* $ curl localhost:8080/api/v1/config
+* $ curl localhost:8080/api/v1/message 
+
+
+# FOR K8
+------------------------------------------------------------------- 
+### For K8 execution 
+* $ mvn clean package -Pkubernates 
+
+### PROFILE ARGUMENT IN IDE AS PROGRAM ARGUS IN INTELLJ /ECLIPSE
+* --spring.profiles.active=dev
+* --spring.profiles.active=prod
 
 # K8 PROCESS FOR DEPLOYMENT
 
@@ -59,16 +112,13 @@
 ### To view the service and other
 $ kubectl get all
 
-### EUREKA SERVER URL
-* http://localhost:8761/
-
 ### TO TEST THE API
-* $ curl localhost:8080/api/employee/1
-* $ curl localhost:8080/api/address/1
-* $ curl localhost:8080/api/details/1
-* $ curl localhost:8080/api/details
-* $ curl localhost:8080/api/config
-* $ curl localhost:8080/api/message
+* $ curl localhost:8080/api/v1/employee/1
+* $ curl localhost:8080/api/v1/address/1
+* $ curl localhost:8080/api/v1/details/1
+* $ curl localhost:8080/api/v1/details
+* $ curl localhost:8080/api/v1/config
+* $ curl localhost:8080/api/v1/message
 
 ### FOR DELETING DEPLOYMENT AND SERVICE
 * $ kubectl delete services  espark-address-service espark-api-gateway espark-api-service espark-employee-service
@@ -78,7 +128,7 @@ $ kubectl get all
 * $ kubectl delete deployment  espark-address-service espark-zuul-gateway espark-api-service espark-employee-service
 
 ### TO DELETE CONFIG MAP
-$ kubectl delete configmap  kubernates-configmap-store  -n   default
+$ kubectl delete configmap  kubernates-configmap-store -n default
 
 ###  TO DELETE ALL THE CONTAINERS WITH VOLUMES
 * $ docker rm -vf $(docker ps -a -q)

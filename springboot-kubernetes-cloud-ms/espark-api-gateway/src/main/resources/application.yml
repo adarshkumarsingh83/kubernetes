@@ -1,0 +1,70 @@
+# @author Adarsh
+# @author $LastChangedBy: adarsh $
+# @version $Revision: 0001 $, $Date:: 9/7/20 12:12 AM#$
+
+spring:
+  profiles:
+    - default
+  cloud:
+    gateway:
+      services:
+        -
+          version: v1
+          serviceId: espark-api-service
+          urlPattern: /api/v1/**
+          forwardUrl: http://localhost:9090
+          requestHeader:
+            -
+              headerName: espark-api-request-header-v1
+              headerValue: espark-api-request-header-value-v1
+          responseHeader:
+            -
+              headerName: espark-api-response-header-v1
+              headerValue: espark-api-response-header-value-v1
+        -
+          version: v2
+          serviceId: espark-api-service
+          urlPattern: /api/v2/**
+          forwardUrl: http://localhost:8080
+          requestHeader:
+            -
+              headerName: espark-api-request-header-v2
+              headerValue: espark-api-request-header-value-v2
+          responseHeader:
+            -
+              headerName: espark-api-response-header-v2
+              headerValue: espark-api-response-header-value-v2
+---
+
+spring:
+  profiles:
+    - kubernates
+  cloud:
+    gateway:
+      services:
+        -
+          version: v1
+          serviceId: espark-api-service
+          urlPattern: /api/v1/**
+          forwardUrl: http://espark-api-service:8080
+          requestHeader:
+            -
+              headerName: espark-api-request-header-v1
+              headerValue: espark-api-request-header-value-v1
+          responseHeader:
+            -
+              headerName: espark-api-response-header-v1
+              headerValue: espark-api-response-header-value-v1
+        -
+          version: v2
+          serviceId: espark-api-service
+          urlPattern: /api/v2/**
+          forwardUrl: http://espark-api-service:8080
+          requestHeader:
+            -
+              headerName: espark-api-request-header-v2
+              headerValue: espark-api-request-header-value-v2
+          responseHeader:
+            -
+              headerName: espark-api-response-header-v2
+              headerValue: espark-api-response-header-value-v2

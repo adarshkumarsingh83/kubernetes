@@ -1,9 +1,29 @@
-server:
-  port: 8080
+
+
 
 spring:
   application:
     name: espark-api-gateway
+  profiles:
+    - default
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,refresh,keepalive,health
+
+---
+
+
+spring:
+  application:
+    name: espark-api-gateway
+  profiles:
+    - kubernates
   cloud:
     gateway:
       discovery:
@@ -21,11 +41,11 @@ spring:
         mode: event
         strategy: refresh
 
+server:
+  port: 8080
+
 management:
   endpoints:
     web:
       exposure:
         include: info,refresh,keepalive,health
-
-
-spring.cloud.gateway.discovery.locator.enabled: true

@@ -15,24 +15,20 @@ public class RibbonConfiguration {
     private DiscoveryClient discoveryClient;
 
     private String serviceId = "client";
-    protected static final String VALUE_NOT_SET = "__not__set__";
-    protected static final String DEFAULT_NAMESPACE = "ribbon";
 
-    public RibbonConfiguration () {
+    public RibbonConfiguration() {
     }
 
-    public RibbonConfiguration (String serviceId) {
+    public RibbonConfiguration(String serviceId) {
         this.serviceId = serviceId;
     }
 
     @Bean
     @ConditionalOnMissingBean
     public ServerList<?> ribbonServerList(IClientConfig config) {
-
         Server[] servers = discoveryClient.getInstances(config.getClientName()).stream()
                 .map(i -> new Server(i.getHost(), i.getPort()))
                 .toArray(Server[]::new);
-
         return new StaticServerList(servers);
     }
 }
