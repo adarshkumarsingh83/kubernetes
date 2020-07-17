@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springboot-kubernetes-logs
+spec:
+  selector:
+    app: springboot-kubernetes-logs
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-kubernetes-logs
+spec:
+  selector:
+    matchLabels:
+      app: springboot-kubernetes-logs
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-kubernetes-logs
+    spec:
+      containers:
+        - name: springboot-kubernetes-logs
+          image: "adarshkumarsingh83/springboot-kubernetes-logs"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: springboot-kubernetes-logs
+              mountPath: /var/logs
+      volumes:
+        - name: springboot-kubernetes-logs
+          emptyDir: {}
