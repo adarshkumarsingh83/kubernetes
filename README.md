@@ -101,3 +101,8 @@
 > .
 > .	
 
+* ## springboot-kubernetes-logs
+> descripition:
+> . spring boot actuator service based logback 
+> . based log file generation in k8 pod 
+> .	and accessing it for ELK
