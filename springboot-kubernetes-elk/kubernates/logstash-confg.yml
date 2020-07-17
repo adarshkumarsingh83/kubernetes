@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-configmap
+data:
+  logstash.yml: |
+    http.host: "0.0.0.0"
+    path.config: /usr/share/logstash/pipeline
+  logstash.conf: |
+    input {
+        tcp {
+            port => 5000
+            type => syslog
+            codec => json_lines
+        }
+    }
+    filter {
+        grok {
+            match => [ "message", "%{GREEDYDATA}" ]
+        }
+        mutate {
+            add_field => { "instance_name" => "%{app_name}-%{host}:%{app_port}" }
+        }
+    }
+      output {
+         stdout { # This will log all messages so that we can confirm that Logstash is receiving them
+             codec => rubydebug
+         }
+         elasticsearch {
+             hosts => [ "http://elasticsearch:9200" ]
+             index => "espark-%{+YYYY.MM.dd}"
+         }
+     }

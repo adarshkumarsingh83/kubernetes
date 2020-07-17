@@ -1,0 +1,43 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springboot-kubernetes-elk
+spec:
+  selector:
+    app: springboot-kubernetes-elk
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-kubernetes-elk
+spec:
+  selector:
+    matchLabels:
+      app: springboot-kubernetes-elk
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-kubernetes-elk
+    spec:
+      containers:
+        - name: springboot-kubernetes-elk
+          image: "adarshkumarsingh83/springboot-kubernetes-elk"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernetes
+          volumeMounts:
+            - name: springboot-kubernetes-elk
+              mountPath: /var/logs
+      volumes:
+        - name: springboot-kubernetes-elk
+          emptyDir: {}
