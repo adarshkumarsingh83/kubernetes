@@ -13,8 +13,8 @@
 * https://www.elastic.co/downloads/elasticsearch
 
 ### To Execute the elastic 
-$ cd ~/Downloads/ELK/elasticsearch-7.8.0/
-$ ./bin/elasticsearch
+* $ cd ~/Downloads/ELK/elasticsearch-7.8.0/
+* $ ./bin/elasticsearch
 
 
 ### To list the available elastic web services  
@@ -212,14 +212,14 @@ output {
 
 
 ### TO VIEW THE POD DETAILS
-$ kubectl get pod
+* $ kubectl get pod
 
 ### TO VIEW THE LOGS OF THE POD
-$ kubectl logs <pod-name> -f
+* $ kubectl logs <pod-name> -f
 
 
 ### TO DELETE DEPLOYMENT & SERVICE 
-$ kubectl delete services elasticsearch logstash kibana springboot-kubernetes-elk
-$ kubectl delete deployment  kibana logstash springboot-kubernetes-elk
-$ kubectl delete stateful  StatefulSet 
-$ kubectl delete ConfigMap  logstash-configmap 
+* $ kubectl delete services elasticsearch logstash kibana springboot-kubernetes-elk
+* $ kubectl delete deployment  kibana logstash springboot-kubernetes-elk
+* $ kubectl delete stateful  StatefulSet 
+* $ kubectl delete ConfigMap  logstash-configmap 
