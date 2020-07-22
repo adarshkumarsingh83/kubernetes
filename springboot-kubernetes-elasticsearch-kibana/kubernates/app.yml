@@ -1,0 +1,49 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springboot-kubernetes-elasticsearch-kibana
+spec:
+  selector:
+    app: springboot-kubernetes-elasticsearch-kibana
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-kubernetes-elasticsearch-kibana
+spec:
+  selector:
+    matchLabels:
+      app: springboot-kubernetes-elasticsearch-kibana
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-kubernetes-elasticsearch-kibana
+    spec:
+      containers:
+        - name: springboot-kubernetes-elasticsearch-kibana
+          image: "adarshkumarsingh83/springboot-kubernetes-elasticsearch-kibana"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernetes
+            - name: ELASTIC_NODES
+              value: elasticsearch:9300
+            - name: ELASTIC_NAME
+              value: elasticsearch
+            - name: ELASTIC_INDEX
+              value: epsark-index
+          volumeMounts:
+            - name: springboot-kubernetes-elasticsearch-kibana
+              mountPath: /var/logs
+      volumes:
+        - name: springboot-kubernetes-elasticsearch-kibana
+          emptyDir: {}
