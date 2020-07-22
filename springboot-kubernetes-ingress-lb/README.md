@@ -34,6 +34,8 @@
 * $ kubectl apply -f $(pwd)/kubernates/config.yaml
 * $ kubectl apply -f $(pwd)/kubernates/address.yaml
 * $ kubectl apply -f $(pwd)/kubernates/employee.yaml
+* $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+* $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/provider/cloud-generic.yaml
 * $ kubectl apply -f $(pwd)/kubernates/ingress.yaml
 
 ----
@@ -50,6 +52,7 @@
 
 ### To get the Ip Address of Ingress
 * $ kubectl get ingress springboot-ingress
+* $ kubectl get pods -n ingress-nginx -l app.kubernetes.io/name=springboot-ingress --watch
 
 ### cluster info dump 
 * $ kubectl cluster-info dump
@@ -65,15 +68,23 @@ crt+i
 ----
 ## TESTING SERVICES 
 
-* http://localhost:8080/v1/api/address/{id}
-* http://localhost:8080/v1/api/address/all
-* http://localhost:8080/v1/api/address/config
+* http://localhost/v1/api/address/{id}
+* http://localhost/v1/api/address/all
+* http://localhost/v1/api/address/config
 
-* http://localhost:8080/v1/api/employee/{id}
-* http://localhost:8080/v1/api/employee/all
-* http://localhost:8080/v1/api/employee/config
+* http://localhost/v1/api/employee/{id}
+* http://localhost/v1/api/employee/all
+* http://localhost/v1/api/employee/config
 
-* http://espark.com:8080/v1/api/employee/all
+* OR 
+
+* http://espark.com/v1/api/address/{id}
+* http://espark.com/v1/api/address/all
+* http://espark.com/v1/api/address/config
+
+* http://espark.com/v1/api/employee/{id}
+* http://espark.com/v1/api/employee/all
+* http://espark.com/v1/api/employee/config
 
 ----
 ## CLEAN UP 
