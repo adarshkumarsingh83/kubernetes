@@ -59,11 +59,11 @@
 ----
 ### Changes in /etc/hosts
 * $ sudo vi /etc/hosts
-crt+i
+* crt+i
  ````
  127.0.0.1 espark.com test.com
  ````
-:wq
+* :wq
 
 ----
 ## TESTING SERVICES 
