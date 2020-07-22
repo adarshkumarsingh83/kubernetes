@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: springboot-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - host: espark.com
+      http:
+        paths:
+          - path: /v1/api/address/*
+            backend:
+              serviceName: espark-address-service
+              servicePort: 8080
+          - path: /v1/api/employee/*
+            backend:
+              serviceName: espark-employee-service
+              servicePort: 8080
+    - host: localhost
+      http:
+        paths:
+          - path: /v1/api/address/*
+            backend:
+              serviceName: espark-address-service
+              servicePort: 8080
+          - path: /v1/api/employee/*
+            backend:
+              serviceName: espark-employee-service
+              servicePort: 8080
+
