@@ -102,7 +102,13 @@
 > .	
 
 * ## springboot-kubernetes-logs
-> descripition:
-> . spring boot actuator service based logback 
-> . based log file generation in k8 pod 
+> descripition: \
+> . spring boot actuator service based logback \
+> . based log file generation in k8 pod  \
 > .	and accessing it for ELK
+
+* ## springboot-kubernetes-ingress-lb 
+> descripition:  \
+> . spring boot based address and employee rest services 
+> . having multiple pods and loadbalanced by ingress 
+> .	and custom host is configure for set up 
