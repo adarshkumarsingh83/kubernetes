@@ -179,7 +179,7 @@ output {
 * $ kubectl apply -f $(pwd)/kubernates/elasticsearch.yml
 * $ kubectl get all
 * To list the available elastic web services  localhost:9200/_cat
-* To list the available index on the elastic  localhost:9200/_cat/indices  
+* To list the available index on the elastic  localhost:9200/_cat/indices
 ---- 
 ### FOR KIBINA 
 
