@@ -26,3 +26,56 @@
 * curl http://localhost:8080/api/employee
 * curl http://localhost:8080/api/employee/100
  
+
+----
+### K8 DEPLOYMENT PROCESS
+
+----
+### ELASTIC SEARCH 
+* $ kubectl cluster-info
+* $ kubectl apply -f $(pwd)/kubernates/elasticsearch.yml
+* $ kubectl get all
+* To list the available elastic web services  localhost:9200/_cat
+* To list the available index on the elastic  localhost:9200/_cat/indices
+---- 
+### FOR KIBINA 
+
+* $ kubectl cluster-info
+* $ kubectl apply -f $(pwd)/kubernates/kibana.yml
+* $ kubectl get all  
+* To log into the kibina console   http://localhost:5601
+---- 
+### SPRING BOOT APPLICATION
+* $ mvn clean package -DskipTests
+* $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-kubernetes-elasticsearch-kibana .
+* $ docker push adarshkumarsingh83/springboot-kubernetes-elasticsearch-kibana
+* $ kubectl cluster-info
+* $ kubectl apply -f $(pwd)/kubernates/app.yml
+* $ kubectl get all
+
+----
+### TO VIEW THE LOGS IN THE K8 POD 
+* $ kubectl get all 
+* $ kubectl get pod 
+* $ kubectl exec -it <pod-name> -- /bin/bash
+
+
+### TO VIEW THE POD DETAILS
+* $ kubectl get pod
+
+### TO VIEW THE LOGS OF THE POD
+* $ kubectl logs <pod-name> -f
+
+
+### TO DELETE DEPLOYMENT & SERVICE 
+* $ kubectl delete services elasticsearch kibana springboot-kubernetes-elasticsearch-kibana
+* $ kubectl delete deployment  kibana springboot-kubernetes-elasticsearch-kibana
+* $ kubectl delete statefulset elasticsearch 
+
+
+
+### TO DELETE ALL THE CONTAINERS WITH VOLUMES
+* $ docker rm -vf $(docker ps -a -q)
+
+### TO DELETE ALL THE IMAGES
+* $ docker rmi -f $(docker images -a -q)

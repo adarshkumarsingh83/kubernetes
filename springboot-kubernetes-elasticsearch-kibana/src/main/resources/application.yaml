@@ -43,12 +43,12 @@ spring:
     elasticsearch:
       repositories:
         enabled: true
-      cluster-nodes: ${ELASTIC_NODES:'localhost:9300'}
-      cluster-name: ${ELASTIC_NAME:'elasticsearch'}
+      cluster-nodes: ${ELASTIC_NODES}
+      cluster-name: ${ELASTIC_NAME}
 
 
 elasticsearch:
   index:
-    name: ${ELASTIC_INDEX:'epsark-index'}
+    name: ${ELASTIC_INDEX}
   user:
     type: user

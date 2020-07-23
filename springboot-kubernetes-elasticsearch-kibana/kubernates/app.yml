@@ -36,7 +36,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: kubernetes
             - name: ELASTIC_NODES
-              value: elasticsearch:9300
+              value: elasticsearch:9200
             - name: ELASTIC_NAME
               value: elasticsearch
             - name: ELASTIC_INDEX
