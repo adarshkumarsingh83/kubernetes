@@ -9,7 +9,7 @@ spec:
   ports:
     - port: 9200
       protocol: TCP
-      targetPort: db
+      targetPort: 9200
   selector:
     k8s-app: elasticsearch
   type: LoadBalancer

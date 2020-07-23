@@ -35,6 +35,8 @@ spec:
           env:   # Setting environmental Variables
             - name: SPRING_PROFILES_ACTIVE
               value: kubernetes
+            - name: LOGSTASH_URL
+              value: logstash:5000
           volumeMounts:
             - name: springboot-kubernetes-elk
               mountPath: /var/logs

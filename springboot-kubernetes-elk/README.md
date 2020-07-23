@@ -207,6 +207,7 @@ output {
 ----
 
 ### TO VIEW THE LOGS IN THE K8 POD 
+* $ kubectl get all 
 * $ kubectl get pod 
 * $ kubectl exec -it <pod-name> -- /bin/bash
 
@@ -221,5 +222,13 @@ output {
 ### TO DELETE DEPLOYMENT & SERVICE 
 * $ kubectl delete services elasticsearch logstash kibana springboot-kubernetes-elk
 * $ kubectl delete deployment  kibana logstash springboot-kubernetes-elk
-* $ kubectl delete stateful  StatefulSet 
+* $ kubectl delete statefulset elasticsearch 
 * $ kubectl delete ConfigMap  logstash-configmap 
+
+
+
+### TO DELETE ALL THE CONTAINERS WITH VOLUMES
+* $ docker rm -vf $(docker ps -a -q)
+
+### TO DELETE ALL THE IMAGES
+* $ docker rmi -f $(docker images -a -q)
