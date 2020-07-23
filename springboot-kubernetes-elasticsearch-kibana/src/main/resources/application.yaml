@@ -24,6 +24,10 @@ elasticsearch:
   user:
     type: user
 
+application:
+  elastic:
+    url: localhost:9200
+
 ---
 
 server:
@@ -37,7 +41,6 @@ spring:
   application:
     name: springboot-kubernetes-elasticsearch-kibana
   profiles:
-    - docker
     - kubernetes
   data:
     elasticsearch:
@@ -52,3 +55,7 @@ elasticsearch:
     name: ${ELASTIC_INDEX}
   user:
     type: user
+
+application:
+  elastic:
+    url: ${ELASTIC_URL}

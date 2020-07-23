@@ -37,6 +37,8 @@ spec:
               value: kubernetes
             - name: ELASTIC_NODES
               value: elasticsearch:9200
+            - name: ELASTIC_URL
+              value: elasticsearch:9200
             - name: ELASTIC_NAME
               value: elasticsearch
             - name: ELASTIC_INDEX

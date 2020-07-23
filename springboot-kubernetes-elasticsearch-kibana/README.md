@@ -35,6 +35,7 @@
 * $ kubectl cluster-info
 * $ kubectl apply -f $(pwd)/kubernates/elasticsearch.yml
 * $ kubectl get all
+* To list the available elastic web services  localhost:9200
 * To list the available elastic web services  localhost:9200/_cat
 * To list the available index on the elastic  localhost:9200/_cat/indices
 ---- 
@@ -66,6 +67,12 @@
 ### TO VIEW THE LOGS OF THE POD
 * $ kubectl logs <pod-name> -f
 
+----
+### To test the services 
+* curl http://localhost:8080/api/employee
+* curl http://localhost:8080/api/employee/100
+
+----
 
 ### TO DELETE DEPLOYMENT & SERVICE 
 * $ kubectl delete services elasticsearch kibana springboot-kubernetes-elasticsearch-kibana
