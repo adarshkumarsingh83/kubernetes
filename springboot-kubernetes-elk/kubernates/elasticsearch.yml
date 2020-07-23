@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: elasticsearch
-  namespace: default
   labels:
     k8s-app: elasticsearch
 spec:
@@ -25,8 +24,6 @@ metadata:
 spec:
   serviceName: elasticsearch
   replicas: 1
-  updateStrategy:
-    type: RollingUpdate
   selector:
     matchLabels:
       k8s-app: elasticsearch
@@ -35,10 +32,14 @@ spec:
       labels:
         k8s-app: elasticsearch
     spec:
-      serviceAccountName: elasticsearch
       containers:
         - image: elasticsearch:6.8.4
           name: elasticsearch
+          env:
+            - name: discovery.type
+              value: single-node
+            - name: cluster.name
+              value: elasticsearch
           ports:
             - containerPort: 9200
               name: db
