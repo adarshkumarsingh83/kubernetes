@@ -124,3 +124,9 @@
 > spring boot based redis cache application  \
 > having redis cache for data store where curd operations are  \
 > performed on the user information using rest endpoints 
+
+* ## [springboot-kubernetes-elasticsearch-kibana](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-elasticsearch-kibana)
+> descripition:  \
+> spring boot based elastic search application  \
+> having elastic search as the serach engine  \
+> data is indexed on elastic and kibina is used to do query on the top of elastic searcch
