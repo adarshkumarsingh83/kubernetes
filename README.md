@@ -2,113 +2,125 @@
 
 # ** SPRING BOOT KUBERNATES EXAMPLES **
 
-* ## DOCUMENTS					
-> descripition:
-> . Contains some step by step helping document for 
+* ## [DOCUMENTS](https://github.com/adarshkumarsingh83/kubernetes/tree/master/DOCUMENT)
+> descripition: \
+> . Contains some step by step helping document for \
 > . configurations and other things 
 
 
 
 
-* ## springboot-kubernates-hazelcast-external
+* ## [springboot-kubernates-hazelcast-external](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-hazelcast-external)
 > descripition:
 > .
 > .
 > .				
 	
-* ## springboot-kubernates-solr	
+* ## [springboot-kubernates-solr](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-solr)
 > descripition:
 > .
 > .
 > .	
 
 		
-* ## springboot-kubernates-kafka
+* ## [springboot-kubernates-kafka](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-kafka)
 > descripition:
 > .
 > .
 > .	
 
-* ## springboot-kubernates-solr_nw	
-> descripition:
-> .
-> .
-> .	
-
-* ## springboot-kubernates-mongo	
-> descripition:
-> .
-> .
-> .	
-
-* ## springboot-kubernetes-cloud-ms	
-> descripition:
-> .
-> .
-> .	
-
-* ## springboot-kubernates-ngnix	
-> descripition:
-> .
-> .
-> .			
-
-* ## springboot-netflix-cloud-ms
-> descripition:
-> .
-> .
-> .	
-
-* ## springboot-kubernates-configmap	
-> descripition:
-> .
-> .
-> .			
-
-* ## springboot-kubernates-rabbitmq		
-> descripition:
-> .
-> .
-> .		
-
-* ## springboot-web-rest
-> descripition:
-> .
-> .
-> .	
-
-* ## springboot-kubernates-elasticsearch	
-> descripition:
-> .
-> .
-> .		
-
-* ## springboot-kubernates-secret-mysql
-> descripition:
-> .
-> .
-> .	
-
-* ## springboot-kubernates-hazelcast			
-> descripition:
-> .
-> .
-> .	
-
-* ## springboot-kubernates-secret-postgres
-> descripition:
-> .
-> .
-> .	
-
-* ## springboot-kubernetes-logs
+* ## [springboot-kubernates-solr_nw](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-solr_nw)
 > descripition: \
-> . spring boot actuator service based logback \
-> . based log file generation in k8 pod  \
-> .	and accessing it for ELK
+> . not working yet to be fixed 
+> .
+> .	
 
-* ## springboot-kubernetes-ingress-lb 
+* ## [springboot-kubernates-mongo](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-mongo)
+> descripition:
+> .
+> .
+> .	
+
+* ## [springboot-kubernetes-cloud-ms](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-cloud-ms)
+> descripition:
+> .
+> .
+> .	
+
+* ## [springboot-kubernates-ngnix](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-ngnix)
+> descripition:
+> .
+> .
+> .			
+
+* ## [springboot-netflix-cloud-ms](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-netflix-cloud-ms)
+> descripition:
+> .
+> .
+> .	
+
+* ## [springboot-kubernates-configmap](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-configmap)
+> descripition:
+> .
+> .
+> .			
+
+* ## [springboot-kubernates-rabbitmq](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-rabbitmq)
+> descripition:
+> .
+> .
+> .		
+
+* ## [springboot-web-rest](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-web-rest)
+> descripition:
+> .
+> .
+> .	
+
+* ## [springboot-kubernates-elasticsearch](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-elasticsearch)
+> descripition:
+> .
+> .
+> .		
+
+* ## [springboot-kubernates-secret-mysql](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-secret-mysql)
+> descripition:
+> .
+> .
+> .	
+
+* ## [springboot-kubernates-hazelcast](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-hazelcast)			
+> descripition:
+> .
+> .
+> .	
+
+* ## [springboot-kubernates-hazelcast-external](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-hazelcast-external)	
+> descripition:
+> .
+> .
+> .	
+
+* ## [springboot-kubernates-secret-postgres](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-secret-postgres)
+> descripition:
+> .
+> .
+> .	
+
+* ## [springboot-kubernetes-logs](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-logs)
+> descripition: \
+> spring boot actuator service based logback \
+> based log file generation in k8 pod  \
+> and accessing it for ELK
+
+* ## [springboot-kubernetes-ingress-lb](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-ingress-lb) 
 > descripition:  \
-> . spring boot based address and employee rest services 
-> . having multiple pods and loadbalanced by ingress 
-> .	and custom host is configure for set up 
+> spring boot based address and employee rest services \
+> having multiple pods and loadbalanced by ingress \
+> and custom host is configure for set up 
+
+* ## [springboot-kubernetes-redis-cache](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-redis-cache)
+> descripition:  \
+> spring boot based redis cache application  \
+> having redis cache for data store where curd operations are  \
+> performed on the user information using rest endpoints 
