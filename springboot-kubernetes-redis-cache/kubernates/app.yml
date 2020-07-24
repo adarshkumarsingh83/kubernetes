@@ -11,7 +11,9 @@ spec:
       protocol: TCP
       targetPort: 8080
   type: LoadBalancer
+
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,11 +38,11 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: kubernetes
             - name: REDIS_HOST
-              value: redis-cluster
+              value: 'redis'
             - name: REDIS_PORT
-              value: 6379
+              value: '6379'
             - name: REDIS_URL
-              value: redis-cluster:6379
+              value: 'redis:6379'
           volumeMounts:
             - name: springboot-kubernetes-redis-cache
               mountPath: /var/logs

@@ -68,13 +68,12 @@ redis:6379> exit
 ## KUBERNETES DEPLOYMENT
 
 ### K8 Service deployment  
-* $ kubectl apply -f $(pwd)/kubernates/config.yml 
 * $ kubectl apply -f $(pwd)/kubernates/redis.yml 
 
 
 ### spring boot application deployment 
 * $ mvn clean package -DskipTests 
-* $ docker build -f Dockerfile -t springboot-kubernetes-redis-cache .
+* $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-kubernetes-redis-cache .
 * $ docker push adarshkumarsingh83/springboot-kubernetes-redis-cache
 * $ kubectl apply -f $(pwd)/kubernates/app.yml
 
@@ -90,11 +89,20 @@ redis:6379> exit
 ### TO VIEW THE LOGS OF THE POD
 * $ kubectl logs <pod-name> -f
 
+----
+
+### Api Testing 
+* $ curl -d '{"id":"100","userName":"adarsh kumar"}' -H 'Content-Type: application/json' -X POST http://localhost:8080/api/v1/users
+* $ curl -d '{"id":"101","userName":"amit kumar"}' -H 'Content-Type: application/json' -X POST http://localhost:8080/api/v1/users
+* $ curl -d '{"id":"200","userName":"radha singh"}' -H 'Content-Type: application/json' -X POST http://localhost:8080/api/v1/users
+* $ curl -X GET http://localhost:8080/api/v1/users
+
+
+----
+
 ### Deletion of service deployment configmap statefulset
-* $ kubectl delete services redis-cluster
-* $ kubectl delete deployment redis-cluster
-* $ kubectl delete statefulset redis-cluster
-* $ kubectl delete configmap redis-cluster
+* $ kubectl delete services redis springboot-kubernetes-redis-cache
+* $ kubectl delete deployment redis springboot-kubernetes-redis-cache
 
 ### TO DELETE ALL THE CONTAINERS WITH VOLUMES
 * $ docker rm -vf $(docker ps -a -q)
