@@ -1,0 +1,28 @@
+
+
+spring:
+  application:
+    name: springboot-redis-cache
+  redis:
+    host: localhost
+    password: espark
+    port: 6379
+    url: redis://localhost:6379
+
+server:
+  port: 8080
+
+---
+
+spring:
+  application:
+    name: springboot-redis-cache
+  profiles:
+    - kubernetes
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    url: redis://${REDIS_URL}
+
+server:
+  port: 8080

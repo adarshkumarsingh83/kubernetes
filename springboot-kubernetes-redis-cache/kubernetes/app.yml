@@ -1,0 +1,49 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springboot-kubernetes-redis-cache
+spec:
+  selector:
+    app: springboot-kubernetes-redis-cache
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-kubernetes-redis-cache
+spec:
+  selector:
+    matchLabels:
+      app: springboot-kubernetes-redis-cache
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-kubernetes-redis-cache
+    spec:
+      containers:
+        - name: springboot-kubernetes-redis-cache
+          image: "adarshkumarsingh83/springboot-kubernetes-redis-cache"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernetes
+            - name: REDIS_HOST
+              value: redis-cluster
+            - name: REDIS_PORT
+              value: 6379
+            - name: REDIS_URL
+              value: redis-cluster:6379
+          volumeMounts:
+            - name: springboot-kubernetes-redis-cache
+              mountPath: /var/logs
+      volumes:
+        - name: springboot-kubernetes-redis-cache
+          emptyDir: {}
