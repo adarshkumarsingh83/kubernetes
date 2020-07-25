@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernates-configmap-store
+data:
+  application.properties: |-
+    espark.kube.config.address.message=WELCOME TO ESPARK FROM KUBERNATES ADDRESS SERVICE
+    espark.kube.config.address.name=ADARSH KUMAR SINGH FROM KUBERNATES ADDRESS SERVICE
+    espark.kube.config.employee.message=WELCOME TO ESPARK FROM KUBERNATES EMPLOYEE SERVICE
+    espark.kube.config.employee.name=ADARSH KUMAR SINGH FROM KUBERNATES EMPLOYEE SERVICE
