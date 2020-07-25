@@ -130,3 +130,9 @@
 > spring boot based elastic search application  \
 > having elastic search as the serach engine  \
 > data is indexed on elastic and kibina is used to do query on the top of elastic searcch
+
+* ## [springboot-kubernetes-nginx-lb](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-nginx-lb)
+> descripition:  \
+> spring boot based nginx loadbalancer & proxy server application  \
+> springbboot services are rest services exposed data having multi instances  \
+> nginx having reverse proxy and load balancing mechanisms 
