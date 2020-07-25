@@ -102,6 +102,6 @@
 * $ docker rmi -f $(docker images -a -q)
 ----
 ### To ssh to the container 
-* $ kubectl exec --stdin --tty <pod-name> -- /bin/bash
+* $ kubectl exec --stdin --tty {pod-name} -- /bin/bash
 
 
