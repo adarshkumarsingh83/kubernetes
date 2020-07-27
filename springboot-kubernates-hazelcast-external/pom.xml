@@ -26,8 +26,8 @@
 
 		<dependency>
 			<groupId>com.hazelcast</groupId>
-			<artifactId>hazelcast-client</artifactId>
-			<version>3.12.7</version>
+			<artifactId>hazelcast</artifactId>
+			<version>4.0.2</version>
 		</dependency>
 
 		<dependency>

@@ -23,13 +23,11 @@ public class ApplicationConfig {
     @Bean
     public ClientConfig clientConfig() {
         ClientConfig config = new ClientConfig();
-        config.getGroupConfig().setName("dev").setPassword("dev-pass");
         config.getNetworkConfig().addAddress(hazelcastUrl)
                 .setSmartRouting(true)
                 .addOutboundPortDefinition("34700-34710")
                 .setRedoOperation(true)
-                .setConnectionTimeout(5000)
-                .setConnectionAttemptLimit(5);
+                .setConnectionTimeout(5000);
         config.setInstanceName("espark-cache");
         return config;
     }
