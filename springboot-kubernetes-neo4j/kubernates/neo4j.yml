@@ -1,0 +1,106 @@
+
+# kubectl apply -f neo4j.yml 
+# kubectl delete service neo4j-lb
+# kubectl delete deployment neo4j-lb
+# kubectl delete PersistentVolumeClaim neo4j-data-claim
+# kubectl delete PersistentVolume neo4j-data-storage
+
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: neo4j-lb
+    namespace: default
+spec:
+    type: LoadBalancer
+    ports:
+      - protocol: TCP
+        port: 7474
+        targetPort: 7474
+        name: http
+      - protocol: TCP
+        port: 7473
+        targetPort: 7473
+        name: https
+      - protocol: TCP
+        port: 7687
+        targetPort: 7687
+        name: bolt
+    selector:
+      app: neo4j-db
+
+---
+
+apiVersion: apps/v1 ## Kubernetes API Version
+kind: Deployment ## Type of resource
+metadata:
+  labels:
+    app: neo4j-db ## Labels given by user
+  name: neo4j-db ## Name given to the <kind> resource
+  namespace: default ## Namespace in which to deploy the resource
+spec:
+  replicas: 1
+  selector:
+    matchLabels: ## Should be same as spec.template.labels
+      app: neo4j-db
+  template:
+    metadata:
+      labels: ## Should be same as spec.selector.matchLabels
+        app: neo4j-db 
+    spec:
+      containers:
+      - image: neo4j:4.0.3 ## Image Name
+        name: neo4j ## Name of container
+        env: ## Env variables to pass
+          - name: NEO4J_AUTH
+            value: neo4j/secret
+          - name: NEO4J_dbms_logs_debug_level
+            value: DEBUG
+        ports: ## Ports to map
+            - containerPort: 7474
+              name: http
+            - containerPort: 7687
+              name: bolt
+            - containerPort: 7473
+              name: https
+        volumeMounts: ## Volumes to mount
+            - name: neo4j-data
+              mountPath: "/var/lib/neo4j/data"
+      volumes:
+          - name: neo4j-data
+            persistentVolumeClaim:
+              claimName: neo4j-data-claim
+---
+
+  kind: "PersistentVolumeClaim"
+  apiVersion: "v1"
+  metadata:
+    name: neo4j-data-claim
+    namespace: default
+    labels:
+      app: neo4j-db
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+
+---
+
+kind: "PersistentVolume"
+apiVersion: "v1"
+metadata:
+  name: neo4j-data-storage
+  labels:
+    type: local
+    app: neo4j
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: fast
+  gcePersistentDisk:
+    pdName: pd-ssd-disk-1

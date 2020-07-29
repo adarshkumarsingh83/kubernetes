@@ -1,0 +1,42 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springboot-kubernetes-neo4j
+spec:
+  selector:
+    app: springboot-kubernetes-neo4j
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30084
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-kubernetes-neo4j
+spec:
+  selector:
+    matchLabels:
+      app: springboot-kubernetes-neo4j
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-kubernetes-neo4j
+    spec:
+      containers:
+        - name: springboot-kubernetes-neo4j
+          image: "adarshkumarsingh83/springboot-kubernetes-neo4j"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: NEO4J_URL
+              value: "bolt://neo4j-lb:7687"
+            - name: NEO4J_USERNAME
+              value: neo4j
+            - name: NEO4J_USERPWD
+              value: secret

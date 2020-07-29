@@ -142,3 +142,9 @@
 > spring boot based haproxy based proxy \
 > spring boot based rest services application  \
 > ha proxy based load balancing and proxy service 
+
+* ## [springboot-kubernetes-neo4j](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-neo4j)
+> descripition:  \
+> spring boot based neo4j graph db \
+> spring boot based rest services application  \
+> data will be seeded into the db at the applicaion startup 
