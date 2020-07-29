@@ -140,4 +140,5 @@
 * ## [springboot-kubernates-haproxy](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-haproxy)
 > descripition:  \
 > spring boot based haproxy based proxy \
-> spring boot based rest services application  
+> spring boot based rest services application  \
+> ha proxy based load balancing and proxy service 
