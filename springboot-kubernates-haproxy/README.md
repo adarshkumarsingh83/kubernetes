@@ -136,9 +136,9 @@ $ kubectl logs <pod-name> -f
 
 
 ### TO DELETE DEPLOYMENT & SERVICE 
-$ kubectl delete services springboot-haproxy1 springboot-haproxy2 springboot-haproxy3 springboot-haproxy4 haproxy
-$ kubectl delete deployment springboot-haproxy1 springboot-haproxy2 springboot-haproxy3 springboot-haproxy4 haproxy
-$ kubectl delete configmap haproxy-cfg
+* $ kubectl delete services springboot-haproxy1 springboot-haproxy2 springboot-haproxy3 springboot-haproxy4 haproxy
+* $ kubectl delete deployment springboot-haproxy1 springboot-haproxy2 springboot-haproxy3 springboot-haproxy4 haproxy
+* $ kubectl delete configmap haproxy-cfg
 
 
 ### TO DELETE ALL THE CONTAINERS WITH VOLUMES
