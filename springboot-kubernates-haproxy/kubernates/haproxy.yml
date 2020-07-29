@@ -1,0 +1,53 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: haproxy
+spec:
+  selector:
+    app: haproxy
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      nodePort: 30080
+    - name: stats
+      protocol: TCP
+      port: 9999
+      nodePort: 30090
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy
+spec:
+  selector:
+    matchLabels:
+      app: haproxy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: haproxy
+    spec:
+      containers:
+        - name: haproxy
+          image: haproxy
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 9999
+              name: stats
+          volumeMounts:
+            - mountPath: /usr/local/etc/haproxy # mount haproxy-conf volumes to /etc/haproxy
+              readOnly: true
+              name: haproxy-cfg
+      volumes:
+        - name: haproxy-cfg
+          configMap:
+            name: haproxy-cfg # place ConfigMap `haproxy-conf` on /etc/haproxy
+            items:
+              - key: haproxy.cfg
+                path: haproxy.cfg

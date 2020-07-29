@@ -136,3 +136,8 @@
 > spring boot based nginx loadbalancer & proxy server application  \
 > springbboot services are rest services exposed data having multi instances  \
 > nginx having reverse proxy and load balancing mechanisms 
+
+* ## [springboot-kubernates-haproxy](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-haproxy)
+> descripition:  \
+> spring boot based haproxy based proxy \
+> spring boot based rest services application  
