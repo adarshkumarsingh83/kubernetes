@@ -15,16 +15,24 @@
 ----
 
 * ## [springboot-kubernetes-cloud-ms](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-cloud-ms)
-> descripition:
-> .
-> .
-> .			
+> descripition: \
+> we have zuul and api gateway as the proxy server k8  registry as the registry server  \
+> we have api-service which is aggregator service which internal request to the  \
+> employee-service & address-service fetch the data and aggregate in it.  \
+> we have k8 config map service which holds the configuration of the eco system \
+> this project can we executed on k8 cluster  \
+> this application has zuul as well as api-gateway use any one at a time 	
 
 * ## [springboot-netflix-cloud-ms](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-netflix-cloud-ms)
-> descripition:
-> .
-> .
-> .	
+> descripition: \
+> this project is implemented with spring netflix cloud api where  \
+> we have zuul and api gateway as the proxy server eureka as the registry server \
+> we have api-service which is aggregator service which internal request to the  \
+> employee-service & address-service fetch the data and aggregate in it. \
+> we have external config-service which holds the configuration of the eco system \
+> this project can we executed on local machine in default profile and in docker compose  \
+> finally this is deployed on k8 cluster \
+> this application has zuul as well as api-gateway use any one at a time   
 
 * ## [springboot-kubernates-configmap](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-configmap)
 > descripition: \
