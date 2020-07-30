@@ -96,6 +96,24 @@ listen: a shorthand notation that combines frontend and backend features into a 
 * http://localhost:8080/actuator/beans
 * http://localhost:8080/actuator/metrics
 
+----
+
+### DOCKER COMPOSE TESTING 
+* $ docker-compose up 
+* $ docker-compose down 
+
+### FOR TESTING 
+* http://localhost/actuator/health
+* http://localhost/actuator/info
+* http://localhost/actuator/env
+* http://localhost/actuator/beans
+* http://localhost/actuator/metrics
+
+### TO DELETE ALL THE CONTAINERS WITH VOLUMES
+* $ docker rm -vf $(docker ps -a -q)
+### TO DELETE ALL THE IMAGES
+* $ docker rmi -f $(docker images -a -q)
+
 ---- 
 ### KUBERNATES BUILD & DOCKER IMAGE CREATION AND PUSH TO DOCKER HUB.
 * $ mvn clean package 
