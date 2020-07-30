@@ -46,7 +46,7 @@
 		
 ----
 
-* # QUEUES IMPLENEAIONS  
+* # QUEUE IMPLEMENTATION   
 
 ----		
 		
