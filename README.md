@@ -7,6 +7,12 @@
 > . Contains some step by step helping document for \
 > . configurations and other things 
 
+* ## [springboot-web-rest](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-web-rest)
+> Description: \
+> springboot application which has web pages \
+> and rest endpoints for the consumer application. 
+
+
 * ## [springboot-kubernates-hazelcast-external](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-hazelcast-external)
 > descripition:
 > .
@@ -67,11 +73,7 @@
 > .
 > .		
 
-* ## [springboot-web-rest](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-web-rest)
-> descripition:
-> .
-> .
-> .	
+
 
 * ## [springboot-kubernates-elasticsearch](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-elasticsearch)
 > descripition:
