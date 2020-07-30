@@ -7,9 +7,6 @@
 > . Contains some step by step helping document for \
 > . configurations and other things 
 
-
-
-
 * ## [springboot-kubernates-hazelcast-external](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-hazelcast-external)
 > descripition:
 > .
@@ -21,7 +18,6 @@
 > .
 > .
 > .	
-
 		
 * ## [springboot-kubernates-kafka](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-kafka)
 > descripition:
@@ -60,10 +56,10 @@
 > .	
 
 * ## [springboot-kubernates-configmap](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-configmap)
-> descripition:
-> .
-> .
-> .			
+> descripition: \
+> spring boot application which uses k8 configmap \
+> for various application configurations \
+> whis is used futher for data exposing 			
 
 * ## [springboot-kubernates-rabbitmq](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-rabbitmq)
 > descripition:
