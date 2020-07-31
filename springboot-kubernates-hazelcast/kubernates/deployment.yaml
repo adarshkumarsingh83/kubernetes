@@ -36,7 +36,9 @@ spec:
   selector:
     app: springboot-kubernates-hazelcast
   type: LoadBalancer
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

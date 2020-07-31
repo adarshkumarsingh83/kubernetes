@@ -115,16 +115,16 @@
 
 
 * ## [springboot-kubernates-hazelcast](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-hazelcast)			
-> descripition:
-> .
-> .
-> .	
+> descripition: \
+> spring boot hazelcast where k8 will help for embedded \
+> hazelcast cache for the spring boot application \
+> which is futher used by the spring boot hazelcast clint 
 
 * ## [springboot-kubernates-hazelcast-external](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-hazelcast-external)	
-> descripition:
-> .
-> .
-> .		
+> descripition: \
+> spring boot hazel cast cache which is runing as the sperate server\
+> and spring boot hazel cast cache will perform the curd operation on \
+> the data which is cached on the hazel cast external server. 
 
 ----
 
