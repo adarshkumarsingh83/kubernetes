@@ -8,7 +8,7 @@ spec:
       app: springboot-kubernates-ngnix2
       tier: backend
       track: stable
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
