@@ -19,6 +19,13 @@
 > and return those in the restful services 
 
 
+* ## [springboot-kubernates-configmap](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-configmap)
+> descripition: \
+> spring boot application which uses k8 configmap  \
+> which is kind of confi server for the application \
+> for various application configurations \
+> whis is used futher for data exposing 	
+
 ----
 
 * # MICRO SERVICES IMPLEMENATIONS  
@@ -45,11 +52,6 @@
 > finally this is deployed on k8 cluster \
 > this application has zuul as well as api-gateway use any one at a time   
 
-* ## [springboot-kubernates-configmap](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-configmap)
-> descripition: \
-> spring boot application which uses k8 configmap \
-> for various application configurations \
-> whis is used futher for data exposing 	
 
 * ## [springboot-web-rest](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-web-rest)
 > Description: \
