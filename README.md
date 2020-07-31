@@ -164,10 +164,10 @@
 ----
 
 * ## [springboot-kubernates-ngnix](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-ngnix)
-> descripition:
-> .
-> .
-> .	
+> descripition: \
+> spring boot ngnix k8 docker compose application \
+> spring boot rest services and web pages are exposed \
+> ngnix load balancing and proxy is enable for multiinstances of the spring boot server appliation
 
 * ## [springboot-kubernetes-nginx-lb](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-nginx-lb)
 > descripition:  \
