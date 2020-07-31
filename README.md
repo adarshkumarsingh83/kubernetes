@@ -7,6 +7,17 @@
 > . Contains some step by step helping document for \
 > . configurations and other things 
 
+----
+
+* # K8 INFA SERVICES 
+
+----
+
+* ## [springboot-kubernates-secret](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-secret)
+> descripition: \
+> spring boot appliation uses k8 secret valult services \
+> and return those in the restful services 
+
 
 ----
 

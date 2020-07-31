@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: springboot-kubernates-secret
+    email: adarsh@kumar.espark
+    phone: 0000
+    secretId: secret-dummy
+
+server:
+  port: 9090
+
+logging:
+  level:
+    root: DEBUG
+
+---
+
+spring:
+  application:
+    name: springboot-kubernates-secret
+    email: ${EMAIL}
+    phone: ${PHONE}
+    secretId: ${SECRET_ID}
+  profiles:
+    - kubernates
+
+server:
+  port: 9090
+
+logging:
+  level:
+    root: INFO
