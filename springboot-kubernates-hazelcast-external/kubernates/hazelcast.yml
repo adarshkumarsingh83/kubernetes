@@ -14,7 +14,7 @@ spec:
         app: hazelcast
     spec: 
       containers: 
-        - image: hazelcast/hazelcast
+        - image: hazelcast/hazelcast:4.0.1
           name: hazelcast
           imagePullPolicy: Always
           ports:
@@ -22,34 +22,15 @@ spec:
               protocol: TCP
               containerPort: 5701
 ---
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: management-center
-spec:
-  replicas: 1
-  serviceName: management-center
-  selector:
-    matchLabels:
-      app: management-center  
-  template:
-    metadata:
-      labels:
-        app: management-center
-    spec:
-      containers:
-      - name: management-center
-        image: hazelcast/management-center
----
 kind: Service
 apiVersion: v1
 metadata:
-  name: management-center
+  name: hazelcast
 spec:
   type: LoadBalancer
   selector:
-    app: management-center
+    app: hazelcast
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 5701
+      targetPort: 5701

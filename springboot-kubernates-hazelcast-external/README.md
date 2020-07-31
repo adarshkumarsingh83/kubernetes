@@ -58,8 +58,9 @@ for stopping $ sh stop.sh
 * $ kubectl cluster-info
 
 ### to create service and other in kubernetes
-* $ kubectl apply -f $(pwd)/hazelcast-mgmt.yml
-* $ kubectl apply -f $(pwd)/spring.yml
+* $ kubectl apply -f $(pwd)/kubernates/hazelcast.yml
+* $ kubectl apply -f $(pwd)/kubernates/hazelcast-mc.yml
+* $ kubectl apply -f $(pwd)/kubernates/spring.yml
 
 ### to view the service and other
 * $ kubectl get all
@@ -80,11 +81,9 @@ for stopping $ sh stop.sh
 ### Resource Clean up 
 * $ kubectl delete statefulsets  hazelcast
 * $ kubectl delete services  hazelcast
-* $ kubectl delete services  management-center
-* $ kubectl delete statefulsets  management-center
 
-* $ kubectl delete deployment springboot-kubernates-hazelcast-external
-* $ kubectl delete services springboot-kubernates-hazelcast-external
+* $ kubectl delete services springboot-kubernates-hazelcast-external management-center 
+* $ kubectl delete deployment springboot-kubernates-hazelcast-external management-center
 
 ### TO DELETE ALL THE CONTAINERS WITH VOLUMES
 * $ docker rm -vf $(docker ps -a -q)
