@@ -161,9 +161,9 @@
 > data is indexed on elastic and kibina is used to do query on the top of elastic searcch
 
 * ## [springboot-kubernates-solr](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-solr)
-> descripition:
+> descripition: \
 > spring boot application implemented with curd operation \
-> data is stores on solr search engine \ 
+> data is stores on solr search engine \
 > where data is indexed for fast searching 
 
 * ## [springboot-kubernates-solr_nw](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-solr_nw)
