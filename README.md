@@ -162,9 +162,9 @@
 
 * ## [springboot-kubernates-solr](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-solr)
 > descripition:
-> .
-> .
-> .	
+> spring boot application implemented with curd operation \
+> data is stores on solr search engine \ 
+> where data is indexed for fast searching 
 
 * ## [springboot-kubernates-solr_nw](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-solr_nw)
 > descripition: \
