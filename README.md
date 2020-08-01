@@ -72,16 +72,16 @@
 ----		
 		
 * ## [springboot-kubernates-kafka](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-kafka)
-> descripition:
-> .
+> descripition: \
+>  not working yet to test
 > .
 > .	
 
 * ## [springboot-kubernates-rabbitmq](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-rabbitmq)
-> descripition:
-> .
-> .
-> .		
+> Description: \
+> spring boot rabbitmq application where \
+> producer application put data on rabbitmq \
+> consumer will read the data from the rabbitmq 	
 
 
 ----
