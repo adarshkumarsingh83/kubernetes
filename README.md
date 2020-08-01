@@ -105,7 +105,7 @@
 * ## [springboot-kubernates-mongo](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-mongo)
 > Description: \
 > spring boot jpa mongo db application \
-> where curd operation implemented and data \ 
+> where curd operation implemented  \ 
 > data is persisted into the mongo db
 
 * ## [springboot-kubernetes-neo4j](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernetes-neo4j)
