@@ -91,10 +91,11 @@
 ----
 
 * ## [springboot-kubernates-secret-postgres](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-secret-postgres)
-> descripition:
-> .
-> .
-> .	
+> Description: \
+> spring boot application uses postgres db \
+> jpa is used for curd operation \
+> k8 config map and secret is use for storing \
+> credentials and configurations.
 
 * ## [springboot-kubernates-secret-mysql](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-secret-mysql)
 > Description: \
