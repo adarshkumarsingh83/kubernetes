@@ -1,0 +1,51 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: springboot-kubernates-cassandra
+spec:
+  selector:
+    app: springboot-kubernates-cassandra
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-kubernates-cassandra
+spec:
+  selector:
+    matchLabels:
+      app: springboot-kubernates-cassandra
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-kubernates-cassandra
+    spec:
+      containers:
+        - name: springboot-kubernates-cassandra
+          image: "adarshkumarsingh83/springboot-kubernates-cassandra"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernetes
+            - name: CASSANDRA_KEYSPACE
+              value: espark
+            - name: CASSANDRA_PORT
+              value: 9042
+            - name: CASSANDRA_HOST
+              value: cassandra
+          volumeMounts:
+            - name: springboot-kubernates-cassandra
+              mountPath: /var/logs
+      volumes:
+        - name: springboot-kubernates-cassandra
+          emptyDir: {}

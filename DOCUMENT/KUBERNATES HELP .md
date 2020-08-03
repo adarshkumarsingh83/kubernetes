@@ -124,3 +124,11 @@ ENTRYPOINT ["java","-jar","springboot-docker-xxx.jar"]
 
 ### to delete deployment 
 * $ kubectl delete deployment springboot-docker-xxx
+
+
+### to delete all in one shot 
+* $ kubectl delete --all pods
+* $ kubectl delete --all services
+* $ kubectl delete --all configmap
+* $ kubectl delete --all statefulset
+* $ kubectl delete --all deployment

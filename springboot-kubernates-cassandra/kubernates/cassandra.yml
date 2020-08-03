@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cassandra
+  labels:
+    app: cassandra
+spec:
+  serviceName: cassandra
+  selector:
+    matchLabels:
+      app: cassandra
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cassandra
+    spec:
+      containers:
+      - name: cassandra
+        image: docker.io.cassandra
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9042
+          name: cql
+        env:
+          - name: CASSANDRA_SEEDS
+            value: cassandradb
+          - name: CASSANDRA_DC
+            value: espark
+        volumeMounts:
+        - name: cassandra-data
+          mountPath: /var/lib/cassandra
+  volumeClaimTemplates:
+  - metadata:
+      name: cassandra-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: fast
+      resources:
+        requests:
+          storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cassandra
+  labels:
+    service: cassandra
+spec:
+  ports:
+    - protocol: TCP
+      port: 9042
+      targetPort: 9042
+  selector:
+    app: cassandra
+  type: LoadBalancer

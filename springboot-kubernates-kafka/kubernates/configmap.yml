@@ -8,6 +8,6 @@ data:
   name: "espark-mysql"    # name of the database for application
   port: "3306"
   zk_url: "zookeeper:2181"
-  kafka_url: "kafka:9092"
-  kafka_topic: "espark-topic"
+  kafka_url: "kafka-service0:9092"
+  kafka_topic: "espark-topic:1:2"
   kafka_ad_port: "9092"

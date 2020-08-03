@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: springboot-cassandra
+  data:
+    cassandra:
+      port: 9042
+      keyspace-name: espark
+      contact-points: localhost
+      schema-action: CREATE_IF_NOT_EXISTS
+      local-datacenter: cassandra
+      entity-base-package: com.espark.adarsh.entity
+      connect-timeout-millis: 10000ms
+      read-timeout-millis: 10000ms
+      connect-timeout: 10000ms
+      read-timeout: 10000ms
+      username: cassandra
+      password: cassandra
+---
+
+spring:
+  application:
+    name: springboot-cassandra
+  profiles:
+    - docker
+    - kubernates
+  data:
+    cassandra:
+      port: ${CASSANDRA_PORT}
+      contact-points: ${CASSANDRA_HOST}
+      keyspace-name: ${CASSANDRA_KEYSPACE}
+      schema-action: CREATE_IF_NOT_EXISTS
+      entity-base-package: com.espark.adarsh.entity
+      local-datacenter: ${CASSANDRA_DC}
+      username:  ${CASSANDRA_USERNAME}
+      password: ${CASSANDRA_PWD}
+      connect-timeout-millis: 10000ms
+      read-timeout-millis: 10000ms
+      connect-timeout: 10000ms
+      read-timeout: 10000ms

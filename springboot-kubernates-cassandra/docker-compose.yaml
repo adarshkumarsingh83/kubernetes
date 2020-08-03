@@ -1,0 +1,51 @@
+version: '3.7'
+services:
+
+  cassandra0:
+    image: cassandra
+    container_name: cassandra0
+    ports:
+      - 9042:9042
+      - 7199:7199
+
+  cassandra1:
+    image: cassandra
+    container_name: cassandra1
+    ports:
+      - 9142:9042
+    links:
+      - cassandra0:cassandradb
+    environment:
+      - CASSANDRA_SEEDS=cassandradb
+
+  cassandra2:
+    image: cassandra
+    container_name: cassandra2
+    ports:
+      - 9242:9042
+    links:
+      - cassandra0:cassandradb
+    environment:
+      - CASSANDRA_SEEDS=cassandradb
+
+  springboot-kubernates-cassandra:
+    container_name: springboot-kubernates-cassandra
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    links:
+      - cassandra0
+      - cassandra1
+      - cassandra2
+    depends_on:
+      - cassandra0
+      - cassandra1
+      - cassandra2
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - CASSANDRA_KEYSPACE=espark
+      - CASSANDRA_HOST=cassandra0
+      - CASSANDRA_PORT=9042
