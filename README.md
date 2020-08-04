@@ -166,11 +166,11 @@
 > data is stores on solr search engine \
 > where data is indexed for fast searching 
 
-* ## [springboot-kubernates-solr_nw](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-solr_nw)
+* ## [springboot-kubernates-solr-cloud](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-solr-cloud)
 > descripition: \
 > . not working yet to be fixed 
-> .
-> .	
+> spring boot solr cloud application \
+> docker compose and k8 for curd operaton 
 
 ----
 

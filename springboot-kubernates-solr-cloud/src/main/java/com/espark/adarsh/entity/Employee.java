@@ -8,9 +8,8 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import java.io.Serializable;
 
 @Data
-@SolrDocument(collection = "employee")
+@SolrDocument(collection = "employee", solrCoreName = "employee")
 public class Employee implements Serializable {
-
 
     @Id
     @Indexed(name = "id", type = "string")

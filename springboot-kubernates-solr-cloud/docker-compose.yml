@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: zookeeper:3.4
+    ports:
+      - "2181:2181"
+    hostname: zookeeper
+    networks:
+      - spring-ms
+
+  solr1:
+    container_name: solr1
+    image: solr:8
+    ports:
+      - "8983:8983"
+    environment:
+      - ZK_HOST=zookeeper:2181
+    volumes:
+      - data:/var/solr/employee
+    links:
+      - zookeeper
+    depends_on:
+      - zookeeper
+    networks:
+      - spring-ms
+
+  solr2:
+    container_name: solr2
+    image: solr:8
+    ports:
+      - "8984:8983"
+    environment:
+      - ZK_HOST=zookeeper:2181
+    volumes:
+      - data:/var/solr/employee
+    links:
+      - zookeeper
+    depends_on:
+      - zookeeper
+    networks:
+      - spring-ms
+
+  springboot-kubernates-solr-cloud:
+    container_name: springboot-kubernates-solr-cloud
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: on-failure:5
+    ports:
+      - '8080:8080'
+    depends_on:
+      - zookeeper
+      - solr1
+      - solr2
+    links:
+      - zookeeper
+      - solr1
+      - solr2
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - ZOOKEEPER=zookeeper:2181
+      - SOLR_HOST=solr1:8983,solr2:8984
+    networks:
+      - spring-ms
+
+networks:
+  spring-ms:
+
+volumes:
+  data:
+
