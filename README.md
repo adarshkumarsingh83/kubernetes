@@ -74,7 +74,7 @@
 * ## [springboot-kubernates-kafka](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-kafka)
 > descripition: \
 > spring boot application with kaffa queue \
-> where producer will keep data into the queue \ 
+> where producer will keep data into the queue \
 > consumer will take data from queue.
 
 * ## [springboot-kubernates-rabbitmq](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-rabbitmq)
