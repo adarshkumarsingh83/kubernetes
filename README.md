@@ -116,6 +116,12 @@
 > spring boot based rest services application  \
 > data will be seeded into the db at the applicaion startup 
 
+* ## [springboot-kubernates-cassandra](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-cassandra)
+> descripition:  \
+> spring boot based cassandra  db \
+> spring boot based rest services application  \
+> data will be stored into the db  
+
 ----
 
 * # CACHE
