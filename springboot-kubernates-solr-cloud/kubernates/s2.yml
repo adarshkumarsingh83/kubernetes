@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: solr2
+spec:
+  serviceName: solr2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: solr2
+  template:
+    metadata:
+      labels:
+        app: solr2
+    spec:
+      containers:
+        - name: solr2
+          image: solr:8
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8983
+          env:
+            - name: ZK_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: application-conf
+                  key: zk_url
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/solr
+      volumes:
+        - name: data
+          hostPath:
+            path: /data/solr
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: solr2
+  labels:
+    service: solr2
+spec:
+  ports:
+    - protocol: TCP
+      port: 8983
+      targetPort: 8983
+  selector:
+    app: solr2
+  type: LoadBalancer

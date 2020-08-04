@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: application-conf
+  namespace: default
+data:
+  zk_url: "zookeeper:2181"
+  solr_host: "solr1:8983,solr2:8983"
