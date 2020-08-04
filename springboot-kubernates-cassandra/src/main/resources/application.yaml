@@ -9,10 +9,8 @@ spring:
       schema-action: CREATE_IF_NOT_EXISTS
       local-datacenter: cassandra
       entity-base-package: com.espark.adarsh.entity
-      connect-timeout-millis: 10000ms
-      read-timeout-millis: 10000ms
-      connect-timeout: 10000ms
-      read-timeout: 10000ms
+      connect-timeout: 10000
+      read-timeout: 10000
       username: cassandra
       password: cassandra
 ---
@@ -33,7 +31,5 @@ spring:
       local-datacenter: ${CASSANDRA_DC}
       username:  ${CASSANDRA_USERNAME}
       password: ${CASSANDRA_PWD}
-      connect-timeout-millis: 10000ms
-      read-timeout-millis: 10000ms
-      connect-timeout: 10000ms
-      read-timeout: 10000ms
+      connect-timeout: 10000
+      read-timeout: 10000

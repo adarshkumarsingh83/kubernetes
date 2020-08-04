@@ -1,11 +1,11 @@
 package com.espark.adarsh.entity;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 
 
 @Data

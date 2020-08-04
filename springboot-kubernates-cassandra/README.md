@@ -74,7 +74,12 @@ $ brew uninstall cassandra
 
 ### To Test the Application Execution 
 * $ curl -X POST -H "Content-Type: application/json" -d '{"id":1, "name":"adarsh kumar"}' http://localhost:8080/api/employee
+* $ curl -X POST -H "Content-Type: application/json" -d '{"id":2, "name":"radha singh"}' http://localhost:8080/api/employee
+* $ curl -X POST -H "Content-Type: application/json" -d '{"id":3, "name":"amit kumar"}' http://localhost:8080/api/employee
 * $ curl http://localhost:8080/api/employee/1 
+* $ curl http://localhost:8080/api/employee/2
+* $ curl http://localhost:8080/api/employee/3
+* $ curl http://localhost:8080/api/employees
 
 ### CLEAN UP PROCESS 
 ### TO DELETE ALL THE CONTAINERS WITH VOLUMES
@@ -94,6 +99,8 @@ $ brew uninstall cassandra
 
 ### Deployment 
 * $ kubectl apply -f $(pwd)/kubernates/cassandra.yml
+* $ kubectl apply -f $(pwd)/kubernates/cassandra1.yml
+* $ kubectl apply -f $(pwd)/kubernates/cassandra2.yml
 * $ kubectl apply -f $(pwd)/kubernates/spring.yml
 
 ### TO VIEW THE LOGS IN THE K8 POD
@@ -106,10 +113,18 @@ $ brew uninstall cassandra
 * $ kubectl logs -f
 * $ kubectl get cassandra
 
+### To Test the Application Execution 
+* $ curl -X POST -H "Content-Type: application/json" -d '{"id":1, "name":"adarsh kumar"}' http://localhost:8080/api/employee
+* $ curl -X POST -H "Content-Type: application/json" -d '{"id":2, "name":"radha singh"}' http://localhost:8080/api/employee
+* $ curl -X POST -H "Content-Type: application/json" -d '{"id":3, "name":"amit kumar"}' http://localhost:8080/api/employee
+* $ curl http://localhost:8080/api/employee/1 
+* $ curl http://localhost:8080/api/employee/2
+* $ curl http://localhost:8080/api/employee/3
+* $ curl http://localhost:8080/api/employees
+
 ### Deletion of service deployment statefulset
-* $ kubectl delete services springboot-kubernates-cassandra cassandra
-* $ kubectl delete deployment springboot-kubernates-cassandra
-* $ kubectl delete StatefulSet cassandra
+* $ kubectl delete service cassandradb cassandra1 cassandra2 springboot-kubernates-cassandra
+* $ kubectl delete deployment cassandradb cassandra1 cassandra2 springboot-kubernates-cassandra
 
 ### TO DELETE ALL THE CONTAINERS WITH VOLUMES
 * $ docker rm -vf $(docker ps -a -q)

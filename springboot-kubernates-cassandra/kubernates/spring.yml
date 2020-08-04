@@ -36,13 +36,13 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: kubernetes
+              value: 'kubernates'
             - name: CASSANDRA_KEYSPACE
-              value: espark
+              value: 'espark'
             - name: CASSANDRA_PORT
-              value: 9042
+              value: '9042'
             - name: CASSANDRA_HOST
-              value: cassandra
+              value: 'cassandradb'
           volumeMounts:
             - name: springboot-kubernates-cassandra
               mountPath: /var/logs

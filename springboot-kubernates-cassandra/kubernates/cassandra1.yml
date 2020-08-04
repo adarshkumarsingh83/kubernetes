@@ -1,0 +1,52 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: cassandra1
+spec:
+  selector:
+    app: cassandra1
+  ports:
+    - protocol: TCP
+      name: tcpport1
+      port: 9042
+      targetPort: 9042
+    - protocol: TCP
+      name: tcpport2
+      port: 7199
+      targetPort: 7199
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cassandra1
+spec:
+  selector:
+    matchLabels:
+      app: cassandra1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cassandra1
+    spec:
+      containers:
+        - name: cassandra1
+          image: cassandra
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 9042
+            name: cql
+          - containerPort: 7199
+            name: net
+          env:
+            - name: CASSANDRA_SEEDS
+              value: cassandradb
+          volumeMounts:
+            - name: cassandra1
+              mountPath: /var/logs
+      volumes:
+        - name: cassandra1
+          emptyDir: {}
