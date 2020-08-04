@@ -9,9 +9,9 @@
 * $ mvn clean package
 
 
-### To 
-$ docker-compose up
-$ docker-compose down
+### To bring up docker compose 
+* $ docker-compose up
+* $ docker-compose down
 
 ### SOLR URL 
 * http://localhost:8983/
