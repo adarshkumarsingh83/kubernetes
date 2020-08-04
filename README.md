@@ -173,10 +173,10 @@
 > where data is indexed for fast searching 
 
 * ## [springboot-kubernates-solr-cloud](https://github.com/adarshkumarsingh83/kubernetes/tree/master/springboot-kubernates-solr-cloud)
-> descripition: \
-> . not working yet to be fixed 
-> spring boot solr cloud application \
-> docker compose and k8 for curd operaton 
+> Description: \
+> spring boot application with solr cloud cluster \
+> where application is performing curd operation on the \
+> employee data which will be indexed on the solr 
 
 ----
 
