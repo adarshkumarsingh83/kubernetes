@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: springboot-oracledb-service
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/XE
+    username: SYSTEM
+    password: 12345
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      minimumIdle: 5
+      maximum-pool-size: 20
+      idleTimeout: 30000
+      max-lifetime: 2000000
+      connection-timeout: 30000
+      pool-name: HikariPool
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    generate-ddl: false
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: false
+
+---
+
+spring:
+  application:
+    name: springboot-oracledb-service
+  profiles: kubernates
+  datasource:
+    url: jdbc:oracle:thin:@//${DATABASE_HOST}:1521/XE
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      minimumIdle: 5
+      maximum-pool-size: 20
+      idleTimeout: 30000
+      max-lifetime: 2000000
+      connection-timeout: 30000
+      pool-name: HikariPool
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    generate-ddl: false
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: false

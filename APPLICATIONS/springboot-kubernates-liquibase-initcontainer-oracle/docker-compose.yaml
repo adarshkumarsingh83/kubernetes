@@ -1,0 +1,42 @@
+version: '3.1'
+services:
+
+  oracledb:
+    image: oracle/database:18.4.0-xe
+    container_name: OracleXE
+    environment:
+      - shm-size=1g
+      - ORACLE_PWD=12345
+    ports:
+      - "1521:1521"
+      - "8081:8081"
+    volumes:
+      - ./db:/u01/app/oracle/oradata 
+    networks:
+     - espark-net
+
+  oracledb-liquibse:
+    build: ./oracle-liquibase-docker
+    restart: always
+    links:
+      - oracledb
+    depends_on:
+      - oracledb
+    networks:
+     - espark-net
+
+  springboot-services:
+    build: ./springboot-oracledb-service
+    restart: always
+    ports:
+      - "8080:8080"
+    links:
+      - oracledb
+    depends_on:
+      - oracledb
+      - oracledb-liquibse
+    networks:
+     - espark-net
+
+networks:
+  espark-net:
