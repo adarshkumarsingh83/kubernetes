@@ -25,9 +25,30 @@ General-purpose web UI for Kubernetes clusters
 
 ## To install 
 * kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+```
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+namespace/kubernetes-dashboard created
+serviceaccount/kubernetes-dashboard created
+service/kubernetes-dashboard created
+secret/kubernetes-dashboard-certs created
+secret/kubernetes-dashboard-csrf created
+secret/kubernetes-dashboard-key-holder created
+configmap/kubernetes-dashboard-settings created
+role.rbac.authorization.k8s.io/kubernetes-dashboard created
+clusterrole.rbac.authorization.k8s.io/kubernetes-dashboard created
+rolebinding.rbac.authorization.k8s.io/kubernetes-dashboard created
+clusterrolebinding.rbac.authorization.k8s.io/kubernetes-dashboard created
+deployment.apps/kubernetes-dashboard created
+service/dashboard-metrics-scraper created
+deployment.apps/dashboard-metrics-scraper created
+```
 
 ## to get Acess 
 * kubectl proxy
+```
+$ kubectl proxy
+Starting to serve on 127.0.0.1:8001
+```
 
 ## to access dashboard 
 * http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
@@ -39,7 +60,7 @@ General-purpose web UI for Kubernetes clusters
 
 ### Creating a Service Account
 * create file "dashboard-adminuser.yaml"
-* kubectl apply -f dashboard-adminuser.yaml
+
 ```
 apiVersion: v1
 kind: ServiceAccount
@@ -47,10 +68,16 @@ metadata:
   name: admin-user
   namespace: kubernetes-dashboard
 ```
+* kubectl apply -f dashboard-adminuser.yaml
+```
+$ kubectl apply -f dashboard-adminuser.yaml
+serviceaccount/admin-user created
+```
+
 
 ### Creating a ClusterRoleBinding
 * create a file "cluster-admin.yaml"
-* kubectl apply -f cluster-admin.yaml
+
 ```
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -65,10 +92,20 @@ subjects:
   name: admin-user
   namespace: kubernetes-dashboard
 ```
+* kubectl apply -f cluster-admin.yaml
+```
+$ kubectl apply -f cluster-admin.yaml
+clusterrolebinding.rbac.authorization.k8s.io/admin-user created
+```
 
 ### Getting a Bearer Token
 * kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
 *  copy the token and paste it into the Enter token field on the login screen.
+```
+$ kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
+
+eyJhbGciOiJSUzI1NiIsImtpZCI6ImlEVEVqdTVUdWY5SjV5cWgwSW10YUthYkt1ZjB5VkdHQkcwWUl6RWtuNUkifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWJjZmNtIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIxZWMzYzY5Mi1iM2RlLTQ5MTAtOGUzZi0wOTc4MmQxM2E0MWUiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.XPaOOTXbTEMHiXI9F48orhZnQcg6nJzizQO7354ChEJ5-hZLxUjboHOCHnme2S070EdHdKnMDir4G2VriBD8EvR-F_ohjdYFQ6-vD6l31MmJlfE5zy53CYXkUgKv8c26kp8w7hlKsGVgGbs0WXk-ZDxya0YZLZVhiiZjLaz10VwD1YLPEBHvKDD3cd9rejwwiV0WwJ0J2GA_G-wkm5GI1Jdx6m1vDNCZCsHY8J2FSElLxvkugX5PX5B-_gHROPeOB_K_0ro95gsO_OMqT4U0yg5CQmwv41U7fQxreYk74mS7LU7hM4uvB1I1x6k-JyZL419mUQ8DgTTi0vcK5kXOUg
+```
 
 ### Clean up and next steps
 * kubectl -n kubernetes-dashboard delete serviceaccount admin-user
