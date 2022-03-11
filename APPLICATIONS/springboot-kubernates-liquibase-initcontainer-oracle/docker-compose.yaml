@@ -16,8 +16,13 @@ services:
      - espark-net
 
   oracledb-liquibse:
+    container_name: oracledb-liquibse
     build: ./oracle-liquibase-docker
     restart: always
+    environment:
+     - DB_URL=jdbc:oracle:thin:@OracleXE:1521:XE
+     - DB_USERNAME=SYSTEM
+     - DB_PASSWORD=12345
     links:
       - oracledb
     depends_on:
@@ -26,10 +31,16 @@ services:
      - espark-net
 
   springboot-services:
+    container_name: springboot-services
     build: ./springboot-oracledb-service
     restart: always
     ports:
       - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DATABASE_HOST=OracleXE
+      - DATABASE_USER=SYSTEM
+      - DATABASE_PASSWORD=12345
     links:
       - oracledb
     depends_on:
