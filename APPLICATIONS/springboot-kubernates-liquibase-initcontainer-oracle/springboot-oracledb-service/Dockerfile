@@ -1,4 +1,4 @@
 FROM openjdk:8
 ADD target/springboot-oracledb-service.jar springboot-oracledb-service.jar
-EXPOSE 8080
+EXPOSE 9090
 ENTRYPOINT ["java","-jar","springboot-oracledb-service.jar"]

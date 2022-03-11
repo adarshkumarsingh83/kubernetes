@@ -54,3 +54,83 @@ $ docker-compose down
  ⠿ Container OracleXE                                               Removed                                                                                                 10.4s
  ⠿ Network oracle-liquibase-docker-compose_espark-net               Removed                                                                                                  0.1s
 ```
+
+
+----
+
+---
+
+# k8
+
+---
+
+## K8 Deployment Process
+
+### To build code
+
+- $ mvn clean package
+
+### To build the docker image and tag
+
+- $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-oracledb-service .
+
+### to push the docker image to the docker hub
+
+- $ docker push adarshkumarsingh83/springboot-oracledb-service
+
+### NOTE CHANGE TO THE DOCKER DESKTOP IN THE DOCKER -> KUBERNATES
+
+- $ kubectl cluster-info
+
+### to create service and other in kubernetes
+
+- $ kubectl apply -f $(pwd)/configmap.yml
+- $ kubectl apply -f $(pwd)/secret.yml
+- $ kubectl apply -f $(pwd)/oracle.yml
+- $ kubectl apply -f $(pwd)/springboot.yml
+
+### to view the service and other
+
+- $ kubectl get all
+
+### to view the secrets
+
+- $ kubectl get secrets
+
+### to get the persistence volume
+
+- $ kubectl get persistentvolumes
+- $ kubectl get persistentvolumeclaims
+
+### TO VIEW THE POD DETAILS
+
+- $ kubectl get pod
+
+### TO VIEW THE LOGS OF THE POD
+
+- $ kubectl logs <pod-name> -f
+- $ kubectl describe services springboot-oracledb-service
+- $ kubectl port-forward svc/springboot-oracledb-service 8080:8080
+
+### Api Testing
+
+- $ curl http://localhost:9090/employees
+- $ curl http://localhost:9090/employee/1
+- $ curl http://localhost:9090/employee/2
+
+### TO DELETE CONFIG MAP
+
+- $ kubectl delete configmap db-conf -n default
+- $ kubectl delete secret/db-credentials
+- $ kubectl delete secret/db-root-credentials
+
+### FOR DELETING DEPLOYMENT AND SERVICE
+
+- $ kubectl delete services springboot-oracledb-service
+- $ kubectl delete deployment springboot-oracledb-service
+
+### FOR DELETING DEPLOYMENT AND SERVICE OF MYSQL
+
+- $ kubectl delete services OracleXE
+- $ kubectl delete deployment OracleXE
+- $ kubectl delete pvc oracle-pv-claim

@@ -6,13 +6,14 @@
 
 ### To Build Code
 
-* mvn clean package
+- mvn clean package
 
 ### To Build the docker image
 
-* $ docker build -f Dockerfile -t espark/springboot-oracledb-service .
+- $ docker build -f Dockerfile -t espark/springboot-oracledb-service .
+
 ```
-[+] Building 14.7s (7/7) FINISHED                                                                                                                                                                     
+[+] Building 14.7s (7/7) FINISHED
  => [internal] load build definition from Dockerfile                                                                                                                                             0.0s
  => => transferring dockerfile: 206B                                                                                                                                                             0.0s
  => [internal] load .dockerignore                                                                                                                                                                0.0s
@@ -43,11 +44,13 @@
  => exporting to image                                                                                                                                                                           0.2s
  => => exporting layers                                                                                                                                                                          0.2s
  => => writing image sha256:0f10f013d22632a3b26913c445c519f277fc47c8bd00c69c507b2fa45a4b1e32                                                                                                     0.0s
- => => naming to docker.io/espark/springboot-oracledb-service    
+ => => naming to docker.io/espark/springboot-oracledb-service
 ```
 
-### To list the image 
-* $ docker images ls 
+### To list the image
+
+- $ docker images ls
+
 ```
 REPOSITORY                           TAG            IMAGE ID       CREATED          SIZE
 espark/springboot-oracledb-service   latest         0f10f013d226   50 seconds ago   569MB
@@ -55,10 +58,11 @@ espark/liquibase                     latest         64a96c2ca688   5 hours ago  
 liquibase/liquibase                  latest         92d9c4600558   2 weeks ago      364MB
 oracle/database                      18.4.0-xe      c265dc4e3bd6   3 months ago     5.89GB
 ```
+
 ### To run the docker container
 
-* $ docker run --rm --name espark-springboot-service -p 8080:8080 --net espark-net espark/springboot-oracledb-service
+- $ docker run --rm --name espark-springboot-service -p 8080:8080 --net espark-net espark/springboot-oracledb-service
 
 ### To test the service
 
-* $ curl http://localhost:8080/employees
+- $ curl http://localhost:9090/employees

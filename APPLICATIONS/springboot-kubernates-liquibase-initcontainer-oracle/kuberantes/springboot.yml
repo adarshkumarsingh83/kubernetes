@@ -1,0 +1,85 @@
+# Define 'Service' to expose backend application deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-oracledb-service
+  namespace: default
+spec:
+  selector: # backend application pod labels should match these
+    app: springboot-oracledb-service-label
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: LoadBalancer # use NodePort, if you are not running Kubernetes on cloud
+---
+# Configure 'Deployment' of backend application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-oracledb-service
+  labels:
+    app: springboot-oracledb-service-label
+    tier: backend
+spec:
+  replicas: 1 # Number of replicas of back-end application to be deployed
+  selector:
+    matchLabels: # backend application pod labels should match these
+      app: springboot-oracledb-service-label
+      tier: backend
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' labels
+        app: springboot-oracledb-service-label
+        tier: backend
+    spec:
+      containers:
+        - name: springboot-oracledb-service
+          image: adarshkumarsingh83/springboot-oracledb-service # docker image of backend application
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+          env: # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: DATABASE_HOST # Setting Database host address from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf # name of configMap
+                  key: host
+            - name: DATABASE_USER # Setting Database username from Secret
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials # Secret Name
+                  key: username
+            - name: DATABASE_PASSWORD # Setting Database password from Secret
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+      initContainers:
+        - name: liquibase
+          image: espark/liquibase
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "2000M"
+            requests:
+              memory: "200Mi"
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: url
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
