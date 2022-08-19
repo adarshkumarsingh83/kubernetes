@@ -131,6 +131,6 @@ $ docker-compose down
 
 ### FOR DELETING DEPLOYMENT AND SERVICE OF MYSQL
 
-- $ kubectl delete services OracleXE
-- $ kubectl delete deployment OracleXE
+- $ kubectl delete services oracle-xe
+- $ kubectl delete deployment oracle-xe
 - $ kubectl delete pvc oracle-pv-claim

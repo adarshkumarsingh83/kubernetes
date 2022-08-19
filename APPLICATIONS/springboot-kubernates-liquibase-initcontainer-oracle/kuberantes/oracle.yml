@@ -2,16 +2,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: OracleXE # DNS name
+  name: oracle-xe # DNS name
   labels:
-    app: OracleXE
+    app: oracle-xe
     tier: database
 spec:
   ports:
     - port: 1521
       targetPort: 1521
   selector: # oracle Pod Should contain same labels
-    app: OracleXE
+    app: oracle-xe
     tier: database
   clusterIP: None # We Use DNS, Thus ClusterIP is not relevant
 ---
@@ -21,41 +21,41 @@ kind: PersistentVolumeClaim
 metadata:
   name: oracle-pv-claim # name of PVC essential for identifying the storage data
   labels:
-    app: OracleXE
+    app: oracle-xe
     tier: database
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 10Gi
 ---
 # Configure 'Deployment' of oracle server
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: OracleXE
+  name: oracle-xe
   labels:
-    app: OracleXE
+    app: oracle-xe
     tier: database
 spec:
   selector: # oracle Pod Should contain same labels
     matchLabels:
-      app: OracleXE
+      app: oracle-xe
       tier: database
   strategy:
     type: Recreate
   template:
     metadata:
       labels: # Must match 'Service' and 'Deployment' selectors
-        app: OracleXE
+        app: oracle-xe
         tier: database
     spec:
       containers:
-        - image: oracle/database:18.4.0-xe # image from docker-hub
+        - image: adarshkumarsingh83/oracle:18.4.0-xe # image from docker-hub
           args:
             - "--shm-size=1g"
-          name: OracleXE
+          name: oracle-xe
           env:
             - name: ORACLE_PWD # Setting Root Password of oracle From a 'Secret'
               valueFrom:
@@ -64,7 +64,7 @@ spec:
                   key: password # 'key' inside the Secret which contains required 'value'
           ports:
             - containerPort: 1521
-              name: OracleXE
+              name: oracle-xe
           volumeMounts: # Mounting voulume obtained from Persistent Volume Claim
             - name: oracle-persistent-storage
               mountPath: /var/lib/oracle
