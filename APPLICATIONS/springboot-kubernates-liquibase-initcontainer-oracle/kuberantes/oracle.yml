@@ -24,11 +24,12 @@ metadata:
     app: oracle-xe
     tier: database
 spec:
+  storageClassName: pure-block
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 20Gi
 ---
 # Configure 'Deployment' of oracle server
 apiVersion: apps/v1
@@ -54,7 +55,7 @@ spec:
       containers:
         - image: adarshkumarsingh83/oracle:18.4.0-xe # image from docker-hub
           args:
-            - "--shm-size=1g"
+            - "--shm-size=1g -h OracleXE --name oracle-xe"
           name: oracle-xe
           env:
             - name: ORACLE_PWD # Setting Root Password of oracle From a 'Secret'

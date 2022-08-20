@@ -4,7 +4,7 @@ metadata:
   name: db-conf # name of ConfigMap, referenced in other files
   namespace: default
 data:
-  host: "OracleXE" # host address of mysql server, we are using DNS of Service
-  name: "XE" # name of the database for application
+  host: "oracle-xe"    # host address of mysql server, we are using DNS of Service
+  name: "XE"           # name of the database for application
   port: "1521"
   url: jdbc:oracle:thin:@OracleXE:1521:XE
