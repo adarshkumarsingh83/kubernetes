@@ -90,24 +90,22 @@ $ docker-compose down
 - $ kubectl apply -f $(pwd)/springboot.yml
 
 ### to view the service and other
-
 - $ kubectl get all
 
 ### to view the secrets
-
 - $ kubectl get secrets
 
-### to get the persistence volume
+### to view the configmap
+- $ kubectl get configmap
 
+### to get the persistence volume
 - $ kubectl get persistentvolumes
 - $ kubectl get persistentvolumeclaims
 
 ### TO VIEW THE POD DETAILS
-
 - $ kubectl get pod
 
 ### TO VIEW THE LOGS OF THE POD
-
 - $ kubectl logs <pod-name> -f
 - $ kubectl describe services springboot-oracledb-service
 - $ kubectl port-forward svc/springboot-oracledb-service 8080:8080
@@ -134,3 +132,4 @@ $ docker-compose down
 - $ kubectl delete services oracle-xe
 - $ kubectl delete deployment oracle-xe
 - $ kubectl delete pvc oracle-pv-claim
+- $ kubectl delete pvc oracle-pv-volume

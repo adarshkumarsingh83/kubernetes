@@ -24,12 +24,27 @@ metadata:
     app: oracle-xe
     tier: database
 spec:
-  storageClassName: pure-block
+  storageClassName: manual  # pure-file/pure-block/local-storage/manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: oracle-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
 ---
 # Configure 'Deployment' of oracle server
 apiVersion: apps/v1
@@ -55,7 +70,7 @@ spec:
       containers:
         - image: adarshkumarsingh83/oracle:18.4.0-xe # image from docker-hub
           args:
-            - "--shm-size=1g -h OracleXE --name oracle-xe"
+            - "--shm-size=1g -h oracle-xe --name oracle-xe"
           name: oracle-xe
           env:
             - name: ORACLE_PWD # Setting Root Password of oracle From a 'Secret'
@@ -66,7 +81,7 @@ spec:
           ports:
             - containerPort: 1521
               name: oracle-xe
-          volumeMounts: # Mounting voulume obtained from Persistent Volume Claim
+          volumeMounts: # Mounting volume obtained from Persistent Volume Claim
             - name: oracle-persistent-storage
               mountPath: /var/lib/oracle
       volumes:
