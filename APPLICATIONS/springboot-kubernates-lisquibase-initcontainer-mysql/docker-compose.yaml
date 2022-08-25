@@ -1,0 +1,38 @@
+version: '3.1'
+services:
+  espark-mysql:
+    container_name: espark-mysql
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=espark
+      - MYSQL_USER=espark-root
+      - MYSQL_PASSWORD=root
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/espark-mysql
+    networks:
+     - espark-net
+
+  mysql-liquibse:
+    container_name: mysql-liquibse
+    image: springboot-liquibase-mysql
+    restart: on-failure
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DATABASE_HOST=espark-mysql
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=espark
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+    links:
+      - espark-mysql
+    depends_on:
+      - espark-mysql
+    networks:
+     - espark-net
+
+networks:
+  espark-net:

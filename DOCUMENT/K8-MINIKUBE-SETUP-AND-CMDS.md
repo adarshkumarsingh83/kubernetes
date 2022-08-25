@@ -71,6 +71,7 @@
 `kubectl delete deployment nginx-depl`
 
 ### create or edit config file
+
 `vim nginx-deployment.yaml`
 
 `kubectl apply -f nginx-deployment.yaml`
@@ -80,6 +81,7 @@
 `kubectl get deployment`
 
 ### delete with config
+
 `kubectl delete -f nginx-deployment.yaml`
 
 #Metrics

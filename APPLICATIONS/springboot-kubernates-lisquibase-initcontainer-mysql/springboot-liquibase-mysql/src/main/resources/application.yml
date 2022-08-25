@@ -1,0 +1,80 @@
+
+logging:
+  level:
+    liquibase: INFO
+
+spring:
+  config:
+    activate:
+      on-profile:
+        - default
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    drop-first: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/espark
+    username: root
+    password: rootPwd
+    hikari:
+      pool-name: hikar-pool
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 200000
+      connection-timeout: 30000
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: rootPwd
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - docker
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    drop-first: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?createDatabaseIfNotExist=true&useSSL=false
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    hikari:
+      pool-name: hikar-pool
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 200000
+      connection-timeout: 30000
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: ${DATABASE_USER}
+      password: ${DATABASE_PASSWORD}
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - kubernates
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    drop-first: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    testWhileIdle: true
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?createDatabaseIfNotExist=true&useSSL=false
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    hikari:
+      pool-name: hikar-pool
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 200000
+      connection-timeout: 30000
+      nitialization-fail-timeout: 100
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: ${DATABASE_USER}
+      password: ${DATABASE_PASSWORD}
+
