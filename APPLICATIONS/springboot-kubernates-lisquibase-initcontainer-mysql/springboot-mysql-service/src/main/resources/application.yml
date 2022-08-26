@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: springboot-oracledb-service
+    name: springboot-mysql-service
   datasource:
     url: jdbc:mysql://localhost:3306/espark
     username: root
@@ -29,20 +29,23 @@ spring:
 ---
 spring:
   application:
-    name: springboot-oracledb-service
+    name: springboot-mysql-service
   profiles: docker
   datasource:
-    url: jdbc:mysql://${DATABASE_HOST}:3306/${DATABASE_NAME}
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
+      pool-name: HikariPool
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: ${DATABASE_USER}
+      password: ${DATABASE_PASSWORD}
       minimumIdle: 5
       maximum-pool-size: 20
       idleTimeout: 30000
       max-lifetime: 2000000
       connection-timeout: 30000
-      pool-name: HikariPool
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     generate-ddl: false
@@ -52,23 +55,27 @@ spring:
     hibernate:
       ddl-auto: none
       use-new-id-generator-mappings: false
+
 ---
 spring:
   application:
-    name: springboot-oracledb-service
+    name: springboot-mysql-service
   profiles: kubernates
   datasource:
-    url: jdbc:mysql://${DATABASE_HOST}:3306/${DATABASE_NAME}
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
+      pool-name: HikariPool
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: ${DATABASE_USER}
+      password: ${DATABASE_PASSWORD}
       minimumIdle: 5
       maximum-pool-size: 20
       idleTimeout: 30000
       max-lifetime: 2000000
       connection-timeout: 30000
-      pool-name: HikariPool
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     generate-ddl: false

@@ -34,10 +34,42 @@ spec:
         app: springboot-mysql-service-label
         tier: backend
     spec:
+      initContainers:
+        - name: liquibase
+          image: adarshkumarsingh83/springboot-liquibase-mysql
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: host
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: port
+            - name: DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: name          
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-root-credentials
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-root-credentials
+                  key: password
       containers:
         - name: springboot-mysql-service
           image: adarshkumarsingh83/springboot-mysql-service # docker image of backend application
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
           env: # Setting environmental Variables
@@ -48,50 +80,23 @@ spec:
                 configMapKeyRef:
                   name: db-conf # name of configMap
                   key: host
-            - name: DATABASE_USER # Setting Database username from Secret
-              valueFrom:
-                secretKeyRef:
-                  name: db-credentials # Secret Name
-                  key: username
-            - name: DATABASE_PASSWORD # Setting Database password from Secret
-              valueFrom:
-                secretKeyRef:
-                  name: db-credentials
-                  key: password
-      initContainers:
-        - name: liquibase
-          image: springboot-liquibase-mysql
-          imagePullPolicy: IfNotPresent
-          resources:
-            limits:
-              memory: "2000M"
-            requests:
-              memory: "200Mi"
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: kubernates
-            - name: DATABASE_HOST
+            - name: DATABASE_PORT
               valueFrom:
                 configMapKeyRef:
                   name: db-conf
-                  key: host
+                  key: port  
             - name: DATABASE_NAME
               valueFrom:
                 configMapKeyRef:
                   name: db-conf
                   key: name
-            - name: DATABASE_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: db-conf
-                  key: port          
-            - name: DATABASE_USER
+            - name: DATABASE_USER # Setting Database username from Secret
               valueFrom:
                 secretKeyRef:
-                  name: db-credentials
+                  name: db-root-credentials # Secret Name
                   key: username
-            - name: DATABASE_PASSWORD
+            - name: DATABASE_PASSWORD # Setting Database password from Secret
               valueFrom:
                 secretKeyRef:
-                  name: db-credentials
+                  name: db-root-credentials
                   key: password

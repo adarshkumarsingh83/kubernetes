@@ -21,45 +21,30 @@
 
 ### To Build Code
 
-- mvn clean package
+- mvn clean install -DskipTests
+- or
+- mvn clean install -Dmaven.test.skip=true
 
 ### To Build the docker image
 
-- $ docker build -f Dockerfile -t espark/springboot-mysql-service .
+- $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-mysql-service .
 
 ```
-[+] Building 14.7s (7/7) FINISHED
- => [internal] load build definition from Dockerfile                                                                                                                                             0.0s
- => => transferring dockerfile: 206B                                                                                                                                                             0.0s
- => [internal] load .dockerignore                                                                                                                                                                0.0s
- => => transferring context: 2B                                                                                                                                                                  0.0s
- => [internal] load metadata for docker.io/library/openjdk:8                                                                                                                                     1.4s
- => [internal] load build context                                                                                                                                                                0.7s
- => => transferring context: 43.15MB                                                                                                                                                             0.7s
- => [1/2] FROM docker.io/library/openjdk:8@sha256:245ee43af1ed7d94f904ed7df0a7d9b6cda6513bd60fe8d484aaea9bc3e8d9b1                                                                              12.8s
- => => resolve docker.io/library/openjdk:8@sha256:245ee43af1ed7d94f904ed7df0a7d9b6cda6513bd60fe8d484aaea9bc3e8d9b1                                                                               0.0s
- => => sha256:89fd67087664a9a10fd9321cd7b3935369e4029f87e562a90ad7685d35559074 7.81kB / 7.81kB                                                                                                   0.0s
- => => sha256:e4d61adff2077d048c6372d73c41b0bd68f525ad41f5530af05098a876683055 54.92MB / 54.92MB                                                                                                 3.5s
- => => sha256:245ee43af1ed7d94f904ed7df0a7d9b6cda6513bd60fe8d484aaea9bc3e8d9b1 1.04kB / 1.04kB                                                                                                   0.0s
- => => sha256:763ecc9f11937fd3af8a9721e65d2481e4e3b230202474d4d387cf373cef86ee 1.79kB / 1.79kB                                                                                                   0.0s
- => => sha256:4ff1945c672b08a1791df62afaaf8aff14d3047155365f9c3646902937f7ffe6 5.15MB / 5.15MB                                                                                                   0.7s
- => => sha256:ff5b10aec998344606441aec43a335ab6326f32aae331aab27da16a6bb4ec2be 10.87MB / 10.87MB                                                                                                 1.0s
- => => sha256:12de8c754e45686ace9e25d11bee372b070eed5b5ab20aa3b4fab8c936496d02 54.58MB / 54.58MB                                                                                                 4.3s
- => => sha256:4848edf445067f98c6b8a509dedaf172cbffa5273efa89273a90cff48cffa416 5.42MB / 5.42MB                                                                                                   1.5s
- => => sha256:612ca5886be9e1e0bb406743fb5b2078ab1107f3869b6f5a487d5db747e688fc 211B / 211B                                                                                                       1.6s
- => => sha256:3c8418aa597a9edf38f2cbe9c55845aa3be39a45114746b31893fd193aaf3c6a 106.07MB / 106.07MB                                                                                               6.3s
- => => extracting sha256:e4d61adff2077d048c6372d73c41b0bd68f525ad41f5530af05098a876683055                                                                                                        2.4s
- => => extracting sha256:4ff1945c672b08a1791df62afaaf8aff14d3047155365f9c3646902937f7ffe6                                                                                                        0.2s
- => => extracting sha256:ff5b10aec998344606441aec43a335ab6326f32aae331aab27da16a6bb4ec2be                                                                                                        0.3s
- => => extracting sha256:12de8c754e45686ace9e25d11bee372b070eed5b5ab20aa3b4fab8c936496d02                                                                                                        2.3s
- => => extracting sha256:4848edf445067f98c6b8a509dedaf172cbffa5273efa89273a90cff48cffa416                                                                                                        0.2s
- => => extracting sha256:612ca5886be9e1e0bb406743fb5b2078ab1107f3869b6f5a487d5db747e688fc                                                                                                        0.0s
- => => extracting sha256:3c8418aa597a9edf38f2cbe9c55845aa3be39a45114746b31893fd193aaf3c6a                                                                                                        2.9s
- => [2/2] ADD target/springboot-oracledb-service.jar springboot-oracledb-service.jar                                                                                                             0.1s
- => exporting to image                                                                                                                                                                           0.2s
- => => exporting layers                                                                                                                                                                          0.2s
- => => writing image sha256:0f10f013d22632a3b26913c445c519f277fc47c8bd00c69c507b2fa45a4b1e32                                                                                                     0.0s
- => => naming to docker.io/espark/springboot-mysql-service
+[+] Building 2.4s (8/8) FINISHED                                                                                                                                                        
+ => [internal] load build definition from Dockerfile                                                                                                                               0.0s
+ => => transferring dockerfile: 84B                                                                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                                                                  0.0s
+ => => transferring context: 2B                                                                                                                                                    0.0s
+ => [internal] load metadata for docker.io/library/openjdk:8                                                                                                                       1.3s
+ => [auth] library/openjdk:pull token for registry-1.docker.io                                                                                                                     0.0s
+ => [internal] load build context                                                                                                                                                  0.7s
+ => => transferring context: 38.57MB                                                                                                                                               0.7s
+ => CACHED [1/2] FROM docker.io/library/openjdk:8@sha256:86e863cc57215cfb181bd319736d0baf625fe8f150577f9eb58bd937f5452cb8                                                          0.0s
+ => [2/2] ADD target/springboot-mysql-service.jar springboot-mysql-service.jar                                                                                                     0.1s
+ => exporting to image                                                                                                                                                             0.2s
+ => => exporting layers                                                                                                                                                            0.2s
+ => => writing image sha256:869da9a04835e0a724c77697f44a811829da4378ada1783fce5bd60201084934                                                                                       0.0s
+ => => naming to docker.io/adarshkumarsingh83/springboot-mysql-service  
 ```
 
 ### To list the image
@@ -71,9 +56,12 @@ REPOSITORY                           TAG            IMAGE ID       CREATED      
 espark/springboot-mysql-service   latest         0f10f013d226   50 seconds ago   569MB
 ```
 
+### To push to docker hum 
+* docker push adarshkumarsingh83/springboot-mysql-service
+
 ### To run the docker container
 
-- $ docker run --rm --name espark-springboot-service -p 8080:8080 --net espark-net espark/springboot-mysql-service
+- $ docker run --rm --name springboot-mysql-service -p 8080:8080 --net espark-net adarshkumarsingh83/springboot-mysql-service
 
 ### To test the service
 
