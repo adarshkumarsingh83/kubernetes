@@ -2,16 +2,20 @@
 ---
 
 ### TO BUILD THE CODE 
-* mvn clean install -DskipTests
+* mvn clean package -DskipTests
 * or 
-* mvn clean install -Dmaven.test.skip=true
+* mvn clean package -Dmaven.test.skip=true
 
 
 ## To Execute the 
 * mvn spring-boot:run 
 
 ## To Build Docker image 
-* $ docker build -f Dockerfile -t springboot-liquibase-mysql .
+* $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-liquibase-mysql .
+
+
+## To push to the docker hub 
+*  docker push adarshkumarsingh83/springboot-liquibase-mysql
 
 ## To List Image 
 * $ docker images

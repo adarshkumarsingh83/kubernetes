@@ -9,6 +9,7 @@ spring:
       on-profile:
         - default
   liquibase:
+    enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
     drop-first: true
   datasource:
@@ -33,6 +34,7 @@ spring:
       on-profile:
         - docker
   liquibase:
+    enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
     drop-first: true
   datasource:
@@ -58,6 +60,7 @@ spring:
       on-profile:
         - kubernates
   liquibase:
+    enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
     drop-first: true
   datasource:
