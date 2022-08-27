@@ -68,10 +68,11 @@ spec:
         tier: database
     spec:
       containers:
-        - image: adarshkumarsingh83/oracle:18.4.0-xe # image from docker-hub
+        - name: oracle-xe
+          image: container-registry.oracle.com/database/express:21.3.0-xe # image from docker-hub
+          imagePullPolicy: IfNotPresent
           args:
             - "--shm-size=1g -h oracle-xe --name oracle-xe"
-          name: oracle-xe
           env:
             - name: ORACLE_PWD # Setting Root Password of oracle From a 'Secret'
               valueFrom:
@@ -83,7 +84,7 @@ spec:
               name: oracle-xe
           volumeMounts: # Mounting volume obtained from Persistent Volume Claim
             - name: oracle-persistent-storage
-              mountPath: /var/lib/oracle
+              mountPath: /opt/oracle/oradata
       volumes:
         - name: oracle-persistent-storage # Obtaining 'volume' from PVC
           persistentVolumeClaim:

@@ -107,9 +107,10 @@ $ docker-compose down
 - $ kubectl get pod
 
 ### TO VIEW THE LOGS OF THE POD
-- $ kubectl logs <pod-name> -f
+- $ kubectl logs [pod-name] -f
+- $ kubectl describe pod [pod-name]
 - $ kubectl describe services springboot-mysql-service
-- $ kubectl port-forward svc/springboot-mysql-service 8080:8080
+- $ kubectl port-forward svc/springboot-mysql-service 9090:9090
 
 ### Api Testing
 

@@ -34,10 +34,20 @@ spec:
         app: springboot-mysql-service-label
         tier: backend
     spec:
+      volumes:
+        - name: espark-vol
+          emptyDir: {} 
       initContainers:
         - name: liquibase
           image: adarshkumarsingh83/springboot-liquibase-mysql
           imagePullPolicy: IfNotPresent
+          command: ['java','-jar','springboot-liquibase-mysql.jar']
+          args: []
+          resources:
+            limits:
+              memory: "2000M"
+            requests:
+              memory: "200Mi"
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: kubernates
@@ -66,6 +76,9 @@ spec:
                 secretKeyRef:
                   name: db-root-credentials
                   key: password
+          volumeMounts:
+            - name: espark-vol
+              mountPath: /liquibase
       containers:
         - name: springboot-mysql-service
           image: adarshkumarsingh83/springboot-mysql-service # docker image of backend application
@@ -100,3 +113,6 @@ spec:
                 secretKeyRef:
                   name: db-root-credentials
                   key: password
+          volumeMounts:
+            - name: espark-vol
+              mountPath: /springboot
