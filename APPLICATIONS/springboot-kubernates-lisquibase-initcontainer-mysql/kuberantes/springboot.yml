@@ -42,7 +42,7 @@ spec:
           image: adarshkumarsingh83/springboot-liquibase-mysql
           imagePullPolicy: IfNotPresent
           command: ['java','-jar','springboot-liquibase-mysql.jar']
-          args: []
+          args: ['-c','--SPRING_PROFILES_ACTIVE=kubernates','--DATABASE_HOST=mysql','--DATABASE_PORT=3306','--DATABASE_NAME=espark-mysql','--DATABASE_USER=root','--DATABASE_PASSWORD=root']
           resources:
             limits:
               memory: "2000M"
