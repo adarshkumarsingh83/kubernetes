@@ -2,8 +2,6 @@
 
 ---
 
-
-
 ## Docker n/w creation
 * docker network create mynet
 

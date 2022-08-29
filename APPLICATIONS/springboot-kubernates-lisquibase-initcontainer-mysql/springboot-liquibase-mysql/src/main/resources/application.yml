@@ -4,6 +4,8 @@ logging:
     liquibase: INFO
 
 spring:
+  banner:
+    location: classpath:banner.txt
   config:
     activate:
       on-profile:
@@ -29,6 +31,8 @@ spring:
       password: rootPwd
 ---
 spring:
+  banner:
+    location: classpath:banner.txt
   config:
     activate:
       on-profile:
@@ -55,6 +59,8 @@ spring:
 
 ---
 spring:
+  banner:
+    location: classpath:banner.txt
   config:
     activate:
       on-profile:

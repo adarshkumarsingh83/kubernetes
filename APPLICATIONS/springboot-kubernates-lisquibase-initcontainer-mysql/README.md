@@ -8,33 +8,33 @@
 - docker-compose up
 
 ```
-Ospringboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ####################################################
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##   _     _             _ _                      ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##  | |   (_)           (_) |                     ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##  | |    _  __ _ _   _ _| |__   __ _ ___  ___   ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##  | |   | |/ _` | | | | | '_ \ / _` / __|/ _ \  ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##  | |___| | (_| | |_| | | |_) | (_| \__ \  __/  ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##  \_____/_|\__, |\__,_|_|_.__/ \__,_|___/\___|  ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##              | |                               ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##              |_|                               ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##                                                ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##  Get documentation at docs.liquibase.com       ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##  Get certified courses at learn.liquibase.com  ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##  Free schema change activity reports at        ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##      https://hub.liquibase.com                 ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ##                                                ##
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | ####################################################
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | Starting Liquibase at 02:53:19 (version 4.8.0 #1581 built at 2022-02-18 21:43+0000)
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | Liquibase Version: 4.8.0
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | Liquibase Community 4.8.0 by Liquibase
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | Running Changeset: changelog/changelog.xml::1::adarsh
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | Running Changeset: changelog/changelog.xml::2::radha
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | Running Changeset: changelog/changelog.xml::3::radha
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1    | Liquibase command 'update' was executed successfully.
-springboot-kubernates-liquibase-initcontainer-oracle-oracledb-liquibse-1 exited with code 0
-OracleXE                                                                    | 43% complete
-OracleXE                                                                    | Completing Database Creation
-OracleXE                                                                    | 47% complete
+Ospringboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ####################################################
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##   _     _             _ _                      ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##  | |   (_)           (_) |                     ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##  | |    _  __ _ _   _ _| |__   __ _ ___  ___   ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##  | |   | |/ _` | | | | | '_ \ / _` / __|/ _ \  ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##  | |___| | (_| | |_| | | |_) | (_| \__ \  __/  ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##  \_____/_|\__, |\__,_|_|_.__/ \__,_|___/\___|  ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##              | |                               ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##              |_|                               ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##                                                ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##  Get documentation at docs.liquibase.com       ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##  Get certified courses at learn.liquibase.com  ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##  Free schema change activity reports at        ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##      https://hub.liquibase.com                 ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ##                                                ##
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | ####################################################
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | Starting Liquibase at 02:53:19 (version 4.8.0 #1581 built at 2022-02-18 21:43+0000)
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | Liquibase Version: 4.8.0
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | Liquibase Community 4.8.0 by Liquibase
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | Running Changeset: changelog/changelog.xml::1::adarsh
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | Running Changeset: changelog/changelog.xml::2::radha
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | Running Changeset: changelog/changelog.xml::3::radha
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1    | Liquibase command 'update' was executed successfully.
+springboot-kubernates-liquibase-initcontainer-oracle-mysql-liquibse-1 exited with code 0
+MYsql                                                                    | 43% complete
+MYsql                                                                    | Completing Database Creation
+MYsql                                                                    | 47% complete
 ```
 
 ## To access the api
@@ -50,7 +50,7 @@ $ curl http://localhost:8080/employees
 $ docker-compose down
 [+] Running 4/4
  ⠿ Container oracle-liquibase-docker-compose-springboot-services-1      Removed                                                                                                  0.7s
- ⠿ Container oracle-liquibase-docker-compose-oracledb-liquibse-1    Removed                                                                                                  0.8s
+ ⠿ Container oracle-liquibase-docker-compose-mysql-liquibse-1    Removed                                                                                                  0.8s
  ⠿ Container OracleXE                                               Removed                                                                                                 10.4s
  ⠿ Network oracle-liquibase-docker-compose_espark-net               Removed                                                                                                  0.1s
 ```
@@ -112,6 +112,14 @@ $ docker-compose down
 - $ kubectl describe services springboot-mysql-service
 - $ kubectl port-forward svc/springboot-mysql-service 9090:9090
 
+```
+$ kubectl port-forward svc/springboot-mysql-service 9090:9090
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+```
+
 ## To ssh into mysql container 
 * $ exec kubectl exec -i -t  [mysql-pod-name]  -c mysql -- sh -c "clear; (bash || ash || sh)"
 ```
@@ -163,40 +171,40 @@ mysql> select * from EMPLOYEE;
 ## To see the logs of the container 
 * kubectl logs -f [pod-name] -c [container-name]
 ```
-USMB113823:~ us-guest$ kubectl logs -f springboot-mysql-service-7f4f8fd9df-zx4dg  -c liquibase
+$ kubectl logs -f springboot-mysql-service-7f4f8fd9df-vgnr7  -c liquibase
 
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v2.7.2)
-
-2022-08-29 14:11:35.161  INFO 1 --- [           main] c.e.a.SpringbootLiquibaseApplication     : Starting SpringbootLiquibaseApplication v0.0.1-SNAPSHOT using Java 11.0.16 on springboot-mysql-service-7f4f8fd9df-zx4dg with PID 1 (/springboot-liquibase-mysql.jar started by root in /)
-2022-08-29 14:11:35.164  INFO 1 --- [           main] c.e.a.SpringbootLiquibaseApplication     : The following 1 profile is active: "kubernates"
-2022-08-29 14:11:36.466  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Starting...
-2022-08-29 14:11:36.787  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Start completed.
-2022-08-29 14:11:37.257  INFO 1 --- [           main] liquibase.lockservice                    : Successfully acquired change log lock
-2022-08-29 14:11:37.270  INFO 1 --- [           main] liquibase.command                        : Dropping Database Objects in schema: espark-mysql.espark-mysql
-2022-08-29 14:11:37.634  INFO 1 --- [           main] liquibase.database                       : Successfully deleted all supported object types in schema espark-mysql.espark-mysql.
-2022-08-29 14:11:37.646  INFO 1 --- [           main] liquibase.lockservice                    : Successfully released change log lock
+                        ,--.                    ,--. ,--.                  ,--. ,--.
+ ,---.   ,---.  ,--.--. `--' ,--,--,   ,---.    |  | `--'  ,---.  ,--.,--. `--' |  |-.   ,--,--.  ,---.   ,---.
+(  .-'  | .-. | |  .--' ,--. |      \ | .-. |   |  | ,--. | .-. | |  ||  | ,--. | .-. ' ' ,-.  | (  .-'  | .-. :
+.-'  `) | '-' ' |  |    |  | |  ||  | ' '-' '   |  | |  | ' '-' | '  ''  ' |  | | `-' | \ '-'  | .-'  `) \   --.
+`----'  |  |-'  `--'    `--' `--''--' .`-  /    `--' `--'  `-|  |  `----'  `--'  `---'   `--`--' `----'   `----'
+        `--'                          `---'                  `--'
+2022-08-29 17:01:11.977  INFO 1 --- [           main] c.e.a.SpringbootLiquibaseApplication     : Starting SpringbootLiquibaseApplication v0.0.1-SNAPSHOT using Java 11.0.16 on springboot-mysql-service-7f4f8fd9df-vgnr7 with PID 1 (/springboot-liquibase-mysql.jar started by root in /)
+2022-08-29 17:01:11.980  INFO 1 --- [           main] c.e.a.SpringbootLiquibaseApplication     : The following 1 profile is active: "kubernates"
+2022-08-29 17:01:13.120  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Starting...
+2022-08-29 17:01:13.529  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Start completed.
+2022-08-29 17:01:14.185  INFO 1 --- [           main] liquibase.lockservice                    : Successfully acquired change log lock
+2022-08-29 17:01:14.202  INFO 1 --- [           main] liquibase.command                        : Dropping Database Objects in schema: espark-mysql.espark-mysql
+2022-08-29 17:01:14.236  INFO 1 --- [           main] liquibase.changelog                      : Creating database history table with name: `espark-mysql`.DATABASECHANGELOG
+2022-08-29 17:01:14.550  INFO 1 --- [           main] liquibase.database                       : Successfully deleted all supported object types in schema espark-mysql.espark-mysql.
+2022-08-29 17:01:14.552  INFO 1 --- [           main] liquibase.lockservice                    : Successfully released change log lock
 All objects dropped from root@172.17.0.4@jdbc:mysql://mysql:3306/espark-mysql?createDatabaseIfNotExist=true&useSSL=false
-2022-08-29 14:11:37.707  INFO 1 --- [           main] liquibase.lockservice                    : Successfully acquired change log lock
-2022-08-29 14:11:38.291  INFO 1 --- [           main] liquibase.changelog                      : Creating database history table with name: `espark-mysql`.DATABASECHANGELOG
-2022-08-29 14:11:38.305  INFO 1 --- [           main] liquibase.changelog                      : Reading from `espark-mysql`.DATABASECHANGELOG
+2022-08-29 17:01:14.583  INFO 1 --- [           main] liquibase.lockservice                    : Successfully acquired change log lock
+2022-08-29 17:01:15.004  INFO 1 --- [           main] liquibase.changelog                      : Creating database history table with name: `espark-mysql`.DATABASECHANGELOG
+2022-08-29 17:01:15.016  INFO 1 --- [           main] liquibase.changelog                      : Reading from `espark-mysql`.DATABASECHANGELOG
 Running Changeset: db/changelog/db.changelog-master.xml::1::adarsh
-2022-08-29 14:11:38.385  INFO 1 --- [           main] liquibase.changelog                      : SQL in file db/changelog/changes/sql/create_schema.sql executed
-2022-08-29 14:11:38.386  INFO 1 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/db.changelog-master.xml::1::adarsh ran successfully in 31ms
+2022-08-29 17:01:15.076  INFO 1 --- [           main] liquibase.changelog                      : SQL in file db/changelog/changes/sql/create_schema.sql executed
+2022-08-29 17:01:15.077  INFO 1 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/db.changelog-master.xml::1::adarsh ran successfully in 20ms
 Running Changeset: db/changelog/db.changelog-master.xml::2::radha
-2022-08-29 14:11:38.448  INFO 1 --- [           main] liquibase.changelog                      : SQL in file db/changelog/changes/sql/insert_data.sql executed
-2022-08-29 14:11:38.449  INFO 1 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/db.changelog-master.xml::2::radha ran successfully in 31ms
+2022-08-29 17:01:15.093  INFO 1 --- [           main] liquibase.changelog                      : SQL in file db/changelog/changes/sql/insert_data.sql executed
+2022-08-29 17:01:15.096  INFO 1 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/db.changelog-master.xml::2::radha ran successfully in 13ms
 Running Changeset: db/changelog/db.changelog-master.xml::3::radha
-2022-08-29 14:11:38.463  INFO 1 --- [           main] liquibase.changelog                      : SQL in file db/changelog/changes/sql/select_data.sql executed
-2022-08-29 14:11:38.464  INFO 1 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/db.changelog-master.xml::3::radha ran successfully in 10ms
-2022-08-29 14:11:38.471  INFO 1 --- [           main] liquibase.lockservice                    : Successfully released change log lock
-2022-08-29 14:11:38.558  INFO 1 --- [           main] c.e.a.SpringbootLiquibaseApplication     : Started SpringbootLiquibaseApplication in 4.167 seconds (JVM running for 4.777)
-2022-08-29 14:11:38.568  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Shutdown initiated...
+2022-08-29 17:01:15.108  INFO 1 --- [           main] liquibase.changelog                      : SQL in file db/changelog/changes/sql/select_data.sql executed
+2022-08-29 17:01:15.109  INFO 1 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/db.changelog-master.xml::3::radha ran successfully in 7ms
+2022-08-29 17:01:15.120  INFO 1 --- [           main] liquibase.lockservice                    : Successfully released change log lock
+2022-08-29 17:01:15.321  INFO 1 --- [           main] c.e.a.SpringbootLiquibaseApplication     : Started SpringbootLiquibaseApplication in 4.2 seconds (JVM running for 4.731)
+2022-08-29 17:01:15.333  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Shutdown initiated...
+2022-08-29 17:01:15.355  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Shutdown completed.
 2022-08-29 14:11:38.586  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Shutdown completed.
 
 ```
