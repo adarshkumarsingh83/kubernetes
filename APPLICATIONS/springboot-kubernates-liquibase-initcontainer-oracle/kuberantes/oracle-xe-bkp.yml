@@ -9,7 +9,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 20Gi
   storageClassName: oci
 ---
 apiVersion: apps/v1
@@ -22,6 +22,8 @@ spec:
   selector:
     matchLabels:
       app: oracle-xe
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -29,10 +31,10 @@ spec:
     spec:
       containers:
       - name: oracle-db
-        image: adarshkumarsingh83/oracle-xe
+        image: adarshkumarsingh83/oracle-xe-21
         imagePullPolicy: IfNotPresent        
         env:
-          - name: ORACLE_PASSWORD # Setting Root Password of oracle From a 'Secret'
+          - name: ORACLE_PWD # Setting Root Password of oracle From a 'Secret'
             valueFrom:
               secretKeyRef:
                 name: db-credentials # Name of the 'Secret'

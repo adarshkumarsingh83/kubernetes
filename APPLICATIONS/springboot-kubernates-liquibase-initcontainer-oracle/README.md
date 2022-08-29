@@ -105,8 +105,12 @@ $ docker-compose down
 ### TO VIEW THE POD DETAILS
 - $ kubectl get pod
 
+### To View oracle logs 
+* kubectl logs -f [pod-name]  -c [conatiner-name]
+	* kubectl logs -f [oracle-xe-c98cfddfb-ptvpk]  -c oracle-db
+
 ### TO VIEW THE LOGS OF THE POD
-- $ kubectl logs <pod-name> -f
+- $ kubectl logs [pod-name] -f
 - $ kubectl describe services springboot-oracledb-service
 - $ kubectl port-forward svc/springboot-oracledb-service 8080:8080
 
