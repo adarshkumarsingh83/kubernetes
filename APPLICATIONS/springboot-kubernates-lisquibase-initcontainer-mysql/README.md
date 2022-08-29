@@ -112,6 +112,95 @@ $ docker-compose down
 - $ kubectl describe services springboot-mysql-service
 - $ kubectl port-forward svc/springboot-mysql-service 9090:9090
 
+## To ssh into mysql container 
+* $ exec kubectl exec -i -t  [mysql-pod-name]  -c mysql -- sh -c "clear; (bash || ash || sh)"
+```
+$ exec kubectl exec -i -t  mysql-55bf77bc8f-kjz9v  -c mysql -- sh -c "clear; (bash || ash || sh)"
+bash-4.2# mysql -u root -p  
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 5.7.39 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| espark-mysql       |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> use espark-mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+mysql> select * from EMPLOYEE;
++--------+------------+-----------+---------+
+| emp_id | first_name | last_name | career  |
++--------+------------+-----------+---------+
+|    100 | adarsh     | kumar     | It      |
+|    200 | radha      | singh     | IT      |
+|    300 | sonu       | singh     | IT      |
+|    400 | amit       | kumar     | Finance |
++--------+------------+-----------+---------+
+4 rows in set (0.00 sec)
+```
+
+## To see the logs of the container 
+* kubectl logs -f [pod-name] -c [container-name]
+```
+USMB113823:~ us-guest$ kubectl logs -f springboot-mysql-service-7f4f8fd9df-zx4dg  -c liquibase
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.2)
+
+2022-08-29 14:11:35.161  INFO 1 --- [           main] c.e.a.SpringbootLiquibaseApplication     : Starting SpringbootLiquibaseApplication v0.0.1-SNAPSHOT using Java 11.0.16 on springboot-mysql-service-7f4f8fd9df-zx4dg with PID 1 (/springboot-liquibase-mysql.jar started by root in /)
+2022-08-29 14:11:35.164  INFO 1 --- [           main] c.e.a.SpringbootLiquibaseApplication     : The following 1 profile is active: "kubernates"
+2022-08-29 14:11:36.466  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Starting...
+2022-08-29 14:11:36.787  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Start completed.
+2022-08-29 14:11:37.257  INFO 1 --- [           main] liquibase.lockservice                    : Successfully acquired change log lock
+2022-08-29 14:11:37.270  INFO 1 --- [           main] liquibase.command                        : Dropping Database Objects in schema: espark-mysql.espark-mysql
+2022-08-29 14:11:37.634  INFO 1 --- [           main] liquibase.database                       : Successfully deleted all supported object types in schema espark-mysql.espark-mysql.
+2022-08-29 14:11:37.646  INFO 1 --- [           main] liquibase.lockservice                    : Successfully released change log lock
+All objects dropped from root@172.17.0.4@jdbc:mysql://mysql:3306/espark-mysql?createDatabaseIfNotExist=true&useSSL=false
+2022-08-29 14:11:37.707  INFO 1 --- [           main] liquibase.lockservice                    : Successfully acquired change log lock
+2022-08-29 14:11:38.291  INFO 1 --- [           main] liquibase.changelog                      : Creating database history table with name: `espark-mysql`.DATABASECHANGELOG
+2022-08-29 14:11:38.305  INFO 1 --- [           main] liquibase.changelog                      : Reading from `espark-mysql`.DATABASECHANGELOG
+Running Changeset: db/changelog/db.changelog-master.xml::1::adarsh
+2022-08-29 14:11:38.385  INFO 1 --- [           main] liquibase.changelog                      : SQL in file db/changelog/changes/sql/create_schema.sql executed
+2022-08-29 14:11:38.386  INFO 1 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/db.changelog-master.xml::1::adarsh ran successfully in 31ms
+Running Changeset: db/changelog/db.changelog-master.xml::2::radha
+2022-08-29 14:11:38.448  INFO 1 --- [           main] liquibase.changelog                      : SQL in file db/changelog/changes/sql/insert_data.sql executed
+2022-08-29 14:11:38.449  INFO 1 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/db.changelog-master.xml::2::radha ran successfully in 31ms
+Running Changeset: db/changelog/db.changelog-master.xml::3::radha
+2022-08-29 14:11:38.463  INFO 1 --- [           main] liquibase.changelog                      : SQL in file db/changelog/changes/sql/select_data.sql executed
+2022-08-29 14:11:38.464  INFO 1 --- [           main] liquibase.changelog                      : ChangeSet db/changelog/db.changelog-master.xml::3::radha ran successfully in 10ms
+2022-08-29 14:11:38.471  INFO 1 --- [           main] liquibase.lockservice                    : Successfully released change log lock
+2022-08-29 14:11:38.558  INFO 1 --- [           main] c.e.a.SpringbootLiquibaseApplication     : Started SpringbootLiquibaseApplication in 4.167 seconds (JVM running for 4.777)
+2022-08-29 14:11:38.568  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Shutdown initiated...
+2022-08-29 14:11:38.586  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : hikar-pool - Shutdown completed.
+
+```
+
 ### Api Testing
 
 - $ curl http://localhost:9090/employees
