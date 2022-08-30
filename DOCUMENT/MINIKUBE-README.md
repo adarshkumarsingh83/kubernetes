@@ -63,6 +63,8 @@
 ### To connect from outside of minikube 
 * $ minikube ip
 
+### forced minikube to use docker env 
+* $ eval $(minikube docker-env)
 
 
 
