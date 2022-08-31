@@ -7,5 +7,5 @@ data:
   host: "oracle-xe"    # host address of mysql server, we are using DNS of Service
   name: "XE"           # name of the database for application
   port: "1521"
-  url: jdbc:oracle:thin:@OracleXE:1521:XE
+  url: jdbc:oracle:thin:@oracle-xe:1521:XE
   characterset: "AL32UTF8"

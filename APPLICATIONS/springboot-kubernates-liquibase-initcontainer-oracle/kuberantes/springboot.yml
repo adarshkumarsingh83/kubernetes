@@ -34,6 +34,31 @@ spec:
         app: springboot-oracledb-service-label
         tier: backend
     spec:
+      initContainers:
+        - name: liquibase
+          image: adarshkumarsingh83/liquibase
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "2000M"
+            requests:
+              memory: "200Mi"
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-conf
+                  key: url
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
       containers:
         - name: springboot-oracledb-service
           image: adarshkumarsingh83/springboot-oracledb-service # docker image of backend application
@@ -54,31 +79,6 @@ spec:
                   name: db-credentials # Secret Name
                   key: username
             - name: DATABASE_PASSWORD # Setting Database password from Secret
-              valueFrom:
-                secretKeyRef:
-                  name: db-credentials
-                  key: password
-      initContainers:
-        - name: liquibase
-          image: espark/liquibase
-          imagePullPolicy: IfNotPresent
-          resources:
-            limits:
-              memory: "2000M"
-            requests:
-              memory: "200Mi"
-          env:
-            - name: DB_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: db-conf
-                  key: url
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: db-credentials
-                  key: username
-            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: db-credentials

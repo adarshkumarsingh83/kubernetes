@@ -9,11 +9,11 @@ metadata:
 spec:
   ports:
     - port: 1521
-      targetPort: 1521
+      name: listener
   selector: # oracle Pod Should contain same labels
     app: oracle-xe
     tier: database
-  clusterIP: None # We Use DNS, Thus ClusterIP is not relevant
+  type: LoadBalancer
 ---
 # Define a 'Persistent Volume Claim'(PVC) for oracle Storage, dynamically provisioned by cluster
 apiVersion: v1
@@ -24,27 +24,11 @@ metadata:
     app: oracle-xe
     tier: database
 spec:
-  storageClassName: manual  # pure-file/pure-block/local-storage/manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: oracle-pv-volume
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"
+      storage: 20Gi
 ---
 # Configure 'Deployment' of oracle server
 apiVersion: apps/v1
@@ -69,19 +53,17 @@ spec:
     spec:
       containers:
         - name: oracle-xe
-          image: container-registry.oracle.com/database/express:21.3.0-xe # image from docker-hub
+          image: adarshkumarsingh83/oracle:18.4.0-xe # image from docker-hub
           imagePullPolicy: IfNotPresent
-          args:
-            - "--shm-size=1g -h oracle-xe --name oracle-xe"
           env:
-            - name: ORACLE_PWD # Setting Root Password of oracle From a 'Secret'
+            - name: ORACLE_PASSWORD # Setting Root Password of oracle From a 'Secret'
               valueFrom:
                 secretKeyRef:
                   name: db-credentials # Name of the 'Secret'
                   key: password # 'key' inside the Secret which contains required 'value'
           ports:
             - containerPort: 1521
-              name: oracle-xe
+              name: listener
           volumeMounts: # Mounting volume obtained from Persistent Volume Claim
             - name: oracle-persistent-storage
               mountPath: /opt/oracle/oradata
