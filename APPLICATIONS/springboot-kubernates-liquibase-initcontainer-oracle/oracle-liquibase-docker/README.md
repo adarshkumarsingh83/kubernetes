@@ -83,7 +83,7 @@ CMD ["sh", "-c", "docker-entrypoint.sh --url=${DB_URL} --username=${DB_USERNAME}
 
 ## To create a custom docker image
 
-- $ docker build -f Dockerfile -t espark/liquibase .
+- $ docker build -f Dockerfile -t adarshkumarsingh83/liquibase .
 
 ```
 [+] Building 0.3s (13/13) FINISHED
@@ -105,7 +105,7 @@ CMD ["sh", "-c", "docker-entrypoint.sh --url=${DB_URL} --username=${DB_USERNAME}
  => exporting to image                                                                      0.1s
  => => exporting layers                                                                     0.1s
  => => writing image sha256:64a96c2ca68845bd9bcc43892c6acf505e293dcf525fa09abfa00651d7e99a  0.0s
- => => naming to docker.io/espark/liquibase                                                 0.0s
+ => => naming to docker.io/adarshkumarsingh83/liquibase                                                 0.0s
 ```
 
 ## To list the image
@@ -114,7 +114,7 @@ CMD ["sh", "-c", "docker-entrypoint.sh --url=${DB_URL} --username=${DB_USERNAME}
 
 ```
 REPOSITORY               TAG            IMAGE ID       CREATED        SIZE
-espark/liquibase         latest         64a96c2ca688   1 hours ago    374MB
+adarshkumarsingh83/liquibase         latest         64a96c2ca688   1 hours ago    374MB
 liquibase/liquibase      latest         92d9c4600558   2 weeks ago    364MB
 oracle/database          18.4.0-xe      c265dc4e3bd6   3 months ago   5.89GB
 
@@ -127,10 +127,10 @@ oracle/database          18.4.0-xe      c265dc4e3bd6   3 months ago   5.89GB
   -e DB_URL=jdbc:oracle:thin:@OracleXE:1521:XE \
   -e DB_USERNAME=SYSTEM \
   -e DB_PASSWORD=12345 \
-  espark/liquibase
+  adarshkumarsingh83/liquibase
 
 ```
-$ docker run --rm --name espark-liquibase --net espark-net -e DB_URL=jdbc:oracle:thin:@OracleXE:1521:XE -e DB_USERNAME=SYSTEM -e DB_PASSWORD=12345 espark/liquibase
+$ docker run --rm --name espark-liquibase --net espark-net -e DB_URL=jdbc:oracle:thin:@OracleXE:1521:XE -e DB_USERNAME=SYSTEM -e DB_PASSWORD=12345 adarshkumarsingh83/liquibase
 ####################################################
 ##   _     _             _ _                      ##
 ##  | |   (_)           (_) |                     ##
@@ -157,3 +157,6 @@ Liquibase command 'update' was executed successfully.
 
 ```
 
+### To push to the docker registry hub
+
+- $ docker push adarshkumarsingh83/liquibase

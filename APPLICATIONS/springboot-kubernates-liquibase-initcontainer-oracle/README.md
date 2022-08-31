@@ -82,6 +82,10 @@ $ docker-compose down
 
 - $ kubectl cluster-info
 
+### Execute this cmd in minikube to cache the docker image to avoid downlaods 
+ * $ eval $(minikube docker-env)
+ * $ minikube image load adarshkumarsingh83/oracle:18.4.0-xe --pull
+
 ### to create service and other in kubernetes
 
 - $ kubectl apply -f $(pwd)/configmap.yml
@@ -112,6 +116,7 @@ $ docker-compose down
 ### TO VIEW THE LOGS OF THE POD
 - $ kubectl logs [pod-name] -f
 - $ kubectl describe services springboot-oracledb-service
+- $ kubectl port-forward svc/oracle-xe 1521:1521
 - $ kubectl port-forward svc/springboot-oracledb-service 8080:8080
 
 ### Api Testing
