@@ -8,3 +8,4 @@ data:
   name: "XE"           # name of the database for application
   port: "1521"
   url: jdbc:oracle:thin:@OracleXE:1521:XE
+  characterset: "AL32UTF8"

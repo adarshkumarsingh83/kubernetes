@@ -37,7 +37,7 @@ spec:
       containers:
         - name: springboot-oracledb-service
           image: adarshkumarsingh83/springboot-oracledb-service # docker image of backend application
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
           env: # Setting environmental Variables

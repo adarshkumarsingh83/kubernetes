@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: oracle-xe
+  labels:
+    app: oracle-xe
+spec:
+  ports:
+    - port: 1521
+  selector:
+    app: oracle-xe
+    tier: database
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: oracle-pv-claim
+  labels:
+    app: oracle-xe
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oracle-xe
+  labels:
+    app: oracle-xe
+spec:
+  selector:
+    matchLabels:
+      app: oracle-xe
+      tier: database
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: oracle-xe
+        tier: database
+    spec:
+      containers:
+      - image: adarshkumarsingh83/oracle:18.4.0-xe
+        name: oracle-db
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ORACLE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: password
+        ports:
+        - containerPort: 1521
+          name: listener
+        volumeMounts:
+        - name: oracle-persistent-storage
+          mountPath: /var/lib/oracle
+      volumes:
+      - name: oracle-persistent-storage
+        persistentVolumeClaim:
+          claimName: oracle-pv-claim

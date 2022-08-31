@@ -66,6 +66,8 @@
 ### forced minikube to use docker env 
 * $ eval $(minikube docker-env)
 
+### cache image from remote 
+* $ minikube image load [IMAGE-NAME] --pull/--remote 
 
 
 
