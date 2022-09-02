@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: springboot-web-rest
+  output:
+    ansi:
+      enabled: DETECT
+
+logging:
+  file: /var/log/containers/${spring.application.name}-eflk.log
+  level:
+    org.springframework.web: DEBUG
+    com.espark.adarsh: DEBUG
+
+server:
+  port: 8080

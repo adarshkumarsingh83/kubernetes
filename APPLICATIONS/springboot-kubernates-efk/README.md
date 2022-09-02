@@ -6,6 +6,15 @@
 ![help](https://github.com/fluent/fluent-bit-kubernetes-logging)
 
 
+### To start the minikube 
+* minikube start --vm-driver=hyperkit
+
+### To Enable dashboard 
+* minikube addons enable dashboard
+
+### To open dashboard 
+* minikube dashboard
+
 ### To create namespace 
 *  kubectl apply -f namespace.yml 
 
@@ -14,6 +23,8 @@
 
 ### To create configmap 
 * $ kubectl apply -f configmap.yml 
+* $ kubectl apply -f fluentbit-configmap.yml 
+
 
 ### To create role 
 * $ kubectl apply -f role.yml 
@@ -44,6 +55,11 @@
 ### To port forward 
 * kubectl --namespace=logging port-forward svc/kibana  5601:5601 
 * `http://localhost:5601`
+
+### for spring boot application 
+* kubectl apply -f springboot-deployment.yml 
+* kubectl  port-forward svc/springboot-web-rest  8080:8080 
+* `http://localhost:8080`
 
 
 ### To check all the pods 

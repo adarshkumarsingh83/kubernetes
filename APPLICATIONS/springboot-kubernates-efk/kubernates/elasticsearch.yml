@@ -35,7 +35,7 @@ spec:
         k8s-app: elasticsearch
     spec:
       containers:
-        - image: elasticsearch:6.8.4
+        - image: elasticsearch:7.3.2
           name: elasticsearch
           env:
             - name: discovery.type
@@ -44,11 +44,15 @@ spec:
               value: elasticsearch
           ports:
             - containerPort: 9200
-              name: db
+              name: listener
               protocol: TCP
             - containerPort: 9300
               name: transport
               protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 2Gi
           volumeMounts:
             - name: elasticsearch
               mountPath: /data

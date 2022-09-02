@@ -32,13 +32,18 @@ spec:
         - name: ELASTICSEARCH_HOST
           valueFrom:
             configMapKeyRef:
-              name: fluent-bit-config
+              name: app-config
               key: elasticsearch_host
         - name: ELASTICSEARCH_PORT
           valueFrom:
             configMapKeyRef:
-              name: fluent-bit-config
+              name: app-config
               key: elasticsearch_port
+        - name: ELASTICSEARCH_INDEX
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: elasticsearch_index
         volumeMounts:
         - name: varlog
           mountPath: /var/log

@@ -17,12 +17,12 @@ spec:
     spec:
       containers:
         - name: kibana
-          image: docker.elastic.co/kibana/kibana-oss:6.8.4
+          image: kibana:7.3.2
           env:
             - name: ELASTICSEARCH_URL
               valueFrom:
                 configMapKeyRef:
-                  name: fluent-bit-config
+                  name: app-config
                   key: elasticsearch_url
           ports:
             - containerPort: 5601
