@@ -117,13 +117,13 @@ $ docker-compose down
 - $ kubectl logs [pod-name] -f
 - $ kubectl describe services springboot-oracledb-service
 - $ kubectl port-forward svc/oracle-xe 1521:1521
-- $ kubectl port-forward svc/springboot-oracledb-service 8080:8080
+- $ kubectl port-forward svc/springboot-oracledb-service 9090:9090
 
 ### Api Testing
 
 - $ curl http://localhost:9090/employees
-- $ curl http://localhost:9090/employee/1
-- $ curl http://localhost:9090/employee/2
+- $ curl http://localhost:9090/employees/100
+- $ curl http://localhost:9090/employees/200
 
 ### TO DELETE CONFIG MAP
 
