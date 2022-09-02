@@ -59,7 +59,7 @@
 ### for spring boot application 
 * kubectl apply -f springboot-deployment.yml 
 * kubectl  port-forward svc/springboot-web-rest  8080:8080 
-* `http://localhost:8080`
+* `http://localhost:8080/api/message`
 
 
 ### To check all the pods 
@@ -69,6 +69,8 @@
 * kubectl get pods -A 
 
 ### Clean up 
+* kubectl delete -n default deployment springboot-web-rest
+* kubectl delete -n default service springboot-web-rest
 * kubectl delete -n logging deployment kibana
 * kubectl delete -n logging service kibana
 * kubectl delete -n logging statefulset elasticsearch

@@ -21,7 +21,12 @@ spec:
       - image: adarshkumarsingh83/springboot-web-rest
         name: springboot-web-rest
         imagePullPolicy: IfNotPresent
-        resources: {}
+        volumeMounts:
+          - name: espark-vol
+            mountPath: /var/log/containers/
+      volumes:
+        - name: espark-vol
+          emptyDir: {} 
 status: {}
 ---
 apiVersion: v1
