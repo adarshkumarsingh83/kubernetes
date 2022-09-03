@@ -3,9 +3,6 @@
 ----
 
 
-![help](https://github.com/fluent/fluent-bit-kubernetes-logging)
-
-
 ### To start the minikube 
 * minikube start --vm-driver=hyperkit
 
@@ -58,6 +55,11 @@
 
 ### for spring boot application 
 * kubectl apply -f springboot-deployment.yml 
+
+### To describe service 
+*  kubectl describe svc springboot-web-rest
+
+### To forward for accessing out of k8 
 * kubectl  port-forward svc/springboot-web-rest  8080:8080 
 * `http://localhost:8080/api/message`
 
@@ -68,7 +70,25 @@
 ### To list all the items in the k8
 * kubectl get pods -A 
 
+### for load testing 
+* minikube addons enable ingress
+* kubectl get pods -n ingress-nginx
+* kubectl apply -f ingress.yml 
+*  kubectl get ingress
+```
+NAME                 CLASS   HOSTS                  ADDRESS         PORTS   AGE
+springboot-ingress   nginx   espark.com,localhost   192.168.64.24   80      13m
+```
+* sudo vi /etc/hosts
+```
+192.168.64.24 espark.com
+```
+
+### Make 100 parell wiith 10 jobscall to the service for load testing 
+* seq 1 500 | xargs -n1 -P10  curl -H "Connection: close" "http://espark.com/api/message"
+
 ### Clean up 
+* kubectl delete -n default ingress springboot-ingress
 * kubectl delete -n default deployment springboot-web-rest
 * kubectl delete -n default service springboot-web-rest
 * kubectl delete -n logging deployment kibana
@@ -77,6 +97,7 @@
 * kubectl delete -n logging service elasticsearch
 * kubectl delete -n logging daemonset fluent-bit
 * kubectl delete -n logging configmap fluent-bit-config
+* kubectl delete -n logging configmap app-config
 * kubectl delete -n logging serviceaccount fluent-bit
 * kubectl delete namespace logging
 
