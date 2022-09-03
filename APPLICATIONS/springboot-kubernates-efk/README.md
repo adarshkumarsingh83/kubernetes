@@ -84,7 +84,7 @@ springboot-ingress   nginx   espark.com,localhost   192.168.64.24   80      13m
 192.168.64.24 espark.com
 ```
 
-### Make 100 parell wiith 10 jobscall to the service for load testing 
+### Make 100 parallel with 10 jobs call to the service for load testing
 * seq 1 500 | xargs -n1 -P10  curl -H "Connection: close" "http://espark.com/api/message"
 
 ### Clean up 
