@@ -1,7 +1,10 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: springboot-kubernetes-elk
+  namespace: default
+  labels:
+    app: springboot-kubernetes-elk
 spec:
   selector:
     app: springboot-kubernetes-elk
@@ -16,27 +19,35 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: springboot-kubernetes-elk
+  namespace: default
+  labels:
+    app: sspringboot-kubernetes-elk
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: springboot-kubernetes-elk
-  replicas: 1
+      tier: backend
   template:
     metadata:
       labels:
         app: springboot-kubernetes-elk
+        tier: backend
     spec:
       containers:
         - name: springboot-kubernetes-elk
           image: "adarshkumarsingh83/springboot-kubernetes-elk"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           env:   # Setting environmental Variables
             - name: SPRING_PROFILES_ACTIVE
               value: kubernetes
             - name: LOGSTASH_URL
-              value: logstash:5000
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: logstash_url
           volumeMounts:
             - name: springboot-kubernetes-elk
               mountPath: /var/logs

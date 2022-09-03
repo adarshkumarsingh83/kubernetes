@@ -24,7 +24,7 @@
 * localhost:9200/_cat/indices  
 
 ----
-### KIBINA
+### KIBANA
 * Download 
 * https://www.elastic.co/downloads/kibana
 * edit the config file in location config/kibana.yml 
@@ -162,7 +162,6 @@ output {
 ### FOR DIRECTLY PRODUCING LOGS TO HOST MACHINE RATHER THEN THE DOCKER CONTAINER 
 * $ docker container run  -p 8080:8080  -v $HOME/log:/var/logs springboot-kubernetes-elk
 
-
 ### FOR TESTING 
 * http://localhost:8080/actuator/health
 * http://localhost:8080/actuator/info
@@ -199,9 +198,67 @@ output {
 ### SPRING BOOT APPLICATION
 * $ mvn clean package 
 * $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-kubernetes-elk .
+```
+[+] Building 2.2s (8/8) FINISHED                                                                                                                                                                      
+ => [internal] load build definition from Dockerfile                                                                                                                                             0.0s
+ => => transferring dockerfile: 223B                                                                                                                                                             0.0s
+ => [internal] load .dockerignore                                                                                                                                                                0.0s
+ => => transferring context: 2B                                                                                                                                                                  0.0s
+ => [internal] load metadata for docker.io/library/openjdk:8                                                                                                                                     1.5s
+ => [auth] library/openjdk:pull token for registry-1.docker.io                                                                                                                                   0.0s
+ => CACHED [1/2] FROM docker.io/library/openjdk:8@sha256:86e863cc57215cfb181bd319736d0baf625fe8f150577f9eb58bd937f5452cb8                                                                        0.0s
+ => [internal] load build context                                                                                                                                                                0.3s
+ => => transferring context: 30.44MB                                                                                                                                                             0.3s
+ => [2/2] COPY target/springboot-kubernetes-elk.jar springboot-kubernetes-elk.jar                                                                                                                0.2s
+ => exporting to image                                                                                                                                                                           0.1s
+ => => exporting layers                                                                                                                                                                          0.1s
+ => => writing image sha256:a1436c8a28f8596fa631de10f831799b944658dfc450675fdfdba5b45c1757ec                                                                                                     0.0s
+ => => naming to docker.io/adarshkumarsingh83/springboot-kubernetes-elk    
+```
+### To push the image to docker hub
 * $ docker push adarshkumarsingh83/springboot-kubernetes-elk
+
+### k8 configurations 
 * $ kubectl cluster-info
-* $ kubectl apply -f $(pwd)/kubernates/app.yml
+* $ minikube start --vm-driver=hyperkit
+* $ minikube addons enable dashboard
+* $ minikube dashboard
+* $ kubectl apply -f $(pwd)/kubernetes/configmap.yml
+* $ kubectl apply -f $(pwd)/kubernetes/logstash-config.yml
+* $ kubectl apply -f $(pwd)/kubernetes/logstash.yml
+
+
+* $ kubectl apply -f $(pwd)/kubernetes/elasticsearch.yml
+### To Check elastic is getting index data or not
+* $ kubectl port-forward svc/elasticsearch 9200:9200
+  * http://localhost:9200/
+  * http://localhost:9200/_cat/indices
+  
+
+* $ kubectl apply -f $(pwd)/kubernetes/kibana.yml
+### To port forward
+  * kubectl  port-forward svc/kibana 5601:5601
+  * http://localhost:5601
+  
+* $ kubectl apply -f $(pwd)/kubernetes/springboot.yml
+### api testing 
+* minikube addons enable ingress
+* kubectl get pods -n ingress-nginx
+
+* kubectl apply -f $(pwd)/kubernetes/ingress.yml
+* kubectl get ingress
+```
+NAME                 CLASS   HOSTS                  ADDRESS         PORTS   AGE
+springboot-ingress   nginx   espark.com,localhost   192.168.64.24   80      13m
+```
+* sudo vi /etc/hosts
+```
+192.168.64.24 espark.com
+```
+
+### Make 100 parallel with 10 jobs call to the service for load testing
+* seq 1 500 | xargs -n1 -P10  curl -H "Connection: close" "http://espark.com/api/message"
+
 * $ kubectl get all
 
 ----
@@ -218,14 +275,15 @@ output {
 ### TO VIEW THE LOGS OF THE POD
 * $ kubectl logs <pod-name> -f
 
-
 ### TO DELETE DEPLOYMENT & SERVICE 
-* $ kubectl delete services elasticsearch logstash kibana springboot-kubernetes-elk
-* $ kubectl delete deployment  kibana logstash springboot-kubernetes-elk
-* $ kubectl delete statefulset elasticsearch 
-* $ kubectl delete ConfigMap  logstash-configmap 
+* $ kubectl delete -n default ingress springboot-ingress
+* $ kubectl delete services  kibana elasticsearch logstash springboot-kubernetes-elk
+* $ kubectl delete deployment kibana logstash springboot-kubernetes-elk
+* $ kubectl delete -n default statefulset elasticsearch
+* $ kubectl delete configmap  logstash-configmap app-config
 
-
+### To Delete minikube cluster 
+* $ minikube delete
 
 ### TO DELETE ALL THE CONTAINERS WITH VOLUMES
 * $ docker rm -vf $(docker ps -a -q)
