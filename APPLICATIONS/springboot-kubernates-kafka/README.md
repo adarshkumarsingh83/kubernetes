@@ -69,7 +69,7 @@ $ curl http://localhost:9191/api/messages
 * minikube start --vm-driver=hyperkit
 
 ### To enable dashboard 
-* minikube addons enable [dashboard]
+* minikube addons enable dashboard
 
 ### To open dashboard 
 * minikube dashboard
