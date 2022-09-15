@@ -65,24 +65,20 @@ $ curl http://localhost:9191/api/messages
 
 ----
 
+### To start the minikube 
+* minikube start --vm-driver=hyperkit
+
+### To enable dashboard 
+* minikube addons enable [dashboard]
+
+### To open dashboard 
+* minikube dashboard
+
+### To delete the minikube cluster 
+* minikube delete
+
 ## K8 DEPLOYMENT PROCESS 
-
-### Building the code 
-* $ mvn clean package
-
-### To build the docker image and tag
-* $ cd springboot-kafka-producer
-* $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-kafka-producer .
-
-### to push the docker image to the docker hub
-* $ docker push adarshkumarsingh83/springboot-kafka-producer
-
-### To build the docker image and tag
-* $ cd springboot-kafka-consumer
-* $ docker build -f Dockerfile -t adarshkumarsingh83/springboot-kafka-consumer .
-
-### to push the docker image to the docker hub
-* $ docker push adarshkumarsingh83/springboot-kafka-consumer
+---
 
 ### Configurations 
 * $ kubectl apply -f $(pwd)/kubernates/configmap.yml
