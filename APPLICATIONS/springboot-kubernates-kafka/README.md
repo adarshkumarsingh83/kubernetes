@@ -86,8 +86,7 @@ $ curl http://localhost:9191/api/messages
 
 ### kafka zookeeper cluster 
 * $ kubectl apply -f $(pwd)/kubernates/zk.yml
-* $ kubectl apply -f $(pwd)/kubernates/kafka0.yml
-* $ kubectl apply -f $(pwd)/kubernates/kafka1.yml
+* $ kubectl apply -f $(pwd)/kubernates/kafka.yml
 
 ### mysql secret
 * $ kubectl apply -f $(pwd)/kubernates/secret.yml
@@ -107,10 +106,16 @@ $ curl http://localhost:9191/api/messages
 * $ kubectl get pod
 
 ### TO VIEW THE LOGS OF THE POD
-* $ kubectl logs <pod-name> -f
+* $ kubectl logs [pod-name] -f
 
 ----
 ### TESTING THE API
+
+### Do the port forwarding for the producer and consumer for post and get api call 
+
+* $ kubectl get all 
+* $ kubectl port-forward svc/springboot-kafka-producer 8181:8181
+* $ kubectl port-forward svc/springboot-kafka-consumer 9191:9191
 ----
 * post
 ````
