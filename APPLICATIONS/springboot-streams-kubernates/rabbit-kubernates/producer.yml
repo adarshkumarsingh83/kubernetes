@@ -36,13 +36,13 @@ spec:
     spec:
       containers:
         - name: springboot-rabbitmq-producer
-          image: adarshkumarsingh83/springboot-rabbitmq-producer  # docker image of backend application
+          image: adarshkumarsingh83/rabbitmq-producer  # docker image of backend application
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:   # Setting environmental Variables
             - name: SPRING_PROFILES_ACTIVE
-              value: kubernates
+              value: rabbit-container
             - name: RABBITMQ_HOST   # Setting Database host address from configMap
               valueFrom:
                 configMapKeyRef:
@@ -53,28 +53,23 @@ spec:
                 configMapKeyRef:
                   name: rabbit-conf
                   key: port
-            - name: RABBITMQ_USERNAME  # Setting Database username from Secret
+            - name: RABBITMQ_USER  # Setting Database username from Secret
               valueFrom:
                 secretKeyRef:
                   name: rabbit-secret # Secret Name
                   key: username
-            - name: RABBITMQ_USERPWD # Setting Database password from Secret
+            - name: RABBITMQ_PASSWORD # Setting Database password from Secret
               valueFrom:
                 secretKeyRef:
                   name: rabbit-secret
                   key: password
-            - name: APP_EXCHANGE
+            - name: RABBITMQ_GROUP
               valueFrom:
                 configMapKeyRef:
                   name: rabbit-conf
-                  key: exchange
-            - name: APP_QUEUE
+                  key: rabbitmq_group
+            - name: RABBITMQ_DESTINATION
               valueFrom:
                 configMapKeyRef:
                   name: rabbit-conf
-                  key: queue
-            - name: APP_ROUTING_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: rabbit-conf
-                  key: routingkey
+                  key: rabbitmq_queue

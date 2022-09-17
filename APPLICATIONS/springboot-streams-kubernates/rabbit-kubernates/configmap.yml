@@ -11,3 +11,6 @@ data:
   exchange: "espark-exchange"
   queue: "espark-queue"
   routingkey: "espark"
+  rabbitmq_group: espark-group
+  rabbitmq_queue: espark
+  rabbitmq_queue_processed: espark
