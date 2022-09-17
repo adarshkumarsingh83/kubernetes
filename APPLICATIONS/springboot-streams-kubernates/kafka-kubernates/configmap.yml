@@ -4,13 +4,12 @@ metadata:
   name: application-conf           # name of ConfigMap, referenced in other files
   namespace: default
 data:
-  host: 'mysql'            # host address of mysql server, we are using DNS of Service
-  name: 'espark-mysql'   # name of the database for application
-  port: '3306'
   zk_url: 'zookeeper-service:2181'
   kafka_listener: 'IN://:9092,OUT://:9093'
   kafka_ad_listner: 'PLAINTEXT://:29092,PLAINTEXT_INTERNAL://kafka-service:9092'
   kafka_listener_secuirty_protocal: 'PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT'
   kafka_url: 'kafka-service:9092'
   kafka_topic: 'espark-topic'
+  kafka_processed_topic: 'espark-processed-topic'
+  kafka_group: espark-group
 

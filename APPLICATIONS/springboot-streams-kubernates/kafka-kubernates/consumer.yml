@@ -10,8 +10,8 @@ spec:
     tier: backend
   ports:
     - protocol: TCP
-      port: 9191
-      targetPort: 9191
+      port: 9090
+      targetPort: 9090
   type: LoadBalancer   # use NodePort, if you are not running Kubernetes on cloud
 ---
 # Configure 'Deployment' of backend application
@@ -36,40 +36,30 @@ spec:
     spec:
       containers:
         - name: springboot-kafka-consumer
-          image: adarshkumarsingh83/springboot-kafka-consumer  # docker image of backend application
+          image: adarshkumarsingh83/kafka-consumer  # docker image of backend application
           imagePullPolicy: Always
           ports:
-            - containerPort: 9191
+            - containerPort: 9090
           env:   # Setting environmental Variables
             - name: SPRING_PROFILES_ACTIVE
-              value: kubernates
-            - name: DATABASE_HOST   # Setting Database host address from configMap
-              valueFrom:
-                configMapKeyRef:
-                  name: application-conf # name of configMap
-                  key: host
-            - name: DATABASE_PORT   # Setting Database port  from configMap
-              valueFrom:
-                configMapKeyRef:
-                  name: application-conf # name of configMap
-                  key: port
-            - name: DATABASE_NAME  # Setting Database name from configMap
-              valueFrom:
-                configMapKeyRef:
-                  name: application-conf
-                  key: name
-            - name: DATABASE_USER  # Setting Database username from Secret
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-credentials # Secret Name
-                  key: username
-            - name: DATABASE_PASSWORD # Setting Database password from Secret
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-credentials
-                  key: password
-            - name: KAFKA_URL # Setting KAFKA URL FROM CONFIG MAP
+              value: kafka-container
+            - name: KAFKA_BORKER # Setting KAFKA URL FROM CONFIG MAP
               valueFrom:
                 configMapKeyRef:
                   name: application-conf
                   key: kafka_url
+            - name: KAFKA_DESTINATION # Setting KAFKA URL FROM CONFIG MAP
+              valueFrom:
+                configMapKeyRef:
+                  name: application-conf
+                  key: kafka_processed_topic  
+            - name: KAFKA_GROUP # Setting KAFKA URL FROM CONFIG MAP
+              valueFrom:
+                configMapKeyRef:
+                  name: application-conf
+                  key: kafka_group     
+            - name: ZOOKEEPER_NODE # Setting KAFKA URL FROM CONFIG MAP
+              valueFrom:
+                configMapKeyRef:
+                  name: application-conf
+                  key: zk_url      

@@ -37,13 +37,10 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic espark-topic
 * [KAFKA-CONSUMNER](./springboot-kafka-rabbitmq-consumer/KAFKA-README.md)
 
 
-
-
 ---
 
 ### To run rabbit 
 * docker run --name espark-rabbit -p 5672:5672 -p 15672:15672 rabbitmq:3-management
-
 
 
 ## RABBIT MQ PRODUCER PROCESSOR AND CONSUMER 
@@ -52,13 +49,48 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic espark-topic
 * [RABBIT-CONSUMNER](./springboot-kafka-rabbitmq-consumer/RABBIT-README.md)
 
 
-
 ### To Exeucte kafka docker compose
 * docker compose -f docker-compose-kafka.yml up
 * docker compose -f docker-compose-kafka.yml down
 
 
-
 ### To Exeucte rabbit docker compose
 * docker compose -f docker-compose-rabbit.yml up 
 * docker compose -f docker-compose-rabbit.yml down 
+
+---
+
+# K8
+
+### To start the minikube 
+* minikube start --vm-driver=hyperkit
+
+### To enable dashboard 
+* minikube addons enable dashboard
+
+### To open dashboard 
+* minikube dashboard
+
+### To delete the minikube cluster 
+* minikube delete
+
+### for Kafka 
+* $ kubectl apply -f $(pwd)/kafka-kubernates/configmap.yml
+* $ kubectl apply -f $(pwd)/kafka-kubernates/zk.yml
+* $ kubectl apply -f $(pwd)/kafka-kubernates/kafka.yml
+* $ kubectl apply -f $(pwd)/kafka-kubernates/producer.yml
+* $ kubectl apply -f $(pwd)/kafka-kubernates/processor.yml
+* $ kubectl apply -f $(pwd)/kafka-kubernates/consumer.yml
+
+---
+
+### for Rabbitmq 
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/secret.yml
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/configmap.yml
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/rabbitmq
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/producer
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/processor
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/consumer
+
+### port forwardind 
+* $ kubectl port-forward svc/rabbitmq 15672:15672
