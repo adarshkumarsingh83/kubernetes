@@ -99,10 +99,11 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic espark-topic
 ### for Rabbitmq 
 * $ kubectl apply -f $(pwd)/rabbit-kubernates/secret.yml
 * $ kubectl apply -f $(pwd)/rabbit-kubernates/configmap.yml
-* $ kubectl apply -f $(pwd)/rabbit-kubernates/rabbitmq
-* $ kubectl apply -f $(pwd)/rabbit-kubernates/producer
-* $ kubectl apply -f $(pwd)/rabbit-kubernates/processor
-* $ kubectl apply -f $(pwd)/rabbit-kubernates/consumer
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/rabbitmq.yml
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/producer.yml
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/processor.yml
+* $ kubectl apply -f $(pwd)/rabbit-kubernates/consumer.yml
 
 ### port forwardind 
 * $ kubectl port-forward svc/rabbitmq 15672:15672
+* kubectl port-forward svc/springboot-rabbitmq-producer 8080:8080 
