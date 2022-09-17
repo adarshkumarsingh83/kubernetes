@@ -107,3 +107,12 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic espark-topic
 ### port forwardind 
 * $ kubectl port-forward svc/rabbitmq 15672:15672
 * kubectl port-forward svc/springboot-rabbitmq-producer 8080:8080 
+
+### To post daa to the api 
+* $ curl --location --request POST 'http://localhost:8080/api/message' \
+--header 'Content-Type: application/json' \
+--data-raw '{"id":1,"name":"adarsh kumar","message":"love u radha"}'
+
+* $ curl --location --request POST 'http://localhost:8080/api/message' \
+--header 'Content-Type: application/json' \
+--data-raw '{"id":2,"name":"radha singh","message":"love u adi"} '
