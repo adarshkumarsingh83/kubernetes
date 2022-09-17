@@ -67,15 +67,30 @@ curl -H "Content-type:application/json"  \
 * $ docker push adarshkumarsingh83/springboot-rabbitmq-consumer
 
 
+----
+
+### To start the minikube 
+* minikube start --vm-driver=hyperkit
+
+### To enable dashboard 
+* minikube addons enable dashboard
+
+### To open dashboard 
+* minikube dashboard
+
+### To delete the minikube cluster 
+* minikube delete
+
+
 * $ kubectl cluster-info
 
 ### to create service and other in kubernetes
 * $ cd kubernates
-* $ kubectl apply -f $(pwd)/secret.yml
-* $ kubectl apply -f $(pwd)/configmap.yml
-* $ kubectl apply -f $(pwd)/rabbitmq.yml
-* $ kubectl apply -f $(pwd)/producer.yml
-* $ kubectl apply -f $(pwd)/consumer.yml
+* $ kubectl apply -f $(pwd)/kubernates/secret.yml
+* $ kubectl apply -f $(pwd)/kubernates/configmap.yml
+* $ kubectl apply -f $(pwd)/kubernates/rabbitmq.yml
+* $ kubectl apply -f $(pwd)/kubernates/producer.yml
+* $ kubectl apply -f $(pwd)/kubernates/consumer.yml
 
 
 ### to view the service and other
@@ -85,9 +100,18 @@ curl -H "Content-type:application/json"  \
 * $ kubectl get pod
 
 ### TO VIEW THE LOGS OF THE POD
-* $ kubectl logs <pod-name> -f
+* $ kubectl logs [pod-name] -f
+
 
 ----
+
+### Do the port forwarding for the producer and consumer for post and get api call 
+
+* $ kubectl get all 
+* $ kubectl port-forward svc/springboot-rabbitmq-producer 8080:8080
+* $ kubectl port-forward svc/springboot-rabbitmq-consumer 9090:9090
+* $ kubectl port-forward svc/rabbitmq 15672:15672
+
 ## TO TEST THE API
 * Post
 ````
