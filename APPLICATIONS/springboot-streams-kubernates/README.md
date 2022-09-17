@@ -104,7 +104,7 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic espark-topic
 * $ kubectl apply -f $(pwd)/rabbit-kubernates/processor.yml
 * $ kubectl apply -f $(pwd)/rabbit-kubernates/consumer.yml
 
-### port forwardind 
+### port Forwarding 
 * $ kubectl port-forward svc/rabbitmq 15672:15672
 * kubectl port-forward svc/springboot-rabbitmq-producer 8080:8080 
 
