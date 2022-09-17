@@ -1,0 +1,80 @@
+# Define 'Service' to expose backend application deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-rabbitmq-producer
+  namespace: default
+spec:
+  selector:  # backend application pod labels should match these
+    app: springboot-rabbitmq-producer-label
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer   # use NodePort, if you are not running Kubernetes on cloud
+---
+# Configure 'Deployment' of backend application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-rabbitmq-producer
+  labels:
+    app: springboot-rabbitmq-producer-label
+    tier: backend
+spec:
+  replicas: 1    # Number of replicas of back-end application to be deployed
+  selector:
+    matchLabels: # backend application pod labels should match these
+      app: springboot-rabbitmq-producer-label
+      tier: backend
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' labels
+        app: springboot-rabbitmq-producer-label
+        tier: backend
+    spec:
+      containers:
+        - name: springboot-rabbitmq-producer
+          image: adarshkumarsingh83/springboot-rabbitmq-producer  # docker image of backend application
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:   # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: RABBITMQ_HOST   # Setting Database host address from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbit-conf # name of configMap
+                  key: host
+            - name: RABBITMQ_PORT  # Setting Database name from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbit-conf
+                  key: port
+            - name: RABBITMQ_USERNAME  # Setting Database username from Secret
+              valueFrom:
+                secretKeyRef:
+                  name: rabbit-secret # Secret Name
+                  key: username
+            - name: RABBITMQ_USERPWD # Setting Database password from Secret
+              valueFrom:
+                secretKeyRef:
+                  name: rabbit-secret
+                  key: password
+            - name: APP_EXCHANGE
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbit-conf
+                  key: exchange
+            - name: APP_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbit-conf
+                  key: queue
+            - name: APP_ROUTING_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbit-conf
+                  key: routingkey
