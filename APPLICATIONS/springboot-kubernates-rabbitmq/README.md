@@ -85,7 +85,6 @@ curl -H "Content-type:application/json"  \
 * $ kubectl cluster-info
 
 ### to create service and other in kubernetes
-* $ cd kubernates
 * $ kubectl apply -f $(pwd)/kubernates/secret.yml
 * $ kubectl apply -f $(pwd)/kubernates/configmap.yml
 * $ kubectl apply -f $(pwd)/kubernates/rabbitmq.yml
