@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: default
+  labels:
+    app: app-config
+data:
+  elasticsearch_host: "elasticsearch.logging"
+  elasticsearch_index: "fluent_bit_index"
+  elasticsearch_port: "9200"
+  elasticsearch_url: "http://elasticsearch.logging:9200"
+  logstash_url: localhost:5000
