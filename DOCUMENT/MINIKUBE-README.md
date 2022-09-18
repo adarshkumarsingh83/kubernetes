@@ -53,11 +53,10 @@
 ### To list addons in minikube 
 * $ minikube addons list
 
-### To enable addons in minikues
+### To enable addons in minikube
 * $ minikube addons enable [dashboard]
 
-
-### To open minikube dashbard 
+### To open minikube dashboard 
 * $ minikube dashboard
 
 ### To connect from outside of minikube 
