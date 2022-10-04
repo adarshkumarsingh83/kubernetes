@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  output:
+    ansi:
+      enabled: DETECT
+  application:
+    name: springboot-service
+  config:
+    activate:
+      on-profile:
+        - default
+logging:
+  file.name: logs/app.log
+  pattern:
+    console: "%d [%t] %-5level %logger{36} - %msg%n"
+    file: "%d [%t] %-5level %logger{36} - %msg%n"
+  level:
+    root: DEBUG
+    com.espark.adarsh: DEBUG
+    org.springframework: DEBUG
+    org.springframework.web: DEBUG
+---
+
+spring:
+  output:
+    ansi:
+      enabled: DETECT
+  application:
+    name: springboot-service
+  config:
+    activate:
+      on-profile:
+        - docker
+        - kubernates
+logging:
+  file: /var/logs/app.log
+  pattern:
+    console: "%d [%t] %-5level %logger{36} - %msg%n"
+    file: "%d [%t] %-5level %logger{36} - %msg%n"
+  level:
+    root: DEBUG
+    com.espark.adarsh: DEBUG
+    org.springframework: DEBUG
+    org.springframework.web: DEBUG

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-service2
+spec:
+  selector:
+    matchLabels:
+      app: springboot-service2
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-service2
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: springboot-service2
+          image: "adarshkumarsingh83/springboot-service"
+          ports:
+            - name: http
+              containerPort: 8080
+              
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-service2
+spec:
+  selector:
+    app: springboot-service2
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: NodePort
