@@ -46,6 +46,10 @@
 
 
 ## To deploye in the k8 
+* $  kubectl apply -f $(pwd)/kubernates/configmap.yml
+* $  kubectl apply -f $(pwd)/kubernates/elasticsearch.yml
+* $  kubectl apply -f $(pwd)/kubernates/kibana.yml
+* $  kubectl apply -f $(pwd)/kubernates/logstash-config.yml
 * $  kubectl apply -f $(pwd)/kubernates/service1.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service2.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service3.yaml
