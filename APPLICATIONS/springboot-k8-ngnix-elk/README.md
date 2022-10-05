@@ -54,7 +54,7 @@
 * $  kubectl apply -f $(pwd)/kubernates/service2.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service3.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service4.yaml
-* $  kubectl apply -f $(pwd)/kubernates/ngix-config.yml
+* $  kubectl apply -f $(pwd)/kubernates/ngix-logstash-config.yml
 * $  kubectl apply -f $(pwd)/kubernates/nginx-config.yaml
 * $  kubectl apply -f $(pwd)/kubernates/nginx.yaml
 
