@@ -65,7 +65,7 @@
 
 
 ### To Check elasic is getting index data or not 
-* kubectl --namespace=logging port-forward svc/elasticsearch 9200:9200
+* kubectl --namespace=default port-forward svc/elasticsearch 9200:9200
 * `http://localhost:9200/`
 * `http://localhost:9200/_cat/indices`
 
@@ -73,10 +73,10 @@
 * $ kubectl apply -f kibana.yml 
 
 ### To get all the items in namespace 
- * $ kubectl --namespace=logging get all 
+ * $ kubectl --namespace=default get all 
 
 ### To port forward 
-* kubectl --namespace=logging port-forward svc/kibana  5601:5601 
+* kubectl --namespace=default port-forward svc/kibana  5601:5601 
 * `http://localhost:5601`
 
 
