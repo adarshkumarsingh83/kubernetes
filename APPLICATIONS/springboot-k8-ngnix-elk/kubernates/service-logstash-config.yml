@@ -7,14 +7,11 @@ data:
     http.host: "0.0.0.0"
     path.config: /usr/share/logstash/pipeline
   logstash.conf: |
-
+   input {
+    
     file {
             path => "/var/log/*.log"
-            codec => multiline {
-            pattern => "^%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{TIME}.*"
-            negate => "true"
-            start_position => beginning
-         }
+            start_position => "beginning"
     }
 
     filter {
