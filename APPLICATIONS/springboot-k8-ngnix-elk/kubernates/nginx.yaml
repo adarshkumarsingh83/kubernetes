@@ -15,6 +15,7 @@ spec:
       containers:
       - name: nginx
         image: nginx
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         volumeMounts:
@@ -25,6 +26,7 @@ spec:
           name: log
       - name: logstash
         image: docker.elastic.co/logstash/logstash:6.3.0
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 5000
         volumeMounts:
@@ -47,12 +49,6 @@ spec:
             items:
               - key: logstash.yml
                 path: logstash.yml
-        - name: logstash-pipeline-volume
-          configMap:
-            name: logstash-configmap
-            items:
-              - key: logstash.conf
-                path: logstash.conf
         - name: log
           emptyDir: {}
 ---

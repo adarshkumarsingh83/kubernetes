@@ -16,6 +16,15 @@ data:
          }
     }
 
+    file {
+            path => "/var/log/*.log"
+            codec => multiline {
+            pattern => "^%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{TIME}.*"
+            negate => "true"
+            start_position => beginning
+         }
+    }
+
     filter {
       #If log line contains tab character followed by 'at' then we will tag that entry as stacktrace
       if [message] =~ "\tat" {
