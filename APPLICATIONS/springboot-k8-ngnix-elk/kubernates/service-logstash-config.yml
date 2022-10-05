@@ -1,20 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: logstash-configmap
+  name: service-logstash-configmap
 data:
   logstash.yml: |
     http.host: "0.0.0.0"
     path.config: /usr/share/logstash/pipeline
   logstash.conf: |
-    file {
-            path => "/var/log/nginx/*.log"
-            codec => multiline {
-            pattern => "^%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{TIME}.*"
-            negate => "true"
-            start_position => beginning
-         }
-    }
 
     file {
             path => "/var/log/*.log"

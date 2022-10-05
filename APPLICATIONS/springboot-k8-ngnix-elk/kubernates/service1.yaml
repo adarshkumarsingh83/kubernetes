@@ -44,10 +44,16 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: logstash-configmap
+            name: service-logstash-configmap
             items:
               - key: logstash.yml
                 path: logstash.yml
+        - name: logstash-pipeline-volume
+          configMap:
+            name: service-logstash-configmap
+            items:
+              - key: logstash.conf
+                path: logstash.conf
         - name: log
           emptyDir: {}
               
