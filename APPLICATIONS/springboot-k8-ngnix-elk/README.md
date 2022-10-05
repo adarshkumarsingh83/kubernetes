@@ -1,4 +1,4 @@
-# springboot k8 ngix proxy & lb
+# springboot k8 ngix proxy & lb & elk for logs 
 > Description: \
 > spring boot rest and web application 
 
@@ -7,9 +7,9 @@
 ### To build the application
 * $ mvn clean package
 
-### To execute the application 
-* $ docker-compose up 
-* $ docker-compose down 
+## To Execute the application 
+* mvn spring-boot:run -Dspring-boot.run.profiles=docker
+* java -jar -Dspring.profiles.active=docker springboot-service.jar
 
 ### To test
 * $ curl localhost:8080
