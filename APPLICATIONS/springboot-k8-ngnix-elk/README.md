@@ -49,11 +49,12 @@
 * $  kubectl apply -f $(pwd)/kubernates/configmap.yml
 * $  kubectl apply -f $(pwd)/kubernates/elasticsearch.yml
 * $  kubectl apply -f $(pwd)/kubernates/kibana.yml
-* $  kubectl apply -f $(pwd)/kubernates/logstash-config.yml
+* $  kubectl apply -f $(pwd)/kubernates/service-logstash-config.yml
 * $  kubectl apply -f $(pwd)/kubernates/service1.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service2.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service3.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service4.yaml
+* $  kubectl apply -f $(pwd)/kubernates/ngix-config.yml
 * $  kubectl apply -f $(pwd)/kubernates/nginx-config.yaml
 * $  kubectl apply -f $(pwd)/kubernates/nginx.yaml
 
@@ -80,9 +81,11 @@
 * `http://localhost:5601`
 
 
+
 ### To test the services 
-* $ curl localhost:80
-* $ curl localhost:80/api/message
+* $  kubectl --namespace=default port-forward svc/nginx 8090:80
+* $ curl localhost:8090
+* $ curl localhost:8090/api/message
 
 ### Make 100 parallel with 10 jobs call to the service for load testing
 * seq 1 500 | xargs -n1 -P10  curl -H "Connection: close" "http://localhost:8080/api/message"
