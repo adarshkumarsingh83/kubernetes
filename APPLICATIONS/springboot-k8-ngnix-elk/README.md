@@ -28,6 +28,8 @@
 ### to push the docker image to the docker hub 
 * $ docker push adarshkumarsingh83/springboot-service
 
+
+## To deploye in the k8 
 * $  kubectl apply -f $(pwd)/kubernates/service1.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service2.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service3.yaml
@@ -58,6 +60,7 @@
 
 ### TO DELETE CONFIG MAP
 * $ kubectl delete configmap nginx-conf -n default
+* $ kubectl delete configmap logstash-config -n default
 
 ### TO DELETE ALL THE CONTAINERS WITH VOLUMES
 * $ docker rm -vf $(docker ps -a -q)
