@@ -29,6 +29,22 @@
 * $ docker push adarshkumarsingh83/springboot-service
 
 
+### To start the minikube 
+* minikube start --vm-driver=hyperkit
+
+### To Enable dashboard 
+* minikube addons enable dashboard
+
+### To open dashboard 
+* minikube dashboard
+
+### To create namespace 
+*  kubectl apply -f namespace.yml 
+
+### To get the namespaces 
+* kubectl get namespaces
+
+
 ## To deploye in the k8 
 * $  kubectl apply -f $(pwd)/kubernates/service1.yaml
 * $  kubectl apply -f $(pwd)/kubernates/service2.yaml
@@ -43,9 +59,29 @@
 * $ kubectl cluster-info
 * $ kubectl get all
 
+
+### To Check elasic is getting index data or not 
+* kubectl --namespace=logging port-forward svc/elasticsearch 9200:9200
+* `http://localhost:9200/`
+* `http://localhost:9200/_cat/indices`
+
+### To create kibina 
+* $ kubectl apply -f kibana.yml 
+
+### To get all the items in namespace 
+ * $ kubectl --namespace=logging get all 
+
+### To port forward 
+* kubectl --namespace=logging port-forward svc/kibana  5601:5601 
+* `http://localhost:5601`
+
+
 ### To test the services 
 * $ curl localhost:80
 * $ curl localhost:80/api/message
+
+### Make 100 parallel with 10 jobs call to the service for load testing
+* seq 1 500 | xargs -n1 -P10  curl -H "Connection: close" "http://localhost:8080/api/message"
 
 ### for system pods listing 
 * $ kubectl get pods -n kube-system
