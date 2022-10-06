@@ -35,10 +35,13 @@ spring:
         - docker
         - kubernates
 logging:
-  file: /var/logs/app.log
+  file:
+    name: /var/logs/application.log
+    max-size: 1MB
+    max-history: 10
   pattern:
-    console: "%d [%t] %-5level %logger{36} - %msg%n"
-    file: "%d [%t] %-5level %logger{36} - %msg%n"
+    rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.zip
+    level: '${spring.application.name} - [%X{traceId}/%X{spanId}] %X{sessionId}  %-5p [%t] %C{2} - %m%n'
   level:
     root: DEBUG
     com.espark.adarsh: DEBUG

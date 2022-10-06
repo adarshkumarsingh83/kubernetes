@@ -27,8 +27,8 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: kubernates
           volumeMounts:
-            - mountPath: /var/log
-              name: log
+            - mountPath: /var/logs
+              name: logs
         - name: logstash
           image: docker.elastic.co/logstash/logstash:6.3.0
           imagePullPolicy: IfNotPresent
@@ -39,8 +39,8 @@ spec:
               mountPath: /usr/share/logstash/config
             - name: logstash-pipeline-volume
               mountPath: /usr/share/logstash/pipeline
-            - mountPath: /var/log
-              name: log
+            - mountPath: /var/logs
+              name: logs
       volumes:
         - name: config-volume
           configMap:
@@ -54,7 +54,7 @@ spec:
             items:
               - key: logstash.conf
                 path: logstash.conf                
-        - name: log
+        - name: logs
           emptyDir: {}
               
 ---
