@@ -64,11 +64,20 @@
 * $ kubectl cluster-info
 * $ kubectl get all
 
+### exec inside the elastic container 
+* execute this curl cmd 
+ ``` curl -XDELETE http://localhost:9200/_template/logstash ```
+
 
 ### To Check elasic is getting index data or not 
 * kubectl --namespace=default port-forward svc/elasticsearch 9200:9200
 * `http://localhost:9200/`
+
+### To list the index 
 * `http://localhost:9200/_cat/indices`
+
+### To veiw the data index 
+* `http://localhost:9200/[index-name]/_search`
 
 ### To create kibina 
 * $ kubectl apply -f kibana.yml 
@@ -89,6 +98,9 @@
 
 ### Make 100 parallel with 10 jobs call to the service for load testing
 * seq 1 500 | xargs -n1 -P10  curl -H "Connection: close" "http://localhost:8080/api/message"
+
+### Make every sec 1 call to the server 
+* while sleep 1; do curl -H "Connection: close" "http://localhost:8080/api/message"; "\n"; done
 
 ### for system pods listing 
 * $ kubectl get pods -n kube-system

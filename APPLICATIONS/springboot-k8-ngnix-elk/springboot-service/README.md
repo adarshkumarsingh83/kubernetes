@@ -16,6 +16,7 @@
 ### To test
 * $ curl localhost:8080
 * $ curl localhost:8080/api/message
+* $ while sleep 1; do curl -H "Connection: close" "http://localhost:8080/api/message"; "\n"; done
 
 
 ### To Create docker image 

@@ -19,18 +19,24 @@ spec:
       containers:
         - name: springboot-service1
           image: "adarshkumarsingh83/springboot-service"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080
           env: # Setting environmental Variables
             - name: SPRING_PROFILES_ACTIVE
               value: kubernates
+            - name: LOGGING_FILE_PATH
+              value: /var/logs/
+            - name: LOGGING_FILE_NAME
+              value: /var/logs/app.logs
+            - name: LOGGGER_LEVEL_ROOT
+              value: INFO
           volumeMounts:
             - mountPath: /var/logs
               name: logs
         - name: logstash
-          image: docker.elastic.co/logstash/logstash:6.3.0
+          image: docker.elastic.co/logstash/logstash:7.13.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
@@ -39,8 +45,8 @@ spec:
               mountPath: /usr/share/logstash/config
             - name: logstash-pipeline-volume
               mountPath: /usr/share/logstash/pipeline
-            - mountPath: /var/logs
-              name: logs
+            - name: logs
+              mountPath: /var/logs
       volumes:
         - name: config-volume
           configMap:

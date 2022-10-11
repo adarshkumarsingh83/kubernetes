@@ -26,6 +26,10 @@ spec:
           env: # Setting environmental Variables
             - name: SPRING_PROFILES_ACTIVE
               value: kubernates
+            - name: LOGGING_FILE_PATH
+              value: /var/logs/
+            - name: LOGGING_FILE_NAME
+              value: /var/logs/app.logs
           volumeMounts:
             - mountPath: /var/logs
               name: logs

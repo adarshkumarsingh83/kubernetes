@@ -11,35 +11,17 @@ data:
       file {
         type => "java"
         path => "/var/logs/app.log"
+        #codec => "plain"
+        start_position => "beginning"
         codec => multiline {
-          pattern => "^%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{TIME}.*"
+          pattern => "^%{YEAR}-%{MONTHNUM}-%{MONTHDAY}.*"
           negate => "true"
           what => "previous"
         }
       }
-    }
-
-    filter {
-      #If log line contains tab character followed by 'at' then we will tag that entry as stacktrace
-      if [message] =~ "\tat" {
-        grok {
-          match => ["message", "^(\tat)"]
-          add_tag => ["stacktrace"]
-        }
-      }
-
-      #Grokking Spring Boot's default log format
-      grok {
-        match => [ "message",
-                   "(?<timestamp>%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{TIME})  %{LOGLEVEL:level} %{NUMBER:pid} --- \[(?<thread>[A-Za-z0-9-]+)\] [A-Za-z0-9.]*\.(?<class>[A-Za-z0-9#_]+)\s*:\s+(?<logmessage>.*)",
-                   "message",
-                   "(?<timestamp>%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{TIME})  %{LOGLEVEL:level} %{NUMBER:pid} --- .+? :\s+(?<logmessage>.*)"
-                 ]
-      }
-
-      #Parsing out timestamps which are in timestamp field thanks to previous grok section
-      date {
-        match => [ "timestamp" , "yyyy-MM-dd HH:mm:ss.SSS" ]
+      file {
+        type => "ngix"
+        path => "/var/log/nginx/*.log"
       }
     }
 
@@ -47,8 +29,8 @@ data:
         stdout {
             codec => rubydebug
         }
-        elasticsearch{
-            hosts=>["elasticsearch:9200"]
-            index=>"esaprk-%{+YYYY.MM.dd}"
+        elasticsearch { 
+            hosts=>["http://elasticsearch:9200"]
+            index => "espark-%{+YYYY.MM.dd}"
         }
     }

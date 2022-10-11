@@ -35,7 +35,7 @@ spec:
         k8s-app: elasticsearch
     spec:
       containers:
-        - image: elasticsearch:7.3.2
+        - image: docker.elastic.co/elasticsearch/elasticsearch:7.13.0
           name: elasticsearch
           env:
             - name: discovery.type

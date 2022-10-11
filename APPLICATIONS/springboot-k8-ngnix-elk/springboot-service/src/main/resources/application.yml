@@ -12,15 +12,16 @@ spring:
       on-profile:
         - default
 logging:
-  file.name: logs/app.log
+  file.name: /Users/us-guest/logs/app.log
   pattern:
     console: "%d [%t] %-5level %logger{36} - %msg%n"
     file: "%d [%t] %-5level %logger{36} - %msg%n"
   level:
-    root: DEBUG
-    com.espark.adarsh: DEBUG
-    org.springframework: DEBUG
-    org.springframework.web: DEBUG
+    root: INFO
+    com.espark.adarsh: INFO
+    org.springframework: INFO
+    org.springframework.web: INFO
+
 ---
 
 spring:
@@ -36,14 +37,13 @@ spring:
         - kubernates
 logging:
   file:
-    name: /var/logs/application.log
+    name: /var/logs/app.log
     max-size: 1MB
     max-history: 10
   pattern:
     rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.zip
-    level: '${spring.application.name} - [%X{traceId}/%X{spanId}] %X{sessionId}  %-5p [%t] %C{2} - %m%n'
   level:
-    root: DEBUG
-    com.espark.adarsh: DEBUG
-    org.springframework: DEBUG
-    org.springframework.web: DEBUG
+    root: INFO
+    com.espark.adarsh: INFO
+    org.springframework: INFO
+    org.springframework.web: INFO
