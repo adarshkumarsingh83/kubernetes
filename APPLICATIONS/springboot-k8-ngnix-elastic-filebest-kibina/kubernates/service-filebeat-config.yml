@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config
+  namespace: logging
+  labels:
+    k8s-app: filebeat
+data:
+  filebeat.yml: |-
+    filebeat.inputs:
+    - type: filestream
+
+      # Unique ID among all inputs, an ID is required.
+      id: springbboot-service-log
+
+      # Change to true to enable this input configuration.
+      enabled: true
+
+      # Paths that should be crawled and fetched. Glob based paths.      
+      paths:
+        - '/var/logs/app.log'
+
+    # output the logs to the elasticsearch
+    output.elasticsearch:
+
+      # Boolean flag to enable or disable the output module.
+      enabled: true
+
+      # hostname of the elasticsearch
+      hosts: ['http://elasticsearch:9200']

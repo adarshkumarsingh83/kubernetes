@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-service1
+  namespace: logging
+spec:
+  selector:
+    matchLabels:
+      app: springboot-service1
+      tier: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-service1
+        tier: backend
+        track: stable
+    spec:
+      serviceAccountName: filebeat
+      containers:
+        - name: springboot-service1
+          image: "adarshkumarsingh83/springboot-service"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+          env: # Setting environmental Variables
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernates
+            - name: LOGGING_FILE_PATH
+              value: /var/logs/
+            - name: LOGGING_FILE_NAME
+              value: /var/logs/app.logs
+            - name: LOGGGER_LEVEL_ROOT
+              value: INFO
+          volumeMounts:
+            - name: logs
+              mountPath: /var/logs/
+        - name: filebeat-sidecar
+          image: docker.elastic.co/beats/filebeat:7.13.
+          args: [
+          "-c", "/etc/filebeat.yml",
+          "-e",
+          ]
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        securityContext:
+          runAsUser: 0
+          volumeMounts:
+            - name: logs
+              mountPath: var/logs/
+            - name: filebeat-config
+              mountPath: /usr/share/filebeat/filebeat.yml
+              subPath: filebeat.yml 
+      volumes:
+        - name: filebeat-config
+          configMap:
+            name: filebeat-config
+            items:
+              - key: filebeat.yml
+                path: filebeat.yml
+        - name: logs
+          emptyDir: {}
+              
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-service1
+spec:
+  selector:
+    app: springboot-service1
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: LoadBalancer
