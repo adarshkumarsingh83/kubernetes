@@ -17,6 +17,7 @@ spec:
         tier: backend
         track: stable
     spec:
+      serviceAccountName: logstash
       containers:
         - name: springboot-service1
           image: "adarshkumarsingh83/springboot-service"
