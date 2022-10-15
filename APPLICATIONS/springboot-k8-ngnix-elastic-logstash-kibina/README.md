@@ -45,6 +45,15 @@
 * kubectl get namespaces
 
 
+### To create role 
+* $ kubectl apply -f role.yml 
+
+### To create service account 
+* $ kubectl apply -f service-account.yml 
+
+### for binding service and role 
+* $ kubectl apply -f service-role-binding.yml 
+
 ## To deploye in the k8 
 * $  kubectl apply -f $(pwd)/kubernates/configmap.yml
 * $  kubectl apply -f $(pwd)/kubernates/elasticsearch.yml

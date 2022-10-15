@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: service-logstash-configmap
+  namespace: logging
 data:
   logstash.yml: |
     http.host: "0.0.0.0"
