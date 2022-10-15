@@ -39,20 +39,20 @@
 * minikube dashboard
 
 ### To create namespace 
-*  kubectl apply -f namespace.yml 
+*  kubectl apply -f $(pwd)/kubernates/namespace.yml 
 
 ### To get the namespaces 
 * kubectl get namespaces
 
 
 ### To create role 
-* $ kubectl apply -f role.yml 
+* $ kubectl apply -f $(pwd)/kubernates/role.yml 
 
 ### To create service account 
-* $ kubectl apply -f service-account.yml 
+* $ kubectl apply -f $(pwd)/kubernates/service-account.yml 
 
 ### for binding service and role 
-* $ kubectl apply -f service-role-binding.yml 
+* $ kubectl apply -f $(pwd)/kubernates/service-role-binding.yml 
 
 ## To deploye in the k8 
 * $  kubectl apply -f $(pwd)/kubernates/configmap.yml
@@ -79,7 +79,7 @@
 
 
 ### To Check elasic is getting index data or not 
-* kubectl --namespace=default port-forward svc/elasticsearch 9200:9200
+* kubectl --namespace=logging port-forward svc/elasticsearch 9200:9200
 * `http://localhost:9200/`
 
 ### To list the index 
@@ -92,16 +92,16 @@
 * $ kubectl apply -f kibana.yml 
 
 ### To get all the items in namespace 
- * $ kubectl --namespace=default get all 
+ * $ kubectl --namespace=logging get all 
 
 ### To port forward 
-* kubectl --namespace=default port-forward svc/kibana  5601:5601 
+* kubectl --namespace=logging port-forward svc/kibana  5601:5601 
 * `http://localhost:5601`
 
 
 
 ### To test the services 
-* $  kubectl --namespace=default port-forward svc/nginx 8090:80
+* $  kubectl --namespace=logging port-forward svc/nginx 8090:80
 * $ curl localhost:8090
 * $ curl localhost:8090/api/message
 

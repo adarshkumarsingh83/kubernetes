@@ -7,5 +7,5 @@ metadata:
     app: app-config
 data:
   elasticsearch_port: "9200"
-  elasticsearch_url: "http://elasticsearch:9200"
+  elasticsearch_url: "http://elasticsearch.logging:9200"
   logstash_url: localhost:5000

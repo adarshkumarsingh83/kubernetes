@@ -31,7 +31,7 @@ data:
             codec => rubydebug
         }
         elasticsearch { 
-            hosts=>["http://elasticsearch:9200"]
+            hosts=>["http://elasticsearch.logging:9200"]
             index => "espark-%{+YYYY.MM.dd}"
         }
     }
